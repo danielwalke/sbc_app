@@ -1,3 +1,4 @@
+import numpy as np
 
 from dataAnalysis.Age import Age
 from dataAnalysis.Diagnosis import Diagnosis
@@ -5,7 +6,8 @@ from dataAnalysis.Sex import Sex
 from dataAnalysis.Center import Center
 from dataAnalysis.Set import Set
 from dataAnalysis.WBC import WBC
-
+from dataAnalysis.TargetIcu import TargetIcu
+from dataAnalysis.Time import Time
 
 class DataAnalysis:
     def __init__(self, data):
@@ -21,7 +23,7 @@ class DataAnalysis:
         leipzig_unique_data = leipzig_unique_data[~leipzig_unique_data['MCV'].isnull()]
         leipzig_unique_data = leipzig_unique_data[~leipzig_unique_data['HGB'].isnull()]
         leipzig_unique_data = leipzig_unique_data[~leipzig_unique_data['CRP'].isnull()]
-        print(len(leipzig_unique_data))
+        ## without icus?
         self.data = leipzig_unique_data
         self.data = leipzig_unique_data
         self.age_analysis = Age(self.data)
@@ -30,6 +32,8 @@ class DataAnalysis:
         self.center_analysis = Center(self.data)
         self.set_analysis = Set(self.data)
         self.wbc_analysis = WBC(self.data)
+        self.target_icus = TargetIcu(self.data)
+        self.time = Time(self.data)
 
 
     def show_text_information(self):
