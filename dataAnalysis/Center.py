@@ -20,10 +20,10 @@ class Center:
         return np_centers
 
     def get_number_of_leipzig(self):
-        return np.count_nonzero(self.get_numpy_centers() == 0)
+        return np.count_nonzero(self.get_numpy_centers() == 1)
 
     def get_numer_of_greifswald(self):
-        return np.count_nonzero(self.get_numpy_centers() == 1)
+        return np.count_nonzero(self.get_numpy_centers() == 0)
 
     def visualize_diagnoses(self):
         fig = plt.figure(figsize=(10, 7))
