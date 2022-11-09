@@ -4,14 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="875a38dc-bf1f-4839-9933-7efb22d78c92" name="Changes" comment="changes in data processing">
-      <change afterPath="$PROJECT_DIR$/dataAnalysis/Episode.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/dataAnalysis/SecToIcu.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/dataAnalysis/Sender.py" afterDir="false" />
+    <list default="true" id="875a38dc-bf1f-4839-9933-7efb22d78c92" name="Changes" comment="changes for data filtering">
+      <change afterPath="$PROJECT_DIR$/dataAnalysis/learning/Features.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dataAnalysis/learning/Testing.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dataAnalysis/learning/Training.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dataAnalysis/DataAnalysis.py" beforeDir="false" afterPath="$PROJECT_DIR$/dataAnalysis/DataAnalysis.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dataAnalysis/TargetIcu.py" beforeDir="false" afterPath="$PROJECT_DIR$/dataAnalysis/TargetIcu.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dataAnalysis/Time.py" beforeDir="false" afterPath="$PROJECT_DIR$/dataAnalysis/Time.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -136,7 +135,7 @@
       <updated>1667828634516</updated>
       <workItem from="1667828638834" duration="4084000" />
       <workItem from="1667887362849" duration="22632000" />
-      <workItem from="1667974871000" duration="5292000" />
+      <workItem from="1667974871000" duration="18587000" />
     </task>
     <task id="LOCAL-00001" summary="changes in data processing">
       <created>1667911144366</created>
@@ -145,7 +144,14 @@
       <option name="project" value="LOCAL" />
       <updated>1667911144366</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="changes for data filtering">
+      <created>1667982417068</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1667982417068</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -165,11 +171,12 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="changes in data processing" />
-    <option name="LAST_COMMIT_MESSAGE" value="changes in data processing" />
+    <MESSAGE value="changes for data filtering" />
+    <option name="LAST_COMMIT_MESSAGE" value="changes for data filtering" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/sbcAnalysis$Sex.coverage" NAME="Sex Coverage Results" MODIFIED="1667894032462" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/dataAnalysis" />
-    <SUITE FILE_PATH="coverage/sbc$main.coverage" NAME="main Coverage Results" MODIFIED="1667982332403" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/sbc$main.coverage" NAME="main Coverage Results" MODIFIED="1668000361068" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/sbcAnalysis$main.coverage" NAME="main Coverage Results" MODIFIED="1667914124922" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/sbcAnalysis$DataAnalysis.coverage" NAME="DataAnalysis Coverage Results" MODIFIED="1667910271537" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/dataAnalysis" />
   </component>
