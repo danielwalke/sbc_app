@@ -4,7 +4,6 @@ class Time:
     def __init__(self, data):
         data_without_nan = data[~data['Time'].isnull()]
         self.time = data_without_nan["Time"]
-        print(self.time)
         print(np.unique(self.get_numpy_time()))
 
     def get_numpy_time(self):
