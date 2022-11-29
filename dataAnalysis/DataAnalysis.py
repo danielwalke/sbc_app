@@ -1,5 +1,3 @@
-import pandas as pd
-
 from dataAnalysis.Age import Age
 from dataAnalysis.Diagnosis import Diagnosis
 from dataAnalysis.Sex import Sex
@@ -13,16 +11,8 @@ from dataAnalysis.learning.Training import Training
 from dataAnalysis.learning.Testing import Testing
 from sklearn.metrics import roc_auc_score
 from sklearn import svm
-# from imblearn.ensemble import RUSBoostClassifier
-# is_cbc <- function(x, columns = c("HGB", "MCV", "PLT", "RBC", "WBC"),
-#                     complete = FALSE) {
-#     rs <- rowSums(is.na(x[, columns, with = FALSE]))
-#
-#     if (complete)
-#         rs == 0
-#     else
-#         rs < length(columns)
-# }
+
+
 def count_cbc_cases(data):
     comp_data = data.query("~(WBC.isnull() & HGB.isnull() & MCV.isnull() & PLT.isnull() & RBC.isnull())", engine='python')
     unique_data = comp_data.drop_duplicates(subset=["Id", "Center"])
@@ -43,16 +33,26 @@ class DataAnalysis:
                                                                              "MCV.isnull() | PLT.isnull() | "
                                                                              "RBC.isnull())", engine='python')
         sirs_complete_first_non_icu_unique_data = complete_first_non_icu_unique_data.query("Diagnosis != 'SIRS'", engine='python')
-        processed_data = sirs_complete_first_non_icu_unique_data
-        print(f"Assessable data are {count_cbc_cases(processed_data)} cases "
-              f"and {count_cbc(processed_data)} CBCs")
-        self.age_analysis = Age(processed_data)
-        self.sex_analysis = Sex(processed_data)
-        self.diagnoses_analysis = Diagnosis(processed_data)
-        self.center_analysis = Center(processed_data)
-        self.set_analysis = Set(processed_data)
-        self.wbc_analysis = WBC(processed_data)
-        self.target_icus = TargetIcu(processed_data)
+        self.data = sirs_complete_first_non_icu_unique_data
+        self.control_data = self.data.query("(Diagnosis == 'Control' | (SecToIcu > 6*3600 & "
+                                            "(~TargetIcu.isnull() & TargetIcu.str.contains('MICU'))))", engine='python')
+        self.sepsis_data = self.data.query("Diagnosis == 'Sepsis'", engine='python')
+        self.sepsis_data = self.sepsis_data.query("(~TargetIcu.isnull() & TargetIcu.str.contains('MICU'))",
+                                                  engine='python')
+        self.sepsis_data = self.sepsis_data.query("SecToIcu <= 6*3600", engine='python')
+        print(f"Control data are {count_cbc_cases(self.control_data)} cases "
+              f"and {count_cbc(self.control_data)} CBCs")
+        print(f"Control data are {count_cbc_cases(self.control_data)} cases "
+              f"and {count_cbc(self.control_data)} CBCs")
+        print(f"Sepsis data are {count_cbc_cases(self.sepsis_data)} cases "
+              f"and {count_cbc(self.sepsis_data)} CBCs")
+        self.age_analysis = Age(self.data)
+        self.sex_analysis = Sex(self.data)
+        self.diagnoses_analysis = Diagnosis(self.data)
+        self.center_analysis = Center(self.data)
+        self.set_analysis = Set(self.data)
+        self.wbc_analysis = WBC(self.data)
+        self.target_icus = TargetIcu(self.data)
 
     def show_text_information(self):
         self.age_analysis.get_avg_age()
