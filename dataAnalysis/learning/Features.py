@@ -1,6 +1,20 @@
 class Features:
     def __init__(self, data):
-        self.data = data
+        unique_data = data.drop_duplicates(subset=["Id", "Center", "Time"], keep=False)
+        non_icu_unique_data = unique_data.query("~(Sender.str.contains('ICU'))", engine='python')
+        first_non_icu_unique_data = non_icu_unique_data.query("Episode == 1 ", engine='python')
+        complete_first_non_icu_unique_data = first_non_icu_unique_data.query("~(WBC.isnull() | HGB.isnull() | "
+                                                                             "MCV.isnull() | PLT.isnull() | "
+                                                                             "RBC.isnull())", engine='python')
+        sirs_complete_first_non_icu_unique_data = complete_first_non_icu_unique_data.query("Diagnosis != 'SIRS'",
+                                                                                           engine='python')
+        self.data = sirs_complete_first_non_icu_unique_data
+        self.control_data = self.data.query("(Diagnosis == 'Control' | (SecToIcu > 6*3600 & "
+                                            "(~TargetIcu.isnull() & TargetIcu.str.contains('MICU'))))", engine='python')
+        self.sepsis_data = self.data.query("Diagnosis == 'Sepsis'", engine='python')
+        self.sepsis_data = self.sepsis_data.query("(~TargetIcu.isnull() & TargetIcu.str.contains('MICU'))",
+                                                  engine='python')
+        self.sepsis_data = self.sepsis_data.query("SecToIcu <= 6*3600", engine='python')
 
     def get_x(self):
         feature_columns = ["Age","Sex", "HGB", "MCV", "PLT", "RBC", "WBC"]
@@ -8,3 +22,12 @@ class Features:
 
     def get_y(self):
         return self.data["Diagnosis"]
+
+    def get_control_data(self):
+        return self.control_data
+
+    def get_sepsis_data(self):
+        return self.sepsis_data
+
+    def get_data(self):
+        return self.data

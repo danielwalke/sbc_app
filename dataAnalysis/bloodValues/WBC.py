@@ -1,14 +1,18 @@
 import numpy as np
 import matplotlib.pyplot as plt
+from dataAnalysis.bloodValues.BloodValue import BloodValue
 
-
-class WBC:
+## TODO normalize?
+class WBC(BloodValue):
     def __init__(self, data):
+        print(len(data.query("WBC > 100", engine='python')))
+        # data = data.query("WBC < 100", engine='python')
         self.wbc = data["WBC"]
         sepsis_data = data[data["Diagnosis"].str.contains("Sepsis")]
         control_data = data[data["Diagnosis"].str.contains("Control")]
         self.wbc_sepsis = sepsis_data["WBC"]
         self.wbc_control = control_data["WBC"]
+        BloodValue.__init__(self, data, "WBC")
 
     def get_numpy_wbc(self):
         np_wbc = np.array(self.wbc, dtype=np.double)
