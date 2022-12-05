@@ -1,6 +1,6 @@
 import numpy as np
 import matplotlib.pyplot as plt
-from dataAnalysis.bloodValues.BloodValue import BloodValue
+from dataAnalysis.patientData.bloodValues.BloodValue import BloodValue
 
 ## TODO normalize?
 class WBC(BloodValue):

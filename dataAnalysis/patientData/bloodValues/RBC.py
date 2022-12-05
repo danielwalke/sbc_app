@@ -1,4 +1,4 @@
-from dataAnalysis.bloodValues.BloodValue import BloodValue
+from dataAnalysis.patientData.bloodValues.BloodValue import BloodValue
 
 
 class RBC(BloodValue):

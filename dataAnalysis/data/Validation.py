@@ -1,4 +1,4 @@
-from dataAnalysis.learning.Features import Features
+from dataAnalysis.data.Features import Features
 
 
 class Validation(Features):
