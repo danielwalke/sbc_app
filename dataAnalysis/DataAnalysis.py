@@ -1,3 +1,4 @@
+from imblearn.over_sampling import RandomOverSampler
 from sklearn.tree import DecisionTreeClassifier
 
 from dataAnalysis.patientData.bloodValues.WBC import WBC
@@ -8,12 +9,15 @@ from dataAnalysis.patientData.bloodValues.RBC import RBC
 from dataAnalysis.patientData.bloodValues.PLT import PLT
 from dataAnalysis.patientData.bloodValues.PCT import PCT
 from dataAnalysis.algorithms.LogisticRegression import LogisticRegressionClassifier
-from sklearn.ensemble import RandomForestClassifier
+from dataAnalysis.algorithms.RusBoost import RusBoostClassifier
+from dataAnalysis.algorithms.RandomForest import RandomForest
+from dataAnalysis.algorithms.BaggingEnsembleClassifier import BaggingEnsembleClassifier
+from dataAnalysis.algorithms.ExtraTrees import ExtraTrees
+from dataAnalysis.algorithms.KNeighbors import KNeighbors
 from dataAnalysis.data.Training import Training
 from dataAnalysis.data.Validation import Validation
 from sklearn.metrics import roc_auc_score
 from sklearn import svm
-from imblearn.ensemble import RUSBoostClassifier
 from lazypredict.Supervised import LazyClassifier
 from sklearn.model_selection import KFold
 from sklearn.model_selection import train_test_split
@@ -81,7 +85,9 @@ class DataAnalysis:
 
     def lazy_predict(self):
         classifier = LazyClassifier(verbose=2, ignore_warnings=True, custom_metric=None)
-        x_train, x_test, y_train, y_test = train_test_split(self.training.get_x(), self.training.get_y(),
+        ros = RandomOverSampler(random_state=42)
+        x_train_ros, y_train_ros = ros.fit_resample(self.training.get_x(), self.training.get_y())
+        x_train, x_test, y_train, y_test = train_test_split(x_train_ros, y_train_ros,
                                                             test_size=0.33, random_state=42)
         models, predictions = classifier.fit(x_train, x_test, y_train, y_test)
         print(models)
@@ -114,31 +120,33 @@ class DataAnalysis:
         self.wbc_analysis.visualize_wbc_comparison()
 
     def logistic_regression(self):
-        logistic_regression = LogisticRegressionClassifier(training_data=self.training)
+        logistic_regression = LogisticRegressionClassifier(training_data=self.training, validation_data=self.validation)
         logistic_regression.cross_validate()
 
     def random_forest(self):
         print("Execute random forest")
-        random_forest = RandomForestClassifier()
-        random_forest.fit(self.training.get_x(), self.training.get_y())
-        score = random_forest.score(self.validation.get_x(), self.validation.get_y())
-        print(f"Score is " + str(score))
-        auroc_train = roc_auc_score(self.training.get_y(), random_forest.predict_proba(self.training.get_x())[:, 1])
-        auroc_test = roc_auc_score(self.validation.get_y(), random_forest.predict_proba(self.validation.get_x())[:, 1])
-        print(f"The AUROC for training data is " + str(auroc_train))
-        print(f"The AUROC for testing data is " + str(auroc_test))
+        random_forest = RandomForest(training_data=self.training, validation_data=self.validation)
+        random_forest.cross_validate()
+
+    def bagging_classifier(self):
+        print("Execute bagging classifier")
+        bagging_classifier = BaggingEnsembleClassifier(training_data=self.training, validation_data=self.validation)
+        bagging_classifier.cross_validate()
+
+    def extra_trees(self):
+        print("Execute extra trees classifier")
+        extra_trees = ExtraTrees(training_data=self.training, validation_data=self.validation)
+        extra_trees.cross_validate()
+
+    def k_neighbors(self):
+        print("Execute k-nearest neighbors classifier")
+        k_neighbors = KNeighbors(training_data=self.training, validation_data=self.validation)
+        k_neighbors.cross_validate()
 
     def rus_boost(self):
         print("Execute RUS Boost")
-        rus_boost = RUSBoostClassifier(base_estimator=DecisionTreeClassifier(max_depth=700, max_leaf_nodes=40),
-                                       sampling_strategy='not majority')
-        rus_boost.fit(self.training.get_x(), self.training.get_y())
-        score = rus_boost.score(self.validation.get_x(), self.validation.get_y())
-        print(f"Score is " + str(score))
-        auroc_train = roc_auc_score(self.training.get_y(), rus_boost.predict_proba(self.training.get_x())[:, 1])
-        auroc_test = roc_auc_score(self.validation.get_y(), rus_boost.predict_proba(self.validation.get_x())[:, 1])
-        print(f"The AUROC for training data is " + str(auroc_train))
-        print(f"The AUROC for testing data is " + str(auroc_test))
+        rus_boost = RusBoostClassifier(training_data=self.training, validation_data=self.validation)
+        rus_boost.cross_validate()
 
     def support_vector_machine(self):
         support_vector_machine = svm.SVC()

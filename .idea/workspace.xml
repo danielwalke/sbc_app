@@ -4,32 +4,17 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="875a38dc-bf1f-4839-9933-7efb22d78c92" name="Changes" comment="preprocessing pipeline II">
-      <change afterPath="$PROJECT_DIR$/dataAnalysis/algorithms/CrossValidation.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/dataAnalysis/algorithms/LogisticRegression.py" afterDir="false" />
+    <list default="true" id="875a38dc-bf1f-4839-9933-7efb22d78c92" name="Changes" comment="cross validation&#10;oversampling">
+      <change afterPath="$PROJECT_DIR$/dataAnalysis/algorithms/BaggingEnsembleClassifier.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dataAnalysis/algorithms/ExtraTrees.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dataAnalysis/algorithms/KNeighbors.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dataAnalysis/algorithms/Model.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dataAnalysis/algorithms/RandomForest.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dataAnalysis/algorithms/RusBoost.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dataAnalysis/Age.py" beforeDir="false" afterPath="$PROJECT_DIR$/dataAnalysis/patientData/Age.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dataAnalysis/Center.py" beforeDir="false" afterPath="$PROJECT_DIR$/dataAnalysis/patientData/Center.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dataAnalysis/DataAnalysis.py" beforeDir="false" afterPath="$PROJECT_DIR$/dataAnalysis/DataAnalysis.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dataAnalysis/Diagnosis.py" beforeDir="false" afterPath="$PROJECT_DIR$/dataAnalysis/patientData/Diagnosis.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dataAnalysis/Episode.py" beforeDir="false" afterPath="$PROJECT_DIR$/dataAnalysis/patientData/Episode.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dataAnalysis/SecToIcu.py" beforeDir="false" afterPath="$PROJECT_DIR$/dataAnalysis/patientData/SecToIcu.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dataAnalysis/Sender.py" beforeDir="false" afterPath="$PROJECT_DIR$/dataAnalysis/patientData/Sender.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dataAnalysis/Set.py" beforeDir="false" afterPath="$PROJECT_DIR$/dataAnalysis/patientData/Set.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dataAnalysis/Sex.py" beforeDir="false" afterPath="$PROJECT_DIR$/dataAnalysis/patientData/Sex.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dataAnalysis/TargetIcu.py" beforeDir="false" afterPath="$PROJECT_DIR$/dataAnalysis/patientData/TargetIcu.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dataAnalysis/Time.py" beforeDir="false" afterPath="$PROJECT_DIR$/dataAnalysis/patientData/Time.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dataAnalysis/bloodValues/BloodValue.py" beforeDir="false" afterPath="$PROJECT_DIR$/dataAnalysis/patientData/bloodValues/BloodValue.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dataAnalysis/bloodValues/CRP.py" beforeDir="false" afterPath="$PROJECT_DIR$/dataAnalysis/patientData/bloodValues/CRP.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dataAnalysis/bloodValues/HGB.py" beforeDir="false" afterPath="$PROJECT_DIR$/dataAnalysis/patientData/bloodValues/HGB.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dataAnalysis/bloodValues/MCV.py" beforeDir="false" afterPath="$PROJECT_DIR$/dataAnalysis/patientData/bloodValues/MCV.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dataAnalysis/bloodValues/PCT.py" beforeDir="false" afterPath="$PROJECT_DIR$/dataAnalysis/patientData/bloodValues/PCT.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dataAnalysis/bloodValues/PLT.py" beforeDir="false" afterPath="$PROJECT_DIR$/dataAnalysis/patientData/bloodValues/PLT.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dataAnalysis/bloodValues/RBC.py" beforeDir="false" afterPath="$PROJECT_DIR$/dataAnalysis/patientData/bloodValues/RBC.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dataAnalysis/bloodValues/WBC.py" beforeDir="false" afterPath="$PROJECT_DIR$/dataAnalysis/patientData/bloodValues/WBC.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dataAnalysis/learning/Features.py" beforeDir="false" afterPath="$PROJECT_DIR$/dataAnalysis/data/Features.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dataAnalysis/learning/Training.py" beforeDir="false" afterPath="$PROJECT_DIR$/dataAnalysis/data/Training.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dataAnalysis/learning/Validation.py" beforeDir="false" afterPath="$PROJECT_DIR$/dataAnalysis/data/Validation.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataAnalysis/algorithms/CrossValidation.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataAnalysis/algorithms/LogisticRegression.py" beforeDir="false" afterPath="$PROJECT_DIR$/dataAnalysis/algorithms/LogisticRegression.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -199,7 +184,11 @@
       <workItem from="1669702055052" duration="11190000" />
       <workItem from="1669875460603" duration="6235000" />
       <workItem from="1669960875344" duration="6244000" />
-      <workItem from="1670220510380" duration="19114000" />
+      <workItem from="1670220510380" duration="19259000" />
+      <workItem from="1670310407749" duration="1869000" />
+      <workItem from="1670315158184" duration="656000" />
+      <workItem from="1670388494005" duration="600000" />
+      <workItem from="1670480069586" duration="4303000" />
     </task>
     <task id="LOCAL-00001" summary="changes in data processing">
       <created>1667911144366</created>
@@ -229,7 +218,14 @@
       <option name="project" value="LOCAL" />
       <updated>1669712186118</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="cross validation&#10;oversampling">
+      <created>1670255012469</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1670255012469</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -251,10 +247,11 @@
     <MESSAGE value="changes for data filtering" />
     <MESSAGE value="preprocessing pipeline" />
     <MESSAGE value="preprocessing pipeline II" />
-    <option name="LAST_COMMIT_MESSAGE" value="preprocessing pipeline II" />
+    <MESSAGE value="cross validation&#10;oversampling" />
+    <option name="LAST_COMMIT_MESSAGE" value="cross validation&#10;oversampling" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/sbc$main.coverage" NAME="main Coverage Results" MODIFIED="1670236394318" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/sbc$main.coverage" NAME="main Coverage Results" MODIFIED="1670480265694" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/sbcAnalysis$main.coverage" NAME="main Coverage Results" MODIFIED="1667914124922" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/sbcAnalysis$Sex.coverage" NAME="Sex Coverage Results" MODIFIED="1667894032462" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/dataAnalysis" />
     <SUITE FILE_PATH="coverage/sbcAnalysis$DataAnalysis.coverage" NAME="DataAnalysis Coverage Results" MODIFIED="1667910271537" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/dataAnalysis" />
