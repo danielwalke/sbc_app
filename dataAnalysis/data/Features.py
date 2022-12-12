@@ -1,7 +1,20 @@
+
+def count_cbc_cases(data):
+    comp_data = data.query("~(WBC.isnull() & HGB.isnull() & MCV.isnull() & PLT.isnull() & RBC.isnull())",
+                           engine='python')
+    unique_data = comp_data.drop_duplicates(subset=["Id", "Center"])
+    return len(unique_data)
+
+
+def count_cbc(data):
+    comp_data = data.query("~(WBC.isnull() & HGB.isnull() & MCV.isnull() & PLT.isnull() & RBC.isnull())",
+                           engine='python')
+    return len(comp_data)
+
 class Features:
     def __init__(self, data):
         unique_data = data.drop_duplicates(subset=["Id", "Center", "Time"], keep=False)
-        non_icu_unique_data = unique_data.query("~(Sender.str.contains('ICU'))", engine='python')
+        non_icu_unique_data = unique_data.query("~(Sender.str.contains('ICU')) & ~(~SecToIcu.isnull() & SecToIcu < 0)", engine='python')
         first_non_icu_unique_data = non_icu_unique_data.query("Episode == 1 ", engine='python')
         complete_first_non_icu_unique_data = first_non_icu_unique_data.query("~(WBC.isnull() | HGB.isnull() | "
                                                                              "MCV.isnull() | PLT.isnull() | "

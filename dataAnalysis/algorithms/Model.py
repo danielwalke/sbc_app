@@ -10,7 +10,7 @@ class Model:
         self.training_data = training_data
         self.validation_data = validation_data
         self.model = model
-        self.cross_validation = StratifiedKFold(n_splits=10, shuffle=True, random_state=1714400672)
+        self.cross_validation = StratifiedKFold(n_splits=5, shuffle=True, random_state=1714400672)
 
     def cross_validate(self):
         train_auroc = []
@@ -24,12 +24,12 @@ class Model:
             y_data_train = self.training_data.get_y().filter(items=train, axis=0)
             y_data_test = self.training_data.get_y().filter(items=test, axis=0)
 
-            x_train_ros, y_train_ros = ros.fit_resample(x_data_train, y_data_train)
-            self.model.fit(x_train_ros, y_train_ros)
+            # x_train_ros, y_train_ros = ros.fit_resample(x_data_train, y_data_train)
+            self.model.fit(x_data_train, y_data_train)
             score = self.model.score(x_data_test, y_data_test)
-            print(f"Score of {i} is " + str(score))
-            auroc_train = roc_auc_score(y_train_ros,
-                                        self.model.predict_proba(x_train_ros)[:, 1])
+            # print(f"Score of {i} is " + str(score))
+            auroc_train = roc_auc_score(y_data_train,
+                                        self.model.predict_proba(x_data_train)[:, 1])
             auroc_test = roc_auc_score(y_data_test,
                                        self.model.predict_proba(x_data_test)[:, 1])
             auroc_val = roc_auc_score(self.validation_data.get_y(),
@@ -43,3 +43,4 @@ class Model:
         print(f"The mean AUROC for training data is " + str(mean(train_auroc)))
         print(f"The mean AUROC for testing data is " + str(mean(test_auroc)))
         print(f"The mean AUROC for validation data is " + str(mean(val_auroc)))
+        ## TODO Confusion matrix
