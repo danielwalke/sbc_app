@@ -1,9 +1,10 @@
 from imblearn.over_sampling import RandomOverSampler, SMOTE
 from sklearn.metrics import roc_auc_score
 from sklearn.model_selection import StratifiedKFold
-
+from sklearn.metrics import accuracy_score
 from statistics import mean
-
+from sklearn import metrics
+import matplotlib.pyplot as plt
 
 class Model:
     def __init__(self, training_data, validation_data, model):
@@ -40,15 +41,33 @@ class Model:
         #     print(f"The AUROC for {i} training data is " + str(auroc_train))
         #     print(f"The AUROC for {i} testing data is " + str(auroc_test))
         #     print(f"The AUROC for {i} validation data is " + str(auroc_val))
+
+        ros = RandomOverSampler(random_state=42)
+
         x_data_train = self.training_data.get_x()
         y_data_train = self.training_data.get_y()
-        self.model.fit(x_data_train, y_data_train)
+
+        x_train_ros, y_train_ros = ros.fit_resample(x_data_train, y_data_train)
+        self.model.fit(x_train_ros, y_train_ros)
+
         auroc_train = roc_auc_score(y_data_train,
                                     self.model.predict_proba(x_data_train)[:, 1])
         auroc_val = roc_auc_score(self.validation_data.get_y(),
                                   self.model.predict_proba(self.validation_data.get_x())[:, 1])
         print(f"The AUROC for training data is " + str(auroc_train))
         print(f"The AUROC for validation data is " + str(auroc_val))
+
+        print(len(self.validation_data.get_y()))
+        print(self.validation_data.get_y().shape)
+        confusion_matrix = metrics.confusion_matrix(self.validation_data.get_y(),
+                                                    self.model.predict(self.validation_data.get_x()))
+
+        cm_display = metrics.ConfusionMatrixDisplay(confusion_matrix=confusion_matrix, display_labels=[False, True])
+
+        cm_display.plot()
+        plt.show()
+
+        return self.model
         # print(f"The mean AUROC for training data is " + str(mean(train_auroc)))
         # print(f"The mean AUROC for testing data is " + str(mean(test_auroc)))
         # print(f"The mean AUROC for validation data is " + str(mean(val_auroc)))

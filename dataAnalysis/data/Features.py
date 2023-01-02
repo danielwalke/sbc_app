@@ -25,6 +25,11 @@ class Features:
                                                                              "RBC.isnull())", engine='python')
         sirs_complete_first_non_icu_unique_data = complete_first_non_icu_unique_data.query("Diagnosis != 'SIRS'",
                                                                                            engine='python')
+        sirs_complete_first_non_icu_unique_data = \
+            sirs_complete_first_non_icu_unique_data.query("(Diagnosis == 'Control') | ((Diagnosis == 'Sepsis') & ("
+                                                          "~TargetIcu.isnull() & "
+                                                          "TargetIcu.str.contains('MICU')))",
+                                                                                           engine='python')
         self.data = sirs_complete_first_non_icu_unique_data
         self.data['Label'] = self.data['Diagnosis']
 
@@ -45,10 +50,10 @@ class Features:
 
     def get_x(self):
         feature_columns = ["Age", "Sex", "HGB", "MCV", "PLT", "RBC", "WBC"]
-        return self.data[feature_columns].replace(to_replace='W', value=1).replace(to_replace='M', value=0)
+        return self.data.loc[:, feature_columns].replace(to_replace='W', value=1).replace(to_replace='M', value=0)
 
     def get_y(self):
-        return self.data["Label"]
+        return self.data.loc[:, "Label"]
 
     def get_control_data(self):
         return self.control_data

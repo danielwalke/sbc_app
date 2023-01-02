@@ -14,6 +14,7 @@ from dataAnalysis.algorithms.RandomForest import RandomForest
 from dataAnalysis.algorithms.BaggingEnsembleClassifier import BaggingEnsembleClassifier
 from dataAnalysis.algorithms.ExtraTrees import ExtraTrees
 from dataAnalysis.algorithms.KNeighbors import KNeighbors
+from dataAnalysis.algorithms.DecisionTree import DecisionTree
 from dataAnalysis.data.Training import Training
 from dataAnalysis.data.Features import Features
 from dataAnalysis.data.Validation import Validation
@@ -22,7 +23,7 @@ from sklearn import svm
 from lazypredict.Supervised import LazyClassifier
 from sklearn.model_selection import KFold
 from sklearn.model_selection import train_test_split
-
+import pandas as pd
 
 def count_cbc_cases(data):
     comp_data = data.query("~(WBC.isnull() & HGB.isnull() & MCV.isnull() & PLT.isnull() & RBC.isnull())",
@@ -150,6 +151,13 @@ class DataAnalysis:
         print("Execute RUS Boost")
         rus_boost = RusBoostClassifier(training_data=self.training, validation_data=self.validation)
         rus_boost.cross_validate()
+
+    def decision_tree(self):
+        print("Execute Decision Tree")
+        rus_boost = DecisionTree(training_data=self.training, validation_data=self.validation)
+        trained_model = rus_boost.cross_validate()
+        features = pd.DataFrame(trained_model.feature_importances_, index=self.validation.get_x().columns)
+        print(features)
 
     def support_vector_machine(self):
         support_vector_machine = svm.SVC()
