@@ -15,6 +15,7 @@ from dataAnalysis.algorithms.BaggingEnsembleClassifier import BaggingEnsembleCla
 from dataAnalysis.algorithms.ExtraTrees import ExtraTrees
 from dataAnalysis.algorithms.KNeighbors import KNeighbors
 from dataAnalysis.data.Training import Training
+from dataAnalysis.data.Features import Features
 from dataAnalysis.data.Validation import Validation
 from sklearn.metrics import roc_auc_score
 from sklearn import svm
@@ -40,17 +41,19 @@ def count_cbc(data):
 #  a better one directly
 class DataAnalysis:
     def __init__(self, data):
-        # self.training = Training(data)
-        # print("Training: ")
-        # print(f"Assessable data are {count_cbc_cases(self.training.get_data())} cases "
-        #       f"and {count_cbc(self.training.get_data())} CBCs")
-        # print(f"Control data are {count_cbc_cases(self.training.get_control_data())} cases "
-        #       f"and {count_cbc(self.training.get_control_data())} CBCs")
-        # print(f"Sepsis data are {count_cbc_cases(self.training.get_sepsis_data())} cases "
-        #       f"and {count_cbc(self.training.get_sepsis_data())} CBCs")
-        # print(20 * "$")
+        self.training = Training(data)
+        print("Training: ")
+        print(f"Assessable data are {count_cbc_cases(self.training.get_data())} cases "
+              f"and {count_cbc(self.training.get_data())} CBCs")
+        print(f"Control data are {count_cbc_cases(self.training.get_control_data())} cases "
+              f"and {count_cbc(self.training.get_control_data())} CBCs")
+        print(f"Sepsis data are {count_cbc_cases(self.training.get_sepsis_data())} cases "
+              f"and {count_cbc(self.training.get_sepsis_data())} CBCs")
+        print(20 * "$")
         print("Testing: ")
         self.validation = Validation(data)
+        print(f"Controls: {self.validation.get_control_data().shape[0]},"
+              f" Sepsis: {self.validation.get_sepsis_data().shape[0]}")
         print(f"Assessable data are {count_cbc_cases(self.validation.get_data())} cases "
               f"and {count_cbc(self.validation.get_data())} CBCs")
         print(f"Control data are {count_cbc_cases(self.validation.get_control_data())} cases "
