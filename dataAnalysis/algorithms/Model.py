@@ -7,9 +7,10 @@ from sklearn import metrics
 import matplotlib.pyplot as plt
 
 class Model:
-    def __init__(self, training_data, validation_data, model):
+    def __init__(self, training_data, validation_data,greifswald_validation, model):
         self.training_data = training_data
         self.validation_data = validation_data
+        self.greifswald_validation = greifswald_validation
         self.model = model
         self.cross_validation = StratifiedKFold(n_splits=5, shuffle=True, random_state=1714400672)
 
@@ -54,8 +55,11 @@ class Model:
                                     self.model.predict_proba(x_data_train)[:, 1])
         auroc_val = roc_auc_score(self.validation_data.get_y(),
                                   self.model.predict_proba(self.validation_data.get_x())[:, 1])
+        auroc_val_gw = roc_auc_score(self.greifswald_validation.get_y(),
+                                  self.model.predict_proba(self.greifswald_validation.get_x())[:, 1])
         print(f"The AUROC for training data is " + str(auroc_train))
         print(f"The AUROC for validation data is " + str(auroc_val))
+        print(f"The AUROC for greifswald validation data is " + str(auroc_val_gw))
 
         print(len(self.validation_data.get_y()))
         print(self.validation_data.get_y().shape)

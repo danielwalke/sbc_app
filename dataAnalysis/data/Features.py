@@ -44,16 +44,14 @@ class Features:
         self.data.loc[sepsis_filter, "Label"] = "Sepsis"
 
         self.control_data = self.data.loc[control_filter]
-        print(self.control_data.shape)
         self.sepsis_data = self.data.loc[sepsis_filter]
-        print(self.sepsis_data.shape)
 
     def get_x(self):
         feature_columns = ["Age", "Sex", "HGB", "MCV", "PLT", "RBC", "WBC"]
         return self.data.loc[:, feature_columns].replace(to_replace='W', value=1).replace(to_replace='M', value=0)
 
     def get_y(self):
-        return self.data.loc[:, "Label"]
+        return (self.data["Label"] == "Sepsis").astype(int) #self.data.loc[:, "Label"]
 
     def get_control_data(self):
         return self.control_data

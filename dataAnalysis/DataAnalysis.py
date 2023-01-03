@@ -31,6 +31,9 @@ import pandas as pd
 from sklearn.metrics import classification_report
 import matplotlib.pyplot as plt
 from sklearn import metrics
+from dataAnalysis.neural_networks import FFNN
+from dataAnalysis.data.Greifswald_Validation import GreifswaldValidation
+from dataAnalysis.algorithms.XGBoostClassifier import XGBoostClassifier
 
 def count_cbc_cases(data):
     comp_data = data.query("~(WBC.isnull() & HGB.isnull() & MCV.isnull() & PLT.isnull() & RBC.isnull())",
@@ -45,8 +48,7 @@ def count_cbc(data):
     return len(comp_data)
 
 
-# TODO Completely re-egineer their model for reproducability or searching through all algorithms to find
-#  a better one directly
+# TODO Implement greifswald validation
 class DataAnalysis:
     def __init__(self, data):
         self.training = Training(data)
@@ -68,6 +70,16 @@ class DataAnalysis:
               f"and {count_cbc(self.validation.get_control_data())} CBCs")
         print(f"Sepsis data are {count_cbc_cases(self.validation.get_sepsis_data())} cases "
               f"and {count_cbc(self.validation.get_sepsis_data())} CBCs")
+
+        self.greifswald_vaidation = GreifswaldValidation(data)
+        print(f"Controls: {self.greifswald_vaidation.get_control_data().shape[0]},"
+              f" Sepsis: {self.greifswald_vaidation.get_sepsis_data().shape[0]}")
+        print(f"Assessable data are {count_cbc_cases(self.greifswald_vaidation.get_data())} cases "
+              f"and {count_cbc(self.greifswald_vaidation.get_data())} CBCs")
+        print(f"Control data are {count_cbc_cases(self.validation.get_control_data())} cases "
+              f"and {count_cbc(self.greifswald_vaidation.get_control_data())} CBCs")
+        print(f"Sepsis data are {count_cbc_cases(self.greifswald_vaidation.get_sepsis_data())} cases "
+              f"and {count_cbc(self.greifswald_vaidation.get_sepsis_data())} CBCs")
         # self.training.get_data().to_csv("leipzig_training.csv")
         # self.validation.get_data().to_csv("leipzig_validation.csv")
         # self.age_analysis = Age(self.data)
@@ -224,3 +236,14 @@ class DataAnalysis:
                                         target_names=target_names))
 
             plt.show()
+
+    def neural_network(self):
+        print("Execute feed forward neural network")
+        ffnn = FFNN.FeedForwardNeuralNetwork(self.training, self.validation, self.greifswald_vaidation)
+        ffnn.train()
+        ffnn.evaluate()
+
+    def xg_boost(self):
+        print("Execute xg boost")
+        xg_boost = XGBoostClassifier(training_data=self.training, validation_data=self.validation, greifswald_validation=self.greifswald_vaidation)
+        xg_boost.cross_validate()
