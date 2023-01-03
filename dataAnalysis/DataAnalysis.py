@@ -1,3 +1,5 @@
+import math
+
 from imblearn.over_sampling import RandomOverSampler
 from sklearn.tree import DecisionTreeClassifier
 
@@ -23,7 +25,12 @@ from sklearn import svm
 from lazypredict.Supervised import LazyClassifier
 from sklearn.model_selection import KFold
 from sklearn.model_selection import train_test_split
+from dialnd_imbalanced_algorithms.imbalanced_algorithms.rus import RUSBoost
+from dialnd_imbalanced_algorithms.imbalanced_algorithms.smote import SMOTEBoost
 import pandas as pd
+from sklearn.metrics import classification_report
+import matplotlib.pyplot as plt
+from sklearn import metrics
 
 def count_cbc_cases(data):
     comp_data = data.query("~(WBC.isnull() & HGB.isnull() & MCV.isnull() & PLT.isnull() & RBC.isnull())",
@@ -170,3 +177,50 @@ class DataAnalysis:
                                    support_vector_machine.predict_proba(self.validation.get_x())[:, 1])
         print(f"The AUROC for training data is " + str(auroc_train))
         print(f"The AUROC for testing data is " + str(auroc_test))
+
+    def dialnd_rus_boost(self):
+        target_names = self.validation.get_y().unique()
+        print(target_names)
+        # ntrees = 100
+        # maxSplits = 300
+        # learn_rate = 0.90369 #65:35 #auroc:  0.854
+        ntrees = 500
+        maxSplits = 500
+        learn_rate = 0.50369
+        undersampling_factor = 0.65
+        sample_disbalance = math.floor((len(self.training.get_y()[self.training.get_y() == 'Control']) - len(
+            self.training.get_y()[self.training.get_y() == 'Sepsis'])) * undersampling_factor)
+        sample_disbalance = len(self.training.get_y()[self.training.get_y() == 'Control']) - math.floor(len(
+            self.training.get_y()[self.training.get_y() == 'Sepsis'])*65/35)
+        print(sample_disbalance)
+        print(len(
+            self.training.get_y()[self.training.get_y() == 'Sepsis']))
+        print(len(
+            self.training.get_y()[self.training.get_y() == 'Control']))
+        ## SMOTEBoost(n_estimators=ntrees, base_estimator=DecisionTreeClassifier(max_leaf_nodes=maxSplits),
+                                    ## n_samples=sample_disbalance, learning_rate=learn_rate),
+        for algorithm in [RUSBoost(n_samples=sample_disbalance,
+                                   base_estimator=DecisionTreeClassifier(max_leaf_nodes=maxSplits),
+                                   learning_rate=learn_rate, n_estimators=ntrees,
+                                   random_state=1714400672, with_replacement=False)]:
+            algorithm.fit(self.training.get_x(), self.training.get_y())
+            y_pred = algorithm.predict(self.validation.get_x())
+            # print(str(algorithm))
+            # print()
+            confusion_matrix = metrics.confusion_matrix(self.validation.get_y(),
+                                                        y_pred)
+
+            cm_display = metrics.ConfusionMatrixDisplay(confusion_matrix=confusion_matrix, display_labels=[False, True])
+
+            cm_display.plot()
+
+            auroc_train = roc_auc_score(self.training.get_y(),
+                                        algorithm.predict_proba(self.training.get_x())[:, 1])
+            auroc_val = roc_auc_score(self.validation.get_y(),
+                                      algorithm.predict_proba(self.validation.get_x())[:, 1])
+            print(f"The AUROC for training data is " + str(auroc_train))
+            print(f"The AUROC for validation data is " + str(auroc_val))
+            print(classification_report(self.validation.get_y(), y_pred,
+                                        target_names=target_names))
+
+            plt.show()

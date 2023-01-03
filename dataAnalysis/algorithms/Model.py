@@ -47,8 +47,8 @@ class Model:
         x_data_train = self.training_data.get_x()
         y_data_train = self.training_data.get_y()
 
-        x_train_ros, y_train_ros = ros.fit_resample(x_data_train, y_data_train)
-        self.model.fit(x_train_ros, y_train_ros)
+        # x_train_ros, y_train_ros = ros.fit_resample(x_data_train, y_data_train)
+        self.model.fit(x_data_train, y_data_train)
 
         auroc_train = roc_auc_score(y_data_train,
                                     self.model.predict_proba(x_data_train)[:, 1])
