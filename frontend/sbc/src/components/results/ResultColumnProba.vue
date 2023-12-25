@@ -1,5 +1,5 @@
 <template>
-  <ResultColumn :title="title">
+  <ResultColumn :title="title" :slotStyle="getColor(value)">
     {{Math.round(value*10000)/10000}}
   </ResultColumn>
 </template>
@@ -11,6 +11,10 @@ defineProps({
   title: String,
   value: Number
 })
+
+function getColor(value){
+  return `background-color: rgb(${255/.6453*value-164.55}, 0, ${255-255/.3547*value})`
+}
 </script>
 
 <style scoped>

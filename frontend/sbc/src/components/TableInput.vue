@@ -88,10 +88,6 @@ function submit(){
         pred_proba.value = response.data.pred_probas
         pred.value = response.data.predictions
         chartData.value = response.data.shap_values
-       /* shaps.value.map((shaps_value_item) => ({
-          labels: Object.keys(cbc).slice(1, Object.keys(cbc).length),
-          datasets: [{ backgroundColor: shaps_value_item.map(s => s<= 0 ? "blue" : "red"),fontColor:"white",data: shaps_value_item }]
-        }))*/
       })
 }
 
@@ -119,11 +115,8 @@ function onInputChange(e) {
                 PLT: +items[7],
 
             })
-            console.log(cbcs.value)
         }
-        /*valueInput(event, cbc, cbcKey)*/
     };
-    reader.onerror = (err) => console.log(err);
     reader.readAsText(file);
 }
 </script>
