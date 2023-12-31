@@ -1,6 +1,6 @@
 <template>
     <FileInput :onInputChange="onInputChange"/>
-  <div class="w-full grid leading-6 pt-2 gap-4 pl-4 pr-4" :class="pred_proba === undefined ? 'grid-cols-8':'grid-cols-10'" v-for="(cbc, idx) in cbcs">
+    <div class="w-full grid leading-6 pt-2 gap-4 pl-4 pr-4" :class="pred_proba === undefined ? 'grid-cols-8':'grid-cols-10'" v-for="(cbc, idx) in cbcs">
     <div v-for="cbcKey in cbcKeys" class="flex justify-center items-center flex-col h-fit">
       <p class="text-center">{{cbcKey}}</p>
       <p class="text-center">({{unit(cbcKey)}})</p>
@@ -8,7 +8,7 @@
           class="p-2 rounded-md w-full w-32 text-right" :value="cbc[cbcKey]"
           :type="type(cbcKey)"
           :placeholder="cbcKey"
-          @input="event => valueInput(event, cbc, cbcKey)">
+          @input="event => valueInput(event, cbc, cbcKey)"/>
     </div>
     <ResultColumnProba v-if="pred_proba && pred_proba[idx] !== undefined" title="Probability sepsis" :value="pred_proba[idx]" />
     <ResultColumnPred v-if="pred && pred[idx] !== undefined" title="Prediction" :value="pred[idx]"/>
