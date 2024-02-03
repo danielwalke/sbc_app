@@ -7,6 +7,9 @@ export const DEFAULT_CBC = {
     RBC: 5,
     MCV: 80,
     PLT: 500,
+    groundTruth: undefined,
+    pred: undefined,
+    pred_proba: undefined,
 
 }
 

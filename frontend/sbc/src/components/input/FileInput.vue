@@ -1,8 +1,9 @@
 <template>
-    <label for="file-input">
+
+      <label for="file-input" class="rounded-md shadow-md hover:scale-105 p-4 bg-sky-700 cursor-pointer hover:bg-sky-600">
         File Upload
-    </label>
-    <input type="file" id="file-input" multiple @change="onInputChange" />
+      </label>
+      <input class="hidden" type="file" id="file-input" multiple @change="onInputChange" />
 
 </template>
 
