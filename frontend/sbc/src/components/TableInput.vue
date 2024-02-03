@@ -1,7 +1,7 @@
 <template>
   <div class="flex justify-center items-center p-2 gap-4">
     <FileInput :onInputChange="onInputChange"/>
-    <FilterDropdown :selectedFilterValue="selectedFilterValue" :setSelectedFilterValue="(value)=> selectedFilterValue = value"/>
+    <FilterDropdown v-if="has_predictions" :selectedFilterValue="selectedFilterValue" :setSelectedFilterValue="(value)=> selectedFilterValue = value"/>
   </div>
     <Content :cbcs="cbcs" :chart-data="chartData" :shaps="shaps"
     :value-input="valueInput" :selectedFilterValue="selectedFilterValue" :has_predictions="has_predictions"/>
@@ -37,7 +37,6 @@ const cbcs  = ref([{...cbc}])
 const chartData= computed(
     {
         get() {
-
             if(shaps.value.length === 0) return undefined
             return shaps.value.map((shaps_value_item) => ({
                 labels: Object.keys(cbc).filter(key =>  !["groundTruth", "pred", "pred_proba"].includes(key)).slice(1, Object.keys(cbc).length),
@@ -56,7 +55,16 @@ function valueInput(event, cbc, cbcKey){
 
 function submit(){
   isLoading.value = true
-  axios.post(SERVER_URL + 'get_pred', cbcs.value)
+  axios.post(SERVER_URL + 'get_pred', cbcs.value.map(c=>({
+    patientId: c.patientId,
+    age: c.age,
+    sex: c.sex,
+    HGB: c.HGB,
+    WBC: c.WBC,
+    RBC: c.RBC,
+    MCV: c.MCV,
+    PLT: c.PLT,
+  })))
       .then(function (response) {
         chartData.value = response.data.shap_values
         isLoading.value = false
@@ -79,7 +87,7 @@ function onInputChange(e) {
         const lines = content.split("\n")
         for(const lineIdx in lines){
             const line = lines[lineIdx]
-            if(line.length===0 || lineIdx===0) continue
+            if(line.length===0 || lineIdx==0) continue
             const items = line.split(";")
             cbcs.value.push({
                 patientId: items[0],

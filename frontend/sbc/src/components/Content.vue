@@ -67,19 +67,19 @@ const filteredCbcs = computed(() =>{
   }
 
   if(props.selectedFilterValue === FALSE_POSITIVE){
-    preFilteredCbcs = preFilteredCbcs.filter((cbc, i) => {
+    preFilteredCbcs = preFilteredCbcs.filter((cbcs) => {
       if(cbc.pred === undefined || cbc.groundTruth === undefined) return true
       return (cbc.groundTruth === false && cbc.pred === true)
     })
   }
 
   if(props.selectedFilterValue === FALSE_NEGATIVE){
-    preFilteredCbcs = preFilteredCbcs.filter((cbc, i) => {
+    preFilteredCbcs = preFilteredCbcs.filter((cbc) => {
       if(cbc.pred === undefined || cbc.groundTruth === undefined) return true
       return (cbc.groundTruth === true && cbc.pred === false)
     })
   }
-  return preFilteredCbcs //.filter((cbc, i) => i <= upperLimit.value && i>= lowerLimit.value)
+  return preFilteredCbcs.filter((cbc, i) => i <= upperLimit.value && i>= lowerLimit.value)
 })
 const cbcKeys = computed(() => {
   return Object.keys(DEFAULT_CBC).filter(key => !["groundTruth", "pred", "pred_proba"].includes(key))
