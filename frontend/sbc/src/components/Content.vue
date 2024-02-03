@@ -104,7 +104,6 @@ function updateViewPort(){
   const lowerIdx = upperLimit.value-2
   const lowerElement = document.getElementById(lowerIdx)
   if(lowerElement && isInViewport(lowerElement)){
-    console.log("Found")
     upperLimit.value +=10
   }
 }
