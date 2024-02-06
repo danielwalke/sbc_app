@@ -33,7 +33,11 @@ class Prediction:
 
     def get_output(self):
         output = OutPrediction()
+        print("Start classification")
         output.set_predictions(self.get_prediction().tolist())
         output.set_pred_probas(self.get_pred_proba().tolist())
+        print("Finished classification")
+        print("Started Shapley values calculation")
         output.set_shap_values(self.get_shapley_values().tolist())
+        print("Finished Shapley values calculation")
         return output

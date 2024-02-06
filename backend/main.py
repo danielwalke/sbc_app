@@ -29,6 +29,5 @@ def read_root():
 
 @app.post("/get_pred/")
 async def get_pred(cbc_items: list[CBC])->OutPrediction:
-    print(cbc_items)
     prediction = Prediction(cbc_items, app.state.model)
     return prediction.get_output()

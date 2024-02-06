@@ -1,7 +1,7 @@
 <template>
   <div class="flex justify-center items-center p-2 gap-4">
     <FileInput :onInputChange="onInputChange"/>
-    <FilterDropdown v-if="has_predictions" :selectedFilterValue="selectedFilterValue" :setSelectedFilterValue="(value)=> selectedFilterValue = value"/>
+    <FilterDropdown v-if="has_predictions && cbcs[0].groundTruth !== undefined" :selectedFilterValue="selectedFilterValue" :setSelectedFilterValue="(value)=> selectedFilterValue = value"/>
   </div>
     <Content :cbcs="cbcs" :chart-data="chartData" :shaps="shaps"
     :value-input="valueInput" :selectedFilterValue="selectedFilterValue" :has_predictions="has_predictions"/>
@@ -93,11 +93,11 @@ function onInputChange(e) {
                 patientId: items[0],
                 age: +items[1],
                 sex: items[2],
-                HGB: +items[3],
-                WBC: +items[4],
-                RBC: +items[5],
-                MCV: +items[6],
-                PLT: +items[7],
+                HGB: Math.round(+items[3]*100)/100,
+                WBC: Math.round(+items[4]*100)/100,
+                RBC: Math.round(+items[5]*100)/100,
+                MCV: Math.round(+items[6]*100)/100,
+                PLT: Math.round(+items[7]*100)/100,
               groundTruth: items.length > 8 ? +items[8] === 1 : undefined
             })
         }

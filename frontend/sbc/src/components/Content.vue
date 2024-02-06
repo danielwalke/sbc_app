@@ -1,20 +1,23 @@
 <template>
-  <div class="max-h-[70%] overflow-y-scroll" @scroll="updateViewPort">
-    <div class="w-full grid leading-6 pt-2 gap-4 pl-4 pr-4" :class="has_predictions ? 'grid-cols-11':'grid-cols-9'"
+  <div class="max-h-[80%] overflow-y-auto" @scroll="updateViewPort">
+    <div class="w-full grid leading-6 pt-2 gap-4 pl-4 pr-4" :class="'grid-cols-10'"
          v-for="(cbc, idx) in filteredCbcs" :id="idx">
       <div v-for="cbcKey in cbcKeys" class="flex justify-center items-center flex-col h-fit">
           <p class="text-center">{{cbcKey}}</p>
           <p class="text-center">({{unit(cbcKey)}})</p>
           <input
-              class="p-2 rounded-md w-full w-32 text-right" :value="cbc[cbcKey]"
+              class="p-2 rounded-md w-full w-32 text-right text-black" :value="cbc[cbcKey]"
               :type="type(cbcKey)"
               :placeholder="cbcKey"
-              @input="event => valueInput(event, cbc, cbcKey)"/>
+              @input="event => valueInput(event, cbc, cbcKey)" @change="event => valueInput(event, cbc, cbcKey)"/>
       </div>
-      <ResultColumnPred title="Ground-truth" v-if="cbc.groundTruth !== undefined"
-                        :value="cbc.groundTruth"/>
-      <ResultColumnProba v-if="cbc.pred_proba !== undefined" title="Sepsis-prob." :value="cbc.pred_proba" />
-      <ResultColumnPred v-if="cbc.pred !== undefined" title="Prediction" :value="cbc.pred"/>
+		<div class="flex justify-between col-span-2" v-if="has_predictions">
+		  <ResultColumnPred title="Ground-truth" v-if="cbc.groundTruth !== undefined"
+							:value="cbc.groundTruth"/>
+		  <ResultColumnProba v-if="cbc.pred_proba !== undefined" title="Sepsis-prob." :value="cbc.pred_proba" />
+		  <ResultColumnPred v-if="cbc.pred !== undefined" title="Prediction" :value="cbc.pred"/>
+		</div>
+		<div v-else class="col-span-2"></div>
 
       <div class="col-span-1" v-if="shaps.length>0"></div>
       <div class="col-span-7 flex justify-center max-h-48" v-if="chartData && chartData[idx]">
@@ -58,7 +61,7 @@ const filteredCbcs = computed(() =>{
       return (cbc.pred === true && cbc.groundTruth === true)
     })
   }
-
+	console.log(preFilteredCbcs)
   if(props.selectedFilterValue === TRUE_NEGATIVE){
     preFilteredCbcs = preFilteredCbcs.filter((cbc, i) => {
       if(cbc.pred === undefined || cbc.groundTruth === undefined) return true
@@ -67,7 +70,7 @@ const filteredCbcs = computed(() =>{
   }
 
   if(props.selectedFilterValue === FALSE_POSITIVE){
-    preFilteredCbcs = preFilteredCbcs.filter((cbcs) => {
+    preFilteredCbcs = preFilteredCbcs.filter((cbc) => {
       if(cbc.pred === undefined || cbc.groundTruth === undefined) return true
       return (cbc.groundTruth === false && cbc.pred === true)
     })
