@@ -19,9 +19,9 @@
 		</div>
 		<div v-else class="col-span-2"></div>
 
-      <div class="col-span-1" v-if="shaps.length>0"></div>
-      <div class="col-span-7 flex justify-center max-h-48" v-if="chartData && chartData[idx]">
-        <Bar :data="chartData[idx]" :options="options"/>
+      <div class="col-span-1" v-if="has_predictions"></div>
+      <div class="col-span-7 flex justify-center max-h-48" v-if="has_predictions && cbc.chartData">
+        <Bar :data="cbc.chartData" :options="options"/>
       </div>
     </div>
   </div>
@@ -43,7 +43,6 @@ function type(cbcKey){return cbcKey === "sex" ? "text" : "number"}
 const props = defineProps({
   cbcs:Array,
   shaps:Array,
-  chartData:Array,
   valueInput:Function,
   selectedFilterValue: String|undefined,
   has_predictions: Boolean

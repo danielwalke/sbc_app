@@ -3,7 +3,7 @@
     <FileInput :onInputChange="onInputChange"/>
     <FilterDropdown v-if="has_predictions && cbcs[0].groundTruth !== undefined" :selectedFilterValue="selectedFilterValue" :setSelectedFilterValue="(value)=> selectedFilterValue = value"/>
   </div>
-    <Content :cbcs="cbcs" :chart-data="chartData" :shaps="shaps"
+    <Content :cbcs="cbcs" :shaps="shaps"
     :value-input="valueInput" :selectedFilterValue="selectedFilterValue" :has_predictions="has_predictions"/>
 
   <div>
@@ -34,19 +34,6 @@ const has_predictions = ref(false)
 const selectedFilterValue = ref(undefined)
 const shaps = ref([])
 const cbcs  = ref([{...cbc}])
-const chartData= computed(
-    {
-        get() {
-            if(shaps.value.length === 0) return undefined
-            return shaps.value.map((shaps_value_item) => ({
-                labels: Object.keys(cbc).filter(key =>  !["groundTruth", "pred", "pred_proba"].includes(key)).slice(1, Object.keys(cbc).length),
-                datasets: [{ backgroundColor: shaps_value_item.map(s => s<= 0 ? "blue" : "red"),fontColor:"white",data: shaps_value_item }]
-            }))
-        },
-        set(newValue) {
-            shaps.value = newValue
-        }
-    })
 
 function valueInput(event, cbc, cbcKey){
   if(cbcKey === "sex") return cbc[cbcKey] = event.target.value
@@ -66,13 +53,17 @@ function submit(){
     PLT: c.PLT,
   })))
       .then(function (response) {
-        chartData.value = response.data.shap_values
-        isLoading.value = false
+		  isLoading.value = false
         has_predictions.value = true
         for(let i in cbcs.value){
           const cbc = cbcs.value[i]
           cbc.pred = response.data.predictions[i]
           cbc.pred_proba = response.data.pred_probas[i]
+			cbc.chartData ={
+				labels: Object.keys(cbc).filter(key =>  !["groundTruth", "pred", "pred_proba"].includes(key)).slice(1, Object.keys(cbc).length),
+				datasets: [{ backgroundColor: response.data.shap_values[i].map(s => s<= 0 ? "blue" : "red"),fontColor:"white",data: response.data.shap_values[i] }]
+			}
+
         }
       })
 }
