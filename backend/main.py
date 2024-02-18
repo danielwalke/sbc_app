@@ -3,8 +3,10 @@ from fastapi.middleware.cors import CORSMiddleware
 from torch.nn.functional import normalize
 from joblib import load
 from service.impl.Prediction import Prediction
+from service.impl.GraphPrediction import GraphPrediction
 from service.meta.OutPrediction import OutPrediction
 from service.meta.CBC import CBC
+from service.meta.GraphCBC import GraphCBC
 
 
 app = FastAPI()
@@ -30,4 +32,9 @@ def read_root():
 @app.post("/get_pred/")
 async def get_pred(cbc_items: list[CBC])->OutPrediction:
     prediction = Prediction(cbc_items, app.state.model)
+    return prediction.get_output()
+
+@app.post("/get_graph_pred/")
+async def get_graph_pred(graph_cbc_items: list[GraphCBC])->OutPrediction:
+    prediction = GraphPrediction(graph_cbc_items, app.state.model)
     return prediction.get_output()

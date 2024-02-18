@@ -1,4 +1,4 @@
-#!/Users/danielwalke/git/uni/sbc/backend/bin/python3.10
+#!/Users/danielwalke/git/uni/sbc/backend/bin/python
 # -*- coding: utf-8 -*-
 import re
 import sys
