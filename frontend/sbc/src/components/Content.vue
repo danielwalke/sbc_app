@@ -84,7 +84,7 @@ const filteredCbcs = computed(() =>{
   return preFilteredCbcs.filter((cbc, i) => i <= upperLimit.value && i>= lowerLimit.value)
 })
 const cbcKeys = computed(() => {
-  return Object.keys(DEFAULT_CBC).filter(key => !["groundTruth", "pred", "pred_proba"].includes(key))
+  return Object.keys(DEFAULT_CBC).filter(key => !["groundTruth", "pred", "pred_proba", "cbc_data"].includes(key))
 })
 
 

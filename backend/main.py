@@ -9,6 +9,7 @@ from service.meta.CBC import CBC
 from service.meta.GraphCBC import GraphCBC
 
 
+
 app = FastAPI()
 app.add_middleware(
     CORSMiddleware,
@@ -19,6 +20,7 @@ app.add_middleware(
 )
 @app.on_event("startup")
 async def startup_event():
+    print()
     app.state.model = load('rf.joblib')
 
 def user_function(kwargs):

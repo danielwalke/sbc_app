@@ -13,7 +13,7 @@ defineProps({
 })
 
 function getColor(value){
-  return `background-color: rgb(${255/.6453*value-164.55}, 0, ${255-255/.3547*value})`
+  return `background-color: rgb(${255/.6241*value-164.55}, 0, ${255-255/.3759*value})`
 }
 </script>
 

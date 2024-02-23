@@ -42,6 +42,8 @@ function valueInput(event, cbc, cbcKey){
 
 function submit(){
   isLoading.value = true
+	has_predictions.value = false
+
   axios.post(SERVER_URL + 'get_pred', cbcs.value.map(c=>({
     patientId: c.patientId,
     age: c.age,
@@ -60,7 +62,7 @@ function submit(){
           cbc.pred = response.data.predictions[i]
           cbc.pred_proba = response.data.pred_probas[i]
 			cbc.chartData ={
-				labels: Object.keys(cbc).filter(key =>  !["groundTruth", "pred", "pred_proba"].includes(key)).slice(1, Object.keys(cbc).length),
+				labels: Object.keys(cbc).filter(key =>  !["groundTruth", "pred", "pred_proba", "chartData"].includes(key)).slice(1, Object.keys(cbc).length),
 				datasets: [{ backgroundColor: response.data.shap_values[i].map(s => s<= 0 ? "blue" : "red"),fontColor:"white",data: response.data.shap_values[i] }]
 			}
 
@@ -77,6 +79,9 @@ function onInputChange(e) {
         content = res.target.result;
         const lines = content.split("\n")
         for(const lineIdx in lines){
+						/*if(lineIdx >= 10) {
+							continue
+						}*/
             const line = lines[lineIdx]
             if(line.length===0 || lineIdx==0) continue
             const items = line.split(";")

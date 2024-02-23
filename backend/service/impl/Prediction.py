@@ -23,7 +23,7 @@ class Prediction:
         return self.model.predict_proba(X)[:, 1]
 
     def get_prediction(self):
-        return self.get_pred_proba() >= 0.3547
+        return self.get_pred_proba() >= 0.37590407 #0.3547
 
     def get_shapley_values(self):
         X = self.get_features()
@@ -40,4 +40,7 @@ class Prediction:
         print("Started Shapley values calculation")
         output.set_shap_values(self.get_shapley_values().tolist())
         print("Finished Shapley values calculation")
+        print(np.sum(output.shap_values, axis = -1))
+        print(np.array(output.pred_probas))
+        print(np.array(output.pred_probas) - np.sum(output.shap_values, axis = -1))
         return output
