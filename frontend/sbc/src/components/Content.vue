@@ -1,25 +1,23 @@
 <template>
-  <div class="max-h-[80%] overflow-y-auto" @scroll="updateViewPort">
-    <div class="w-full grid leading-6 pt-2 gap-4 pl-4 pr-4" :class="'grid-cols-10'"
+  <div class="max-h-[80%] overflow-y-auto w-full" @scroll="updateViewPort">
+    <div class="w-full grid leading-6 pt-2 gap-4 grid-container" :class="''"
          v-for="(cbc, idx) in filteredCbcs" :id="idx">
-      <div v-for="cbcKey in cbcKeys" class="flex justify-center items-center flex-col h-fit">
-          <p class="text-center">{{cbcKey}}</p>
-          <p class="text-center">({{unit(cbcKey)}})</p>
+      <div v-for="cbcKey in editableCbcKeys" class="flex justify-center items-center flex-col h-fit">
           <input
               class="p-2 rounded-md w-full w-32 text-right text-black" :value="cbc[cbcKey]"
               :type="type(cbcKey)"
               :placeholder="cbcKey"
               @input="event => valueInput(event, cbc, cbcKey)" @change="event => valueInput(event, cbc, cbcKey)"/>
       </div>
-		<div class="flex justify-between col-span-2" v-if="has_predictions">
-		  <ResultColumnPred title="Ground-truth" v-if="cbc.groundTruth !== undefined"
-							:value="cbc.groundTruth"/>
-		  <ResultColumnProba v-if="cbc.pred_proba !== undefined" title="Sepsis-prob." :value="cbc.pred_proba" />
-		  <ResultColumnPred v-if="cbc.pred !== undefined" title="Prediction" :value="cbc.pred"/>
+		<div class="flex justify-between col-span-4 gap-4" v-if="has_predictions">
+			<div class="non-editable">{{cbc.groundTruth === undefined ? 'Unknown' : cbc.groundTruth ? 'Sepsis': 'Control'}}</div>
+			<div class="non-editable">{{cbc.pred_proba === undefined ? 'Unclassified' : Math.round((1-Math.abs(cbc.pred_proba*PREDICTION_THRESHOLD)/PREDICTION_THRESHOLD)*10000)/100}}</div>
+			<div class="non-editable">{{cbc.pred === undefined ? 'Unclassified' : cbc.pred ? 'Sepsis' : 'Control' }}</div>
+			<Details/>
 		</div>
-		<div v-else class="col-span-2"></div>
+		<div v-else class="col-span-4"></div>
 
-      <div class="col-span-1" v-if="has_predictions"></div>
+      <div class="col-span-2" v-if="has_predictions"></div>
       <div class="col-span-7 flex justify-center max-h-48" v-if="has_predictions && cbc.chartData">
         <Bar :data="cbc.chartData" :options="options"/>
       </div>
@@ -31,10 +29,12 @@
 import { Bar } from 'vue-chartjs'
 import ResultColumnProba from "./results/ResultColumnProba.vue";
 import ResultColumnPred from "./results/ResultColumnPred.vue";
-import {DEFAULT_CBC, UNITS_DICT} from "../lib/constants/CBC_Constants.js";
 import {chartOptions} from "../lib/constants/ChartOptions.js";
 import {computed, ref} from "vue";
 import {FALSE_NEGATIVE, FALSE_POSITIVE, TRUE_NEGATIVE, TRUE_POSITIVE} from "../lib/constants/FilterOptions.js";
+import {editableCbcKeys} from "../lib/TableGrid.js"
+import {PREDICTION_THRESHOLD} from "../lib/constants/CBC_Constants.js";
+import Details from "./icons/Details.vue";
 
 const options = chartOptions
 
@@ -48,7 +48,7 @@ const props = defineProps({
   has_predictions: Boolean
 })
 
-const upperLimit = ref(10)
+const upperLimit = ref(50)
 const lowerLimit = ref(0)
 const filteredCbcs = computed(() =>{
   let preFilteredCbcs = [...props.cbcs]
@@ -60,7 +60,6 @@ const filteredCbcs = computed(() =>{
       return (cbc.pred === true && cbc.groundTruth === true)
     })
   }
-	console.log(preFilteredCbcs)
   if(props.selectedFilterValue === TRUE_NEGATIVE){
     preFilteredCbcs = preFilteredCbcs.filter((cbc, i) => {
       if(cbc.pred === undefined || cbc.groundTruth === undefined) return true
@@ -83,14 +82,7 @@ const filteredCbcs = computed(() =>{
   }
   return preFilteredCbcs.filter((cbc, i) => i <= upperLimit.value && i>= lowerLimit.value)
 })
-const cbcKeys = computed(() => {
-  return Object.keys(DEFAULT_CBC).filter(key => !["groundTruth", "pred", "pred_proba", "cbc_data"].includes(key))
-})
 
-
-function unit(cbcKey){
-  return UNITS_DICT[cbcKey]
-}
 
 function isInViewport(element) {
   const rect = element.getBoundingClientRect();
@@ -106,12 +98,20 @@ function updateViewPort(){
   const lowerIdx = upperLimit.value-2
   const lowerElement = document.getElementById(lowerIdx)
   if(lowerElement && isInViewport(lowerElement)){
-    upperLimit.value +=10
+    upperLimit.value +=50
   }
 }
 
 </script>
 
 <style scoped>
+.grid-container {
+	display: grid;
+	grid-template-columns: repeat(13, minmax(0, 1fr));
+	gap: 1rem;
+}
 
+.non-editable{
+	@apply p-2 bg-gray-600 rounded-md w-full text-center select-none
+}
 </style>

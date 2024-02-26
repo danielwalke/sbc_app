@@ -1,5 +1,6 @@
 export const DEFAULT_CBC = {
     patientId: 0,
+    timePoint: 0,
     age: 18,
     sex: "W",
     HGB: 9,
@@ -15,6 +16,7 @@ export const DEFAULT_CBC = {
 
 export const UNITS_DICT = {
     patientId: "identifier",
+    timePoint: "seconds",
     age:"years",
     sex:"binary (W/M)",
     HGB: "mmol/l",
@@ -23,3 +25,5 @@ export const UNITS_DICT = {
     MCV: "fl",
     PLT: "Gpt/l"
 }
+
+export const PREDICTION_THRESHOLD = .3759
