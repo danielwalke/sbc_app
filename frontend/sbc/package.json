@@ -14,8 +14,11 @@
     "axios": "^1.6.2",
     "chart.js": "^4.4.1",
     "pinia": "^2.1.7",
+    "uuid": "^9.0.1",
+    "uuidv4": "^6.2.13",
     "vue": "^3.3.8",
-    "vue-chartjs": "^5.3.0"
+    "vue-chartjs": "^5.3.0",
+    "vue-router": "^4.3.0"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^4.5.0",

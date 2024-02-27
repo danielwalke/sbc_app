@@ -4,11 +4,12 @@
 			<div class="flex justify-center w-full pb-3">
 				<div class="non-editable skeleton max-w-40"></div>
 			</div>
+			<TableHeader :is-detail-page="true"/>
 			<div class="w-full grid leading-6 pt-2 gap-4 grid-container"
-					 v-for="_ in 13" >
+					 v-for="_ in 15" >
 				<div v-for="_ in editableCbcKeys" class="flex justify-center items-center flex-col h-fit">
 					<div
-						class="p-2 rounded-md w-full w-32 h-16 text-right text-black skeleton-bright"></div>
+						class="p-2 rounded-md w-full w-32 h-12 text-right text-black skeleton-bright"></div>
 				</div>
 				<div class="non-editable skeleton"></div>
 				<div class="flex justify-between col-span-3 gap-4">
@@ -33,6 +34,7 @@
 import {editableCbcKeys} from "../../lib/TableGrid.js"
 import {useCbcStore} from "../../stores/CbcStore.js";
 import {computed} from "vue";
+import TableHeader from "../input/TableHeader.vue";
 
 const cbcStore = useCbcStore()
 const isLoading = computed(()=>cbcStore.getIsLoading)
@@ -59,7 +61,7 @@ const isLoading = computed(()=>cbcStore.getIsLoading)
 }
 
 .non-editable{
-	@apply p-2 bg-gray-600 rounded-md w-full text-center select-none h-16
+	@apply p-2 bg-gray-600 rounded-md w-full text-center select-none h-12
 }
 
 

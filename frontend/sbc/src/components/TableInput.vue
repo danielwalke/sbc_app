@@ -4,7 +4,7 @@
 			<FileInput />
 			<button class="rounded-md shadow-md hover:scale-105 p-4 bg-sky-700 cursor-pointer hover:bg-sky-600" v-if="hasFilters" @click="resetFilters">Reset Filter</button>
 		</div>
-		<TableHeader/>
+		<TableHeader :is-detail-page="false"/>
 		<Content/>
 		<div>
 			<div class="flex justify-center w-full mt-4">
@@ -13,7 +13,7 @@
 				class="flex justify-center items-center rounded-full border-2 text-white h-fit w-fit p-4 text-2xl pt-2 pb-2">+
 				</button>
 			</div>
-			<SubmitButton/>
+			<SubmitButton :fun="submit"/>
 		</div>
 	</div>
 </template>
@@ -47,6 +47,10 @@ const hasFilters = computed(()=> modalStore.getFilters.length > 0)
 
 function resetFilters(){
 	modalStore.setFilter([])
+}
+
+function submit(){
+	store.submitCbcMeasurements()
 }
 </script>
 

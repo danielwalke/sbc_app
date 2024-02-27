@@ -10,12 +10,11 @@
               @input="event => valueInput(event, cbc, cbcKey)" @change="event => valueInput(event, cbc, cbcKey)"/>
       </div>
 			<div class="non-editable">{{cbc.groundTruth === undefined ? 'Unknown' : cbc.groundTruth}}</div>
-			<div class="flex justify-between col-span-3 gap-4" v-if="has_predictions">
+			<div class="flex justify-between col-span-3 gap-4">
 			<div class="non-editable">{{cbc.confidence === undefined ? 'Unclassified' : cbc.confidence}}</div>
 			<div class="non-editable">{{cbc.pred === undefined ? 'Unclassified' : cbc.pred }}</div>
-			<Details/>
+			<Details :fun="()=>handleDetails(cbc)"/>
 		</div>
-		<div v-else class="col-span-4"></div>
 
       <div class="col-span-2" v-if="has_predictions"></div>
       <div class="col-span-7 flex justify-center max-h-48" v-if="has_predictions && cbc.chartData">
@@ -32,6 +31,7 @@ import {computed, ref} from "vue";
 import {editableCbcKeys} from "../lib/TableGrid.js"
 import Details from "./icons/Details.vue";
 import {useCbcStore} from "../stores/CbcStore.js";
+import {router} from "../router/Router.js";
 
 const options = chartOptions
 
@@ -69,6 +69,10 @@ function updateViewPort(){
   if(lowerElement && isInViewport(lowerElement)){
     upperLimit.value +=50
   }
+}
+
+async function handleDetails(cbc){
+	await router.push(`details/${cbc.id}`)
 }
 
 </script>

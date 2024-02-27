@@ -3,10 +3,11 @@ import {DEFAULT_CBC, PREDICTION_THRESHOLD} from "../lib/constants/CBC_Constants.
 import axios from "axios";
 import {SERVER_URL} from "../lib/constants/Server.js";
 import {useModalStore} from "./ModalStore.js";
-
+import { v4 as uuid } from 'uuid';
+import {useRoute} from "vue-router";
 
 export const useCbcStore = defineStore('cbcStore', {
-	state: () => ({ cbcMeasurements: [{...DEFAULT_CBC}], isLoading: false, has_predictions:false}),
+	state: () => ({ cbcMeasurements: [{...DEFAULT_CBC, id : uuid()}], isLoading: false, has_predictions:false, cbcOverClassifiers: []}),
 	getters: {
 		getCbcMeasurements: (state) => {
 			const modalStore = useModalStore()
@@ -29,10 +30,23 @@ export const useCbcStore = defineStore('cbcStore', {
 		},
 		getUnfilteredCbcMeasurements: (state) => state.cbcMeasurements,
 		getIsLoading: (state) => state.isLoading,
-		getHasPredictions: (state) => state.has_predictions
+		getHasPredictions: (state) => state.has_predictions,
+		getCbcOverClassifiers: (state) => {
+			const route = useRoute()
+			if(route.params.id === undefined) return []
+			const classifiers = ["Random Forest", "Decision Tree"] // TODO et this via REST?
+			const cbcOverClassifiers = []
+			const selectedCbc = state.cbcMeasurements.find(cbc => cbc.id === route.params.id)
+			for(const classifier of classifiers){
+				const classifierCbc = {...selectedCbc, classifier: classifier}
+				cbcOverClassifiers.push(classifierCbc)
+			}
+			return cbcOverClassifiers
+		},
 	},
 	actions: {
 		addCbcMeasurements(value ){
+			value.id = uuid()
 			this.cbcMeasurements.push(value)
 		},
 		setCbcMeasurements(value) {
@@ -56,6 +70,7 @@ export const useCbcStore = defineStore('cbcStore', {
 					if(line.length===0 || lineIdx==0) continue
 					const items = line.split(";")
 					this.addCbcMeasurements({
+						id: uuid(),
 						patientId: items[0],
 						order: 0,
 						age: +items[1],
@@ -100,7 +115,37 @@ export const useCbcStore = defineStore('cbcStore', {
 						}
 					}
 				})
-		}
+		},
+		submitCbcMeasurementDetails(){
+			const store = useCbcStore()
+			store.setIsLoading(true)
+			store.setHasPredictions(false)
+
+			axios.post(SERVER_URL + 'get_details_pred', store.getCbcOverClassifiers.map(c=>({
+				patientId: c.patientId,
+				age: c.age,
+				sex: c.sex,
+				HGB: c.HGB,
+				WBC: c.WBC,
+				RBC: c.RBC,
+				MCV: c.MCV,
+				PLT: c.PLT,
+			})))
+				.then(function (response) {
+					store.setIsLoading(false)
+					store.setHasPredictions(true)
+					for(let i in store.getCbcOverClassifiers){
+						const cbc = store.getCbcOverClassifiers[i]
+						cbc.pred = response.data.predictions[i] ? 'Sepsis' : 'Control'
+						cbc.pred_proba = response.data.pred_probas[i]
+						cbc.confidence = Math.round((1-Math.abs(cbc.pred_proba*PREDICTION_THRESHOLD)/PREDICTION_THRESHOLD)*10000)/100
+						cbc.chartData = {
+							labels: ["age", "sex", "HGB", "WBC", "RBC", "MCV", "PLT"],
+							datasets: [{ backgroundColor: response.data.shap_values[i].map(s => s<= 0 ? "blue" : "red"),fontColor:"white",data: response.data.shap_values[i] }]
+						}
+					}
+				})
+		},
 	},
 })
 

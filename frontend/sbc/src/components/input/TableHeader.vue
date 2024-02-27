@@ -3,7 +3,7 @@
 		<div v-for="cbcKey in editableCbcKeys" class="grid-item">
 			<div class="flex gap-3 pt-2">
 				<p class="text-center">{{cbcKey}}</p>
-				<Filter :fun="()=> filterCbcKeyFunction(cbcKey)" :classes="getFilterClass(cbcKey)"/>
+				<Filter v-if="!isDetailPage" :fun="()=> filterCbcKeyFunction(cbcKey)" :classes="getFilterClass(cbcKey)"/>
 				<Help :fun="() => helpCbcKeyFunction(cbcKey)"/>
 			</div>
 			<p class="text-center">({{unit(cbcKey)}})</p>
@@ -11,28 +11,32 @@
 		<div class="grid-item" >
 			<div class="flex gap-2">
 				Ground-truth
-				<Filter :fun="()=> filterCbcKeyFunction('groundTruth')" :classes="getFilterClass('groundTruth')"/>
+				<Filter v-if="!isDetailPage" :fun="()=> filterCbcKeyFunction('groundTruth')" :classes="getFilterClass('groundTruth')"/>
 				<Help :fun="() => helpCbcKeyFunction('groundTruth')"/>
 			</div>
 		</div>
 		<div class="grid-item" >
 			<div class="flex gap-2">
 				Confidence
-				<Filter :fun="()=> filterCbcKeyFunction('confidence')" :classes="getFilterClass('confidence')"/>
+				<Filter v-if="!isDetailPage" :fun="()=> filterCbcKeyFunction('confidence')" :classes="getFilterClass('confidence')"/>
 				<Help :fun="() => helpCbcKeyFunction('confidence')"/>
 			</div>
 		</div>
 		<div class="grid-item">
 			<div class="flex gap-2">
 				Prediction
-				<Filter :fun="()=> filterCbcKeyFunction('pred')" :classes="getFilterClass('pred')"/>
+				<Filter v-if="!isDetailPage" :fun="()=> filterCbcKeyFunction('pred')" :classes="getFilterClass('pred')"/>
 				<Help :fun="() => helpCbcKeyFunction('pred')"/>
 			</div>
 		</div>
 		<div class="grid-item" >
-			<div class="flex gap-2">
+			<div class="flex gap-2" v-if="!isDetailPage">
 				Details
 				<Help :fun="() => helpCbcKeyFunction('details')"/>
+			</div>
+			<div class="flex gap-2" v-else>
+				Classifier
+				<Help :fun="() => helpCbcKeyFunction('classifier')"/>
 			</div>
 		</div>
 	</div>
@@ -49,6 +53,11 @@ import {useCbcStore} from "../../stores/CbcStore.js";
 
 const modalStore = useModalStore()
 const cbcStore = useCbcStore()
+
+const props = defineProps({
+	isDetailPage: Boolean
+})
+
 function unit(cbcKey){
 	return UNITS_DICT[cbcKey]
 }

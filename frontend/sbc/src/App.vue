@@ -1,5 +1,4 @@
 <script setup>
-import TableInput from "./components/TableInput.vue";
 import HelpModal from "./components/modals/HelpModal.vue";
 import FilterModal from "./components/modals/FilterModal.vue";
 import LoadingSkeleton from "./components/loader/LoadingSkeleton.vue";
@@ -8,7 +7,7 @@ import LoadingSkeleton from "./components/loader/LoadingSkeleton.vue";
 
 <template>
   <div class="h-screen w-screen">
-    <TableInput/>
+		<router-view></router-view>
 		<HelpModal/>
 		<FilterModal/>
 		<LoadingSkeleton/>

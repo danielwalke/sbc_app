@@ -1,0 +1,61 @@
+<template>
+	<TableHeader :is-detail-page="true"/>
+	<div class="max-h-[80%] overflow-y-auto w-full">
+		<div class="w-full grid leading-6 pt-2 gap-4 grid-container pl-4 pr-4" :class="''"
+				 v-for="(cbc, idx) in cbcOverClassifiers" :id="idx">
+			<div v-for="cbcKey in editableCbcKeys" class="flex justify-center items-center flex-col h-fit">
+				<input
+					class="p-2 rounded-md w-full w-32 text-right text-black" :value="cbc[cbcKey]"
+					:type="type(cbcKey)"
+					:placeholder="cbcKey"
+					@input="event => valueInput(event, cbc, cbcKey)" @change="event => valueInput(event, cbc, cbcKey)"/>
+			</div>
+			<div class="non-editable">{{cbc.groundTruth === undefined ? 'Unknown' : cbc.groundTruth}}</div>
+			<div class="flex justify-between col-span-3 gap-4" >
+				<div class="non-editable">{{cbc.confidence === undefined ? 'Unclassified' : cbc.confidence}}</div>
+				<div class="non-editable">{{cbc.pred === undefined ? 'Unclassified' : cbc.pred }}</div>
+				<div class="non-editable">{{cbc.classifier}}</div>
+			</div>
+
+			<div class="col-span-2" v-if="has_predictions"></div>
+		</div>
+		<SubmitButton :fun="submitDetails"/>
+	</div>
+</template>
+
+<script setup lang="js">
+import {editableCbcKeys} from "../../lib/TableGrid.js"
+import {useCbcStore} from "../../stores/CbcStore.js";
+import {computed} from "vue";
+import {useRoute, useRouter} from "vue-router";
+import TableHeader from "../input/TableHeader.vue";
+import SubmitButton from "../results/SubmitButton.vue";
+const router = useRouter()
+const route = useRoute()
+
+function type(cbcKey){return cbcKey === "sex" ? "text" : "number"}
+function valueInput(event, cbc, cbcKey){
+	if(cbcKey === "sex") return cbc[cbcKey] = event.target.value
+	cbc[cbcKey] = +event.target.value
+}
+
+const cbcStore = useCbcStore()
+const has_predictions = computed(()=> cbcStore.getHasPredictions)
+const cbcOverClassifiers = computed(()=> cbcStore.getCbcOverClassifiers)
+
+function submitDetails(){
+	console.log("Submit details")
+}
+</script>
+
+<style scoped>
+.grid-container {
+	display: grid;
+	grid-template-columns: repeat(13, minmax(0, 1fr));
+	gap: 1rem;
+}
+
+.non-editable{
+	@apply p-2 bg-gray-600 rounded-md w-full text-center select-none
+}
+</style>
