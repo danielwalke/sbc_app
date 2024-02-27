@@ -1,6 +1,6 @@
 export const DEFAULT_CBC = {
     patientId: 0,
-    timePoint: 0,
+    order: 0,
     age: 18,
     sex: "W",
     HGB: 9,
@@ -16,7 +16,7 @@ export const DEFAULT_CBC = {
 
 export const UNITS_DICT = {
     patientId: "identifier",
-    timePoint: "seconds",
+    order: "ordering",
     age:"years",
     sex:"binary (W/M)",
     HGB: "mmol/l",

@@ -21,20 +21,20 @@
 </template>
 
 <script setup>
-import {ref} from "vue";
+import {computed, ref} from "vue";
 import {FALSE_NEGATIVE, FALSE_POSITIVE, TRUE_NEGATIVE, TRUE_POSITIVE} from "../lib/constants/FilterOptions.js";
-const props = defineProps({
-  selectedFilterValue: String|undefined,
-  setSelectedFilterValue: Function
-})
+import {useCbcStore} from "../stores/CbcStore.js";
 const isOpen = ref(false)
 
 function handleValueSelection(value){
-  props.setSelectedFilterValue(value)
+	store.setSelectedFilterValue(value)
   isOpen.value = !isOpen.value
 }
+const store = useCbcStore()
+const selectedFilterValue = computed(()=>store.getSelectedFilterValue)
 
 const values = [TRUE_POSITIVE, TRUE_NEGATIVE, FALSE_POSITIVE, FALSE_NEGATIVE]
+
 </script>
 
 <style scoped>

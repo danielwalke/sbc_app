@@ -6,11 +6,15 @@
 </template>
 
 <script setup>
-const props = defineProps({
-    submit:Function,
-  isLoading:Boolean
-})
+import {useCbcStore} from "../../stores/CbcStore.js";
+import {computed} from "vue";
 
+const store = useCbcStore()
+const isLoading = computed(()=>store.isLoading)
+
+function submit(){
+	store.submitCbcMeasurements()
+}
 </script>
 
 <style scoped>
