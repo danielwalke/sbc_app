@@ -2,14 +2,17 @@
   <div class="w-full h-full pt-4 pl-4 pb-4">
 		<div class="flex justify-center items-center gap-4">
 			<FileInput />
-			<FilterDropdown v-if="has_predictions && cbcs[0].groundTruth !== undefined"/>
+			<button class="rounded-md shadow-md hover:scale-105 p-4 bg-sky-700 cursor-pointer hover:bg-sky-600" v-if="hasFilters" @click="resetFilters">Reset Filter</button>
 		</div>
 		<TableHeader/>
 		<Content/>
 		<div>
-			<div class="flex justify-center w-full mt-4"><button
+			<div class="flex justify-center w-full mt-4">
+				<button
 				@click="addCbcMeasurement"
-				class="flex justify-center items-center rounded-full border-2 text-white h-fit w-fit p-4 text-2xl pt-2 pb-2">+</button></div>
+				class="flex justify-center items-center rounded-full border-2 text-white h-fit w-fit p-4 text-2xl pt-2 pb-2">+
+				</button>
+			</div>
 			<SubmitButton/>
 		</div>
 	</div>
@@ -25,6 +28,7 @@ import FilterDropdown from "./FilterDropdown.vue";
 import TableHeader from "./input/TableHeader.vue";
 import {DEFAULT_CBC} from "../lib/constants/CBC_Constants.js";
 import {useCbcStore} from "../stores/CbcStore.js";
+import {useModalStore} from "../stores/ModalStore.js";
 
 ChartJS.register(Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale)
 
@@ -37,6 +41,13 @@ function addCbcMeasurement(){
 	store.addCbcMeasurements({...DEFAULT_CBC})
 }
 
+const modalStore = useModalStore()
+
+const hasFilters = computed(()=> modalStore.getFilters.length > 0)
+
+function resetFilters(){
+	modalStore.setFilter([])
+}
 </script>
 
 <style scoped>

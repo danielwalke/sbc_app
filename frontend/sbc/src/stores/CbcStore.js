@@ -2,17 +2,34 @@ import { defineStore } from 'pinia'
 import {DEFAULT_CBC} from "../lib/constants/CBC_Constants.js";
 import axios from "axios";
 import {SERVER_URL} from "../lib/constants/Server.js";
+import {useModalStore} from "./ModalStore.js";
 
 
 export const useCbcStore = defineStore('cbcStore', {
-	state: () => ({ cbcMeasurements: [{...DEFAULT_CBC}], isLoading: false, has_predictions:false, selectedFilterValue: undefined}),
+	state: () => ({ cbcMeasurements: [{...DEFAULT_CBC}], isLoading: false, has_predictions:false}),
 	getters: {
 		getCbcMeasurements: (state) => {
-			return state.cbcMeasurements
+			const modalStore = useModalStore()
+			const filterKey = modalStore.getFilterKey
+			const noFilter = modalStore.getFilters.length === 0
+			if(noFilter) return state.cbcMeasurements
+			let filteredCbcMeasurements = [...state.cbcMeasurements]
+			for(const filter of modalStore.getFilters){
+				filteredCbcMeasurements = filteredCbcMeasurements.filter(cbc => {
+						const filterKey = filter["filterKey"]
+						const selectedValue = filter["selectedValue"]
+						const minValue = filter["minValue"]
+						const maxValue = filter["maxValue"]
+						if (selectedValue !== undefined) return cbc[filterKey] === selectedValue
+						return +cbc[filterKey] >= minValue && +cbc[filterKey] <= maxValue
+					}
+				)
+			}
+			return filteredCbcMeasurements
 		},
+		getUnfilteredCbcMeasurements: (state) => state.cbcMeasurements,
 		getIsLoading: (state) => state.isLoading,
-		getHasPredictions: (state) => state.has_predictions,
-		getSelectedFilterValue: (state) => state.selectedFilterValue,
+		getHasPredictions: (state) => state.has_predictions
 	},
 	actions: {
 		addCbcMeasurements(value ){
@@ -57,8 +74,8 @@ export const useCbcStore = defineStore('cbcStore', {
 		submitCbcMeasurements(){
 			this.isLoading = true
 			this.has_predictions = false
-
-			axios.post(SERVER_URL + 'get_pred', this.cbcMeasurements.map(c=>({
+			const store = useCbcStore()
+			axios.post(SERVER_URL + 'get_pred', store.getCbcMeasurements.map(c=>({
 				patientId: c.patientId,
 				age: c.age,
 				sex: c.sex,
@@ -69,7 +86,6 @@ export const useCbcStore = defineStore('cbcStore', {
 				PLT: c.PLT,
 			})))
 				.then(function (response) {
-					const store = useCbcStore()
 					store.setIsLoading(false)
 					store.setHasPredictions(true)
 					for(let i in store.getCbcMeasurements){
@@ -77,14 +93,11 @@ export const useCbcStore = defineStore('cbcStore', {
 						cbc.pred = response.data.predictions[i]
 						cbc.pred_proba = response.data.pred_probas[i]
 						cbc.chartData = {
-							labels: Object.keys(cbc).filter(key =>  !["groundTruth", "pred", "pred_proba", "chartData", "order"].includes(key)).slice(1, Object.keys(cbc).length),
+							labels: ["age", "sex", "HGB", "WBC", "RBC", "MCV", "PLT"],
 							datasets: [{ backgroundColor: response.data.shap_values[i].map(s => s<= 0 ? "blue" : "red"),fontColor:"white",data: response.data.shap_values[i] }]
 						}
 					}
 				})
-		},
-		setSelectedFilterValue(value){
-			this.selectedFilterValue = value
 		}
 	},
 })

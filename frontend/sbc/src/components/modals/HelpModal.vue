@@ -42,12 +42,12 @@ import {computed} from "vue";
 
 const store = useModalStore()
 
-const isOpen = computed(()=> store.getIsOpen)
+const isOpen = computed(()=> store.getIsHelpModalOpen)
 const headerContent = computed(()=> store.getHeaderContent)
-const mainContent = computed(()=> store.getMainContent)
+const mainContent = computed(()=> store.getHelpMainContent)
 
 function close(){
-	store.setIsOpen(false)
+	store.setIsHelpModalOpen(false)
 }
 </script>
 
