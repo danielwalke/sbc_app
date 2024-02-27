@@ -2,6 +2,7 @@
 import TableInput from "./components/TableInput.vue";
 import HelpModal from "./components/modals/HelpModal.vue";
 import FilterModal from "./components/modals/FilterModal.vue";
+import LoadingSkeleton from "./components/loader/LoadingSkeleton.vue";
 
 </script>
 
@@ -10,6 +11,7 @@ import FilterModal from "./components/modals/FilterModal.vue";
     <TableInput/>
 		<HelpModal/>
 		<FilterModal/>
+		<LoadingSkeleton/>
   </div>
 </template>
 

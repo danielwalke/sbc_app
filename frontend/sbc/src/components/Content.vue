@@ -9,10 +9,10 @@
               :placeholder="cbcKey"
               @input="event => valueInput(event, cbc, cbcKey)" @change="event => valueInput(event, cbc, cbcKey)"/>
       </div>
-			<div class="non-editable">{{cbc.groundTruth === undefined ? 'Unknown' : cbc.groundTruth ? 'Sepsis': 'Control'}}</div>
+			<div class="non-editable">{{cbc.groundTruth === undefined ? 'Unknown' : cbc.groundTruth}}</div>
 			<div class="flex justify-between col-span-3 gap-4" v-if="has_predictions">
-			<div class="non-editable">{{cbc.pred_proba === undefined ? 'Unclassified' : Math.round((1-Math.abs(cbc.pred_proba*PREDICTION_THRESHOLD)/PREDICTION_THRESHOLD)*10000)/100}}</div>
-			<div class="non-editable">{{cbc.pred === undefined ? 'Unclassified' : cbc.pred ? 'Sepsis' : 'Control' }}</div>
+			<div class="non-editable">{{cbc.confidence === undefined ? 'Unclassified' : cbc.confidence}}</div>
+			<div class="non-editable">{{cbc.pred === undefined ? 'Unclassified' : cbc.pred }}</div>
 			<Details/>
 		</div>
 		<div v-else class="col-span-4"></div>
@@ -29,9 +29,7 @@
 import { Bar } from 'vue-chartjs'
 import {chartOptions} from "../lib/constants/ChartOptions.js";
 import {computed, ref} from "vue";
-import {FALSE_NEGATIVE, FALSE_POSITIVE, TRUE_NEGATIVE, TRUE_POSITIVE} from "../lib/constants/FilterOptions.js";
 import {editableCbcKeys} from "../lib/TableGrid.js"
-import {PREDICTION_THRESHOLD} from "../lib/constants/CBC_Constants.js";
 import Details from "./icons/Details.vue";
 import {useCbcStore} from "../stores/CbcStore.js";
 
@@ -41,7 +39,6 @@ function type(cbcKey){return cbcKey === "sex" ? "text" : "number"}
 
 const store = useCbcStore()
 const has_predictions = computed(()=>store.has_predictions)
-const selectedFilterValue = computed(()=>store.getSelectedFilterValue)
 const upperLimit = ref(50)
 const lowerLimit = ref(0)
 
@@ -52,34 +49,6 @@ function valueInput(event, cbc, cbcKey){
 
 const filteredCbcs = computed(() =>{
   let preFilteredCbcs = [...store.getCbcMeasurements]
-  if(!selectedFilterValue.value) return preFilteredCbcs.filter((cbc, i) => i <= upperLimit.value && i>= lowerLimit.value)
-
-  if(selectedFilterValue.value === TRUE_POSITIVE){
-    preFilteredCbcs = preFilteredCbcs.filter((cbc, i) => {
-      if(cbc.pred === undefined || cbc.groundTruth === undefined) return true
-      return (cbc.pred === true && cbc.groundTruth === true)
-    })
-  }
-  if(selectedFilterValue.value === TRUE_NEGATIVE){
-    preFilteredCbcs = preFilteredCbcs.filter((cbc, i) => {
-      if(cbc.pred === undefined || cbc.groundTruth === undefined) return true
-      return (cbc.groundTruth === false && cbc.pred === false)
-    })
-  }
-
-  if(selectedFilterValue.value === FALSE_POSITIVE){
-    preFilteredCbcs = preFilteredCbcs.filter((cbc) => {
-      if(cbc.pred === undefined || cbc.groundTruth === undefined) return true
-      return (cbc.groundTruth === false && cbc.pred === true)
-    })
-  }
-
-  if(selectedFilterValue.value === FALSE_NEGATIVE){
-    preFilteredCbcs = preFilteredCbcs.filter((cbc) => {
-      if(cbc.pred === undefined || cbc.groundTruth === undefined) return true
-      return (cbc.groundTruth === true && cbc.pred === false)
-    })
-  }
   return preFilteredCbcs.filter((cbc, i) => i <= upperLimit.value && i>= lowerLimit.value)
 })
 

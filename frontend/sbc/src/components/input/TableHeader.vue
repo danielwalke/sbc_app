@@ -8,21 +8,32 @@
 			</div>
 			<p class="text-center">({{unit(cbcKey)}})</p>
 		</div>
-		<div class="grid-item">
-			<p>Ground-truth</p>
-			<Help/>
+		<div class="grid-item" >
+			<div class="flex gap-2">
+				Ground-truth
+				<Filter :fun="()=> filterCbcKeyFunction('groundTruth')" :classes="getFilterClass('groundTruth')"/>
+				<Help :fun="() => helpCbcKeyFunction('groundTruth')"/>
+			</div>
+		</div>
+		<div class="grid-item" >
+			<div class="flex gap-2">
+				Confidence
+				<Filter :fun="()=> filterCbcKeyFunction('confidence')" :classes="getFilterClass('confidence')"/>
+				<Help :fun="() => helpCbcKeyFunction('confidence')"/>
+			</div>
 		</div>
 		<div class="grid-item">
-			<p>Confidence</p>
-			<Help/>
+			<div class="flex gap-2">
+				Prediction
+				<Filter :fun="()=> filterCbcKeyFunction('pred')" :classes="getFilterClass('pred')"/>
+				<Help :fun="() => helpCbcKeyFunction('pred')"/>
+			</div>
 		</div>
-		<div class="grid-item">
-			<p>Prediction</p>
-			<Help/>
-		</div>
-		<div class="grid-item">
-			Details
-			<Help/>
+		<div class="grid-item" >
+			<div class="flex gap-2">
+				Details
+				<Help :fun="() => helpCbcKeyFunction('details')"/>
+			</div>
 		</div>
 	</div>
 </template>
@@ -44,6 +55,7 @@ function unit(cbcKey){
 
 function helpCbcKeyFunction(cbcKey){
 	modalStore.setIsHelpModalOpen(true)
+	//TODO Write dictionary with content
 	modalStore.setHeaderContent(cbcKey)
 	modalStore.setHelpMainContent("Funny here")
 }

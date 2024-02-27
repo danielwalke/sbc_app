@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia'
-import {DEFAULT_CBC} from "../lib/constants/CBC_Constants.js";
+import {DEFAULT_CBC, PREDICTION_THRESHOLD} from "../lib/constants/CBC_Constants.js";
 import axios from "axios";
 import {SERVER_URL} from "../lib/constants/Server.js";
 import {useModalStore} from "./ModalStore.js";
@@ -65,16 +65,17 @@ export const useCbcStore = defineStore('cbcStore', {
 						RBC: Math.round(+items[5]*100)/100,
 						MCV: Math.round(+items[6]*100)/100,
 						PLT: Math.round(+items[7]*100)/100,
-						groundTruth: items.length > 8 ? +items[8] === 1 : undefined
+						groundTruth: items.length > 8 ? +items[8] === 1 ? 'Sepsis' : 'Control' : undefined
 					})
 				}
 			};
 			reader.readAsText(file);
 		},
 		submitCbcMeasurements(){
-			this.isLoading = true
-			this.has_predictions = false
 			const store = useCbcStore()
+			store.setIsLoading(true)
+			store.setHasPredictions(false)
+
 			axios.post(SERVER_URL + 'get_pred', store.getCbcMeasurements.map(c=>({
 				patientId: c.patientId,
 				age: c.age,
@@ -90,8 +91,9 @@ export const useCbcStore = defineStore('cbcStore', {
 					store.setHasPredictions(true)
 					for(let i in store.getCbcMeasurements){
 						const cbc = store.getCbcMeasurements[i]
-						cbc.pred = response.data.predictions[i]
+						cbc.pred = response.data.predictions[i] ? 'Sepsis' : 'Control'
 						cbc.pred_proba = response.data.pred_probas[i]
+						cbc.confidence = Math.round((1-Math.abs(cbc.pred_proba*PREDICTION_THRESHOLD)/PREDICTION_THRESHOLD)*10000)/100
 						cbc.chartData = {
 							labels: ["age", "sex", "HGB", "WBC", "RBC", "MCV", "PLT"],
 							datasets: [{ backgroundColor: response.data.shap_values[i].map(s => s<= 0 ? "blue" : "red"),fontColor:"white",data: response.data.shap_values[i] }]

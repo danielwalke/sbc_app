@@ -4,19 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="875a38dc-bf1f-4839-9933-7efb22d78c92" name="Changes" comment="refactored code with pinia store">
+    <list default="true" id="875a38dc-bf1f-4839-9933-7efb22d78c92" name="Changes" comment="fixed help modal and added filter for cbc keys">
+      <change afterPath="$PROJECT_DIR$/frontend/sbc/src/components/loader/LoadingSkeleton.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/sbc/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/sbc/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/sbc/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/sbc/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/sbc/src/App.vue" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/sbc/src/App.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/sbc/src/components/TableInput.vue" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/sbc/src/components/TableInput.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/sbc/src/components/icons/Filter.vue" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/sbc/src/components/icons/Filter.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/sbc/src/components/Content.vue" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/sbc/src/components/Content.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/sbc/src/components/input/TableHeader.vue" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/sbc/src/components/input/TableHeader.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/sbc/src/components/modals/FilterModal.vue" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/sbc/src/components/modals/FilterModal.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/sbc/src/components/modals/HelpModal.vue" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/sbc/src/components/modals/HelpModal.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/sbc/src/stores/CbcStore.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/sbc/src/stores/CbcStore.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/sbc/src/stores/ModalStore.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/sbc/src/stores/ModalStore.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/sbc/tailwind.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/sbc/tailwind.config.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -219,7 +213,7 @@
       <workItem from="1707890784050" duration="1554000" />
       <workItem from="1708676458558" duration="653000" />
       <workItem from="1708924812197" duration="10579000" />
-      <workItem from="1709012455957" duration="14699000" />
+      <workItem from="1709012455957" duration="17963000" />
     </task>
     <task id="LOCAL-00001" summary="changes in data processing">
       <created>1667911144366</created>
@@ -319,7 +313,14 @@
       <option name="project" value="LOCAL" />
       <updated>1709017859897</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="fixed help modal and added filter for cbc keys">
+      <created>1709028550253</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1709028550253</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -351,6 +352,7 @@
     <MESSAGE value="fixed bug" />
     <MESSAGE value="helper modal and preparation for other modals and details contents" />
     <MESSAGE value="refactored code with pinia store" />
-    <option name="LAST_COMMIT_MESSAGE" value="refactored code with pinia store" />
+    <MESSAGE value="fixed help modal and added filter for cbc keys" />
+    <option name="LAST_COMMIT_MESSAGE" value="fixed help modal and added filter for cbc keys" />
   </component>
 </project>
