@@ -7,21 +7,23 @@ import shap
 
 class DetailsPrediction:
 
-    def __init__(self, cbc_items, models):
+    def __init__(self, cbc_items, models, thresholds):
         self.cbc_items = cbc_items
         self.models = models
         self.out_details_predictions = OutDetailsPredictions()
+        self.thresholds = thresholds
 
     def get_output(self):
         for model in self.models:
             print(f"Start prediction for {model.__class__.__name__}")
-            shap_explainer = shap.LinearExplainer if model.__class__.__name__ == "Logistic Regression" else shap.TreeExplainer
-            prediction = Prediction(self.cbc_items, model, shap_explainer)
+            shap_explainer = shap.LinearExplainer if model.__class__.__name__ == "LogisticRegression" else shap.TreeExplainer
+            if model.__class__.__name__ == "LogisticRegression": continue
+            prediction = Prediction(self.cbc_items, model,self.thresholds, shap_explainer)
             out_predictions: OutPrediction = prediction.get_output()
             out_details_prediction = OutDetailsPrediction()
             out_details_prediction.set_prediction(out_predictions.predictions[-1])
-            out_details_prediction.set_shap_values(out_predictions.pred_probas[-1])
-            out_details_prediction.set_pred_proba(out_predictions.shap_values[-1])
+            out_details_prediction.set_shap_values(out_predictions.shap_values)
+            out_details_prediction.set_pred_proba(out_predictions.pred_probas[-1])
             out_details_prediction.set_classifier_name(model.__class__.__name__)
             self.out_details_predictions.add_prediction_detail(out_details_prediction)
         return self.out_details_predictions

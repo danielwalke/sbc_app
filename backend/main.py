@@ -27,6 +27,13 @@ async def startup_event():
     app.state.dt_model = load('models/dt.joblib')
     app.state.lr_model = load('models/lr.joblib')
     app.state.xgb_model = load('models/xgb.joblib')
+    app.state.classifiers = [app.state.rf_model, app.state.dt_model, app.state.lr_model, app.state.xgb_model]
+    app.state.classifier_thresholds = {
+        "RandomForestClassifier": 0.3269368308502123,
+        "XGBClassifier": 0.08329411,
+        "DecisionTreeClassifier": 0.5479930767959986,
+        "LogisticRegression": 0.4746955641186002,
+    }
 
 def user_function(kwargs):
     return normalize(kwargs["updated_features"] - kwargs["mean_neighbors"], p=2.0, dim=1)
@@ -36,15 +43,18 @@ def read_root():
     return {"Hello": "World"}
 
 
+@app.get("/classifier_thresholds")
+async def get_classifier_thresholds():
+    return app.state.classifier_thresholds
+
 @app.post("/get_pred/")
 async def get_pred(cbc_items: list[CBC])->OutPrediction:
-    prediction = Prediction(cbc_items, app.state.model)
+    prediction = Prediction(cbc_items, app.state.model, app.state.classifier_thresholds)
     return prediction.get_output()
 
 @app.post("/get_pred_details/")
-async def get_pred(cbc_items: list[CBC])->OutPrediction:
-    prediction = DetailsPrediction(cbc_items, [app.state.rf_model, app.state.dt_model,
-                                               app.state.lr_model, app.state.xgb_model])
+async def get_pred_details(cbc_items: list[CBC])->OutDetailsPredictions:
+    prediction = DetailsPrediction(cbc_items, app.state.classifiers, app.state.classifier_thresholds)
     return prediction.get_output()
 
 @app.post("/get_graph_pred/")

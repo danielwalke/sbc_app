@@ -1,10 +1,11 @@
 from pydantic import BaseModel
+from typing import Union
 
 
 class OutPrediction(BaseModel):
-    predictions:list = []
-    pred_probas:list = []
-    shap_values:list = []
+    predictions: list = []
+    pred_probas: list = []
+    shap_values: list = []
 
     def __init__(self):
         super().__init__()
@@ -20,3 +21,10 @@ class OutPrediction(BaseModel):
 
     def set_shap_values(self, shap_values):
         self.shap_values = shap_values
+
+    def __str__(self):
+        return f"""
+        Predictions: {self.predictions}\n
+        Pred proba: {self.pred_probas}\n
+        Shap values: {self.shap_values}\n
+        """

@@ -25,3 +25,11 @@ class OutDetailsPrediction:
 
     def set_classifier_name(self, classifier_name):
         self.classifier_name = classifier_name
+
+    def __str__(self):
+        return f"""
+        Classifier name: {self.classifier_name}\n
+        Prediction: {self.prediction}\n
+        Pred proba: {self.pred_proba}\n
+        Shapley values: {self.shap_values}\n
+        """

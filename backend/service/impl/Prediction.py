@@ -4,10 +4,11 @@ from service.meta.OutPrediction import OutPrediction
 
 
 class Prediction:
-    def __init__(self, cbc_items, model, explainer_class=shap.TreeExplainer):
+    def __init__(self, cbc_items, model, thresholds, explainer_class=shap.TreeExplainer):
         self.cbc_items = cbc_items
         self.model = model
         self.shap_explainer = explainer_class(self.model)
+        self.thresholds = thresholds
 
     def get_features(self):
         X = np.zeros((len(self.cbc_items), 7))
@@ -24,12 +25,11 @@ class Prediction:
         return self.model.predict_proba(X)[:, 1]
 
     def get_prediction(self):
-        return self.get_pred_proba() >= 0.37590407  # 0.3547
+        return self.get_pred_proba() >= self.thresholds[self.model.__class__.__name__]
 
     def get_shapley_values(self):
         X = self.get_features()
-        explainer = self.shap_explainer(self.model)
-        shap_values = explainer.shap_values(X)
+        shap_values = self.shap_explainer.shap_values(X)
         return shap_values[1]
 
     def get_output(self):
@@ -40,8 +40,9 @@ class Prediction:
         print("Finished classification")
         print("Started Shapley values calculation")
         output.set_shap_values(self.get_shapley_values().tolist())
+        print(output)
         print("Finished Shapley values calculation")
-        print(np.sum(output.shap_values, axis=-1))
-        print(np.array(output.pred_probas))
-        print(np.array(output.pred_probas) - np.sum(output.shap_values, axis=-1))
+        # print(np.sum(output.shap_values, axis=-1))
+        # print(np.array(output.pred_probas))
+        # print(np.array(output.pred_probas) - np.sum(output.shap_values, axis=-1))
         return output
