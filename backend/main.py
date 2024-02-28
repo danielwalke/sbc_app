@@ -7,7 +7,8 @@ from service.impl.GraphPrediction import GraphPrediction
 from service.meta.OutPrediction import OutPrediction
 from service.meta.CBC import CBC
 from service.meta.GraphCBC import GraphCBC
-
+from service.meta.OutDetailsPredictions import OutDetailsPredictions
+from service.impl.DetailsPrediction import DetailsPrediction
 
 
 app = FastAPI()
@@ -22,6 +23,10 @@ app.add_middleware(
 async def startup_event():
     print()
     app.state.model = load('rf.joblib')
+    app.state.rf_model = load('models/rf.joblib')
+    app.state.dt_model = load('models/dt.joblib')
+    app.state.lr_model = load('models/lr.joblib')
+    app.state.xgb_model = load('models/xgb.joblib')
 
 def user_function(kwargs):
     return normalize(kwargs["updated_features"] - kwargs["mean_neighbors"], p=2.0, dim=1)
@@ -34,6 +39,12 @@ def read_root():
 @app.post("/get_pred/")
 async def get_pred(cbc_items: list[CBC])->OutPrediction:
     prediction = Prediction(cbc_items, app.state.model)
+    return prediction.get_output()
+
+@app.post("/get_pred_details/")
+async def get_pred(cbc_items: list[CBC])->OutPrediction:
+    prediction = DetailsPrediction(cbc_items, [app.state.rf_model, app.state.dt_model,
+                                               app.state.lr_model, app.state.xgb_model])
     return prediction.get_output()
 
 @app.post("/get_graph_pred/")

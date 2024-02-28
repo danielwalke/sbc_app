@@ -4,22 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="875a38dc-bf1f-4839-9933-7efb22d78c92" name="Changes" comment="loading screen">
-      <change afterPath="$PROJECT_DIR$/frontend/sbc/src/components/about/About.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/sbc/src/components/details/DetailContent.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/sbc/src/router/Router.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/sbc/src/router/Routes.js" afterDir="false" />
+    <list default="true" id="875a38dc-bf1f-4839-9933-7efb22d78c92" name="Changes" comment="prepared details page and updated some skeelton structures">
+      <change afterPath="$PROJECT_DIR$/backend/service/impl/DetailsPrediction.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/service/meta/OutDetailsPrediction.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/service/meta/OutDetailsPredictions.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/sbc/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/sbc/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/sbc/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/sbc/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/sbc/src/App.vue" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/sbc/src/App.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/sbc/src/components/Content.vue" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/sbc/src/components/Content.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/sbc/src/components/TableInput.vue" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/sbc/src/components/TableInput.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/sbc/src/components/input/TableHeader.vue" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/sbc/src/components/input/TableHeader.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/sbc/src/components/loader/LoadingSkeleton.vue" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/sbc/src/components/loader/LoadingSkeleton.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/sbc/src/components/results/SubmitButton.vue" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/sbc/src/components/results/SubmitButton.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/sbc/src/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/sbc/src/main.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/sbc/src/stores/CbcStore.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/sbc/src/stores/CbcStore.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/service/impl/GraphAware.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/service/impl/Prediction.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/service/impl/Prediction.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -222,7 +214,8 @@
       <workItem from="1707890784050" duration="1554000" />
       <workItem from="1708676458558" duration="653000" />
       <workItem from="1708924812197" duration="10579000" />
-      <workItem from="1709012455957" duration="24367000" />
+      <workItem from="1709012455957" duration="25688000" />
+      <workItem from="1709095015890" duration="676000" />
     </task>
     <task id="LOCAL-00001" summary="changes in data processing">
       <created>1667911144366</created>
@@ -336,7 +329,14 @@
       <option name="project" value="LOCAL" />
       <updated>1709031804633</updated>
     </task>
-    <option name="localTasksCounter" value="17" />
+    <task id="LOCAL-00017" summary="prepared details page and updated some skeelton structures">
+      <created>1709040724775</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1709040724775</updated>
+    </task>
+    <option name="localTasksCounter" value="18" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -370,6 +370,7 @@
     <MESSAGE value="refactored code with pinia store" />
     <MESSAGE value="fixed help modal and added filter for cbc keys" />
     <MESSAGE value="loading screen" />
-    <option name="LAST_COMMIT_MESSAGE" value="loading screen" />
+    <MESSAGE value="prepared details page and updated some skeelton structures" />
+    <option name="LAST_COMMIT_MESSAGE" value="prepared details page and updated some skeelton structures" />
   </component>
 </project>
