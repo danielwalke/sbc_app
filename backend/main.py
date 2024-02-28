@@ -9,7 +9,10 @@ from service.meta.CBC import CBC
 from service.meta.GraphCBC import GraphCBC
 from service.meta.OutDetailsPredictions import OutDetailsPredictions
 from service.impl.DetailsPrediction import DetailsPrediction
-
+import pandas as pd
+from dataAnalysis.DataAnalysis import DataAnalysis
+from sklearn.model_selection import train_test_split
+import shap
 
 app = FastAPI()
 app.add_middleware(
@@ -21,7 +24,13 @@ app.add_middleware(
 )
 @app.on_event("startup")
 async def startup_event():
-    print()
+    data = pd.read_csv(r"./extdata/sbcdata.csv", header=0)
+    data_analysis = DataAnalysis(data)
+    y_train = data_analysis.get_y_train()
+    X_train = data_analysis.get_X_train()
+
+    X_train, X_val, y_train, y_val = train_test_split(X_train, y_train, test_size=0.2, random_state=0)
+
     app.state.model = load('rf.joblib')
     app.state.rf_model = load('models/rf.joblib')
     app.state.dt_model = load('models/dt.joblib')
@@ -34,6 +43,7 @@ async def startup_event():
         "DecisionTreeClassifier": 0.5479930767959986,
         "LogisticRegression": 0.4746955641186002,
     }
+    app.state.background_data = X_train
 
 def user_function(kwargs):
     return normalize(kwargs["updated_features"] - kwargs["mean_neighbors"], p=2.0, dim=1)
@@ -49,12 +59,13 @@ async def get_classifier_thresholds():
 
 @app.post("/get_pred/")
 async def get_pred(cbc_items: list[CBC])->OutPrediction:
-    prediction = Prediction(cbc_items, app.state.model, app.state.classifier_thresholds)
+    shap_explainer = shap.TreeExplainer(app.state.model)
+    prediction = Prediction(cbc_items, app.state.model, app.state.classifier_thresholds, shap_explainer)
     return prediction.get_output()
 
 @app.post("/get_pred_details/")
 async def get_pred_details(cbc_items: list[CBC])->OutDetailsPredictions:
-    prediction = DetailsPrediction(cbc_items, app.state.classifiers, app.state.classifier_thresholds)
+    prediction = DetailsPrediction(cbc_items, app.state.classifiers, app.state.classifier_thresholds, app.state.background_data)
     return prediction.get_output()
 
 @app.post("/get_graph_pred/")

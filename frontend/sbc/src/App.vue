@@ -2,7 +2,11 @@
 import HelpModal from "./components/modals/HelpModal.vue";
 import FilterModal from "./components/modals/FilterModal.vue";
 import LoadingSkeleton from "./components/loader/LoadingSkeleton.vue";
+import {useCbcStore} from "./stores/CbcStore.js";
 
+
+const cbcStore = useCbcStore()
+cbcStore.fetchClassifierNames()
 </script>
 
 <template>

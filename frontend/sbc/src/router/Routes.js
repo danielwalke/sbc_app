@@ -5,5 +5,5 @@ import About from "../components/about/About.vue";
 export const routes = [
 	{ path: '/', component: TableInput },
 	{ path: '/about', component: About },
-	{ path: '/details/:id', component: DetailContent, props: { default: true }}
+	{ path: '/details/:id', component: DetailContent}
 ]

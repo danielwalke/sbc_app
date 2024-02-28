@@ -4,10 +4,10 @@ from service.meta.OutPrediction import OutPrediction
 
 
 class Prediction:
-    def __init__(self, cbc_items, model, thresholds, explainer_class=shap.TreeExplainer):
+    def __init__(self, cbc_items, model, thresholds, shap_explainer):
         self.cbc_items = cbc_items
         self.model = model
-        self.shap_explainer = explainer_class(self.model)
+        self.shap_explainer = shap_explainer
         self.thresholds = thresholds
 
     def get_features(self):
@@ -30,7 +30,7 @@ class Prediction:
     def get_shapley_values(self):
         X = self.get_features()
         shap_values = self.shap_explainer.shap_values(X)
-        return shap_values[1]
+        return shap_values[1] if isinstance(shap_values, list) else shap_values
 
     def get_output(self):
         output = OutPrediction()

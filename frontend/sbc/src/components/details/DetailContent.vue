@@ -1,5 +1,5 @@
 <template>
-	<TableHeader :is-detail-page="true"/>
+	<TableHeader :is-detail-page="true" class="pt-4"/>
 	<div class="max-h-[80%] overflow-y-auto w-full">
 		<div class="w-full grid leading-6 pt-2 gap-4 grid-container pl-4 pr-4" :class="''"
 				 v-for="(cbc, idx) in cbcOverClassifiers" :id="idx">
@@ -17,7 +17,10 @@
 				<div class="non-editable">{{cbc.classifier}}</div>
 			</div>
 
-			<div class="col-span-2" v-if="has_predictions"></div>
+			<div class="col-span-2" v-if="hasPredictionDetails"></div>
+			<div class="col-span-7 flex justify-center max-h-48" v-if="hasPredictionDetails">
+				<Bar :data="cbc.chartData" :options="chartOptions"/>
+			</div>
 		</div>
 		<SubmitButton :fun="submitDetails"/>
 	</div>
@@ -30,6 +33,8 @@ import {computed} from "vue";
 import {useRoute, useRouter} from "vue-router";
 import TableHeader from "../input/TableHeader.vue";
 import SubmitButton from "../results/SubmitButton.vue";
+import { Bar } from 'vue-chartjs'
+import {chartOptions} from "../../lib/constants/ChartOptions.js";
 const router = useRouter()
 const route = useRoute()
 
@@ -40,11 +45,11 @@ function valueInput(event, cbc, cbcKey){
 }
 
 const cbcStore = useCbcStore()
-const has_predictions = computed(()=> cbcStore.getHasPredictions)
+const hasPredictionDetails = computed(()=> cbcStore.getHasPredictionDetails)
 const cbcOverClassifiers = computed(()=> cbcStore.getCbcOverClassifiers)
 
 function submitDetails(){
-	console.log("Submit details")
+	cbcStore.submitCbcMeasurementDetails()
 }
 </script>
 
