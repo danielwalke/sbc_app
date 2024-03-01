@@ -4,10 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="875a38dc-bf1f-4839-9933-7efb22d78c92" name="Changes" comment="removed file input limit index">
+    <list default="true" id="875a38dc-bf1f-4839-9933-7efb22d78c92" name="Changes" comment="filteroptions to all filter options">
+      <change afterPath="$PROJECT_DIR$/frontend/sbc/src/lib/constants/CBCDescriptions.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/sbc/src/components/modals/FilterModal.vue" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/sbc/src/components/modals/FilterModal.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/sbc/src/stores/ModalStore.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/sbc/src/stores/ModalStore.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/sbc/src/components/input/TableHeader.vue" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/sbc/src/components/input/TableHeader.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/sbc/src/lib/constants/CBC_Constants.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/sbc/src/lib/constants/CBC_Constants.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -18,8 +19,8 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Python Script" />
-        <option value="JavaScript File" />
         <option value="Vue Single File Component" />
+        <option value="JavaScript File" />
       </list>
     </option>
   </component>
@@ -213,7 +214,7 @@
       <workItem from="1709012455957" duration="25688000" />
       <workItem from="1709095015890" duration="12928000" />
       <workItem from="1709213135990" duration="928000" />
-      <workItem from="1709283577484" duration="3151000" />
+      <workItem from="1709283577484" duration="4391000" />
     </task>
     <task id="LOCAL-00001" summary="changes in data processing">
       <created>1667911144366</created>
@@ -348,7 +349,14 @@
       <option name="project" value="LOCAL" />
       <updated>1709288514948</updated>
     </task>
-    <option name="localTasksCounter" value="20" />
+    <task id="LOCAL-00020" summary="filteroptions to all filter options">
+      <created>1709289049361</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1709289049361</updated>
+    </task>
+    <option name="localTasksCounter" value="21" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -385,6 +393,7 @@
     <MESSAGE value="prepared details page and updated some skeelton structures" />
     <MESSAGE value="added background dataset for linear explainer" />
     <MESSAGE value="removed file input limit index" />
-    <option name="LAST_COMMIT_MESSAGE" value="removed file input limit index" />
+    <MESSAGE value="filteroptions to all filter options" />
+    <option name="LAST_COMMIT_MESSAGE" value="filteroptions to all filter options" />
   </component>
 </project>

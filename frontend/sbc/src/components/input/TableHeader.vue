@@ -50,6 +50,7 @@ import Help from "../icons/Help.vue";
 import Filter from "../icons/Filter.vue";
 import {useModalStore} from "../../stores/ModalStore.js";
 import {useCbcStore} from "../../stores/CbcStore.js";
+import {CBC_KEY_TO_DESCRIPTION} from "../../lib/constants/CBCDescriptions.js";
 
 const modalStore = useModalStore()
 const cbcStore = useCbcStore()
@@ -64,9 +65,8 @@ function unit(cbcKey){
 
 function helpCbcKeyFunction(cbcKey){
 	modalStore.setIsHelpModalOpen(true)
-	//TODO Write dictionary with content
 	modalStore.setHeaderContent(cbcKey)
-	modalStore.setHelpMainContent("Funny here")
+	modalStore.setHelpMainContent(CBC_KEY_TO_DESCRIPTION[cbcKey])
 }
 
 function filterCbcKeyFunction(cbcKey){

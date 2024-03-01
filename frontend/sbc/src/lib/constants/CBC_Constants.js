@@ -21,7 +21,7 @@ export const UNITS_DICT = {
     sex:"binary (W/M)",
     HGB: "mmol/l",
     WBC: "Gpt/l",
-    RBC: "Gpt/l",
+    RBC: "Tpt/l",
     MCV: "fl",
     PLT: "Gpt/l"
 }
