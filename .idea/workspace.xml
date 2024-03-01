@@ -4,8 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="875a38dc-bf1f-4839-9933-7efb22d78c92" name="Changes" comment="added background dataset for linear explainer">
-      <change beforePath="$PROJECT_DIR$/frontend/sbc/src/stores/CbcStore.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/sbc/src/stores/CbcStore.js" afterDir="false" />
+    <list default="true" id="875a38dc-bf1f-4839-9933-7efb22d78c92" name="Changes" comment="removed file input limit index">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/sbc/src/components/modals/FilterModal.vue" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/sbc/src/components/modals/FilterModal.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/sbc/src/stores/ModalStore.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/sbc/src/stores/ModalStore.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -211,7 +213,7 @@
       <workItem from="1709012455957" duration="25688000" />
       <workItem from="1709095015890" duration="12928000" />
       <workItem from="1709213135990" duration="928000" />
-      <workItem from="1709283577484" duration="2669000" />
+      <workItem from="1709283577484" duration="3151000" />
     </task>
     <task id="LOCAL-00001" summary="changes in data processing">
       <created>1667911144366</created>
@@ -339,7 +341,14 @@
       <option name="project" value="LOCAL" />
       <updated>1709113441582</updated>
     </task>
-    <option name="localTasksCounter" value="19" />
+    <task id="LOCAL-00019" summary="removed file input limit index">
+      <created>1709288514948</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1709288514948</updated>
+    </task>
+    <option name="localTasksCounter" value="20" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -375,6 +384,7 @@
     <MESSAGE value="loading screen" />
     <MESSAGE value="prepared details page and updated some skeelton structures" />
     <MESSAGE value="added background dataset for linear explainer" />
-    <option name="LAST_COMMIT_MESSAGE" value="added background dataset for linear explainer" />
+    <MESSAGE value="removed file input limit index" />
+    <option name="LAST_COMMIT_MESSAGE" value="removed file input limit index" />
   </component>
 </project>

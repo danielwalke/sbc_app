@@ -23,7 +23,7 @@ export const useModalStore = defineStore('modal', {
 		},
 		getAllFilterOptions: (state) =>{
 			const cbcStore = useCbcStore()
-			const definedFilterMeasurements = cbcStore.getCbcMeasurements.filter( cbc => cbc[state.filterKey] !== undefined)
+			const definedFilterMeasurements = cbcStore.getUnfilteredCbcMeasurements.filter( cbc => cbc[state.filterKey] !== undefined)
 			const options = definedFilterMeasurements.map(cbc => cbc[state.filterKey])
 			const uniqueOptions = Array.from(new Set(options))
 			return uniqueOptions.map(option => ({
@@ -53,7 +53,7 @@ export const useModalStore = defineStore('modal', {
 		addFilter(filter){
 			this.filters.push(filter)
 		},
-		setFilter(value){
+		setFilters(value){
 			this.filters = value
 		}
 	},

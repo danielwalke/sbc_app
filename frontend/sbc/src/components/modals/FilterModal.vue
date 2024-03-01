@@ -22,7 +22,7 @@
 						<form class="max-w-sm mx-auto">
 							<select id="countries" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
 								<option @click="()=>handleOptionSelection({value: undefined})">Select All</option>
-								<option v-for="option in filterOptions"  @click="()=>handleOptionSelection(option)" :value="option.value">{{option.name}}</option>
+								<option v-for="option in allFilterOptions"  @click="()=>handleOptionSelection(option)" :value="option.value">{{option.name}}</option>
 							</select>
 						</form>
 					</div>
@@ -121,9 +121,10 @@ function close(){
 }
 
 function handleOptionSelection(option){
+	console.log(option.value)
 	if(option.value === undefined) {
 		console.log(store.getFilters)
-		store.setFilter(store.getFilters.filter(filter => filter["filterKey"] !== store.getFilterKey))
+		store.setFilters(store.getFilters.filter(filter => filter["filterKey"] !== store.getFilterKey))
 	}
 	if(option.value !== undefined) {
 		store.addFilter({
