@@ -24,3 +24,7 @@
   }
 }
 */
+
+button, label, .grid-item{
+  @apply select-none
+}

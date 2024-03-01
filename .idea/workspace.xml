@@ -4,17 +4,21 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="875a38dc-bf1f-4839-9933-7efb22d78c92" name="Changes" comment="prepared details page and updated some skeelton structures">
+    <list default="true" id="875a38dc-bf1f-4839-9933-7efb22d78c92" name="Changes" comment="added background dataset for linear explainer">
+      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/service/impl/PredictionDetails.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/backend/requirements.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/service/impl/DetailsPrediction.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/service/impl/DetailsPrediction.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/service/impl/GraphPrediction.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/service/impl/GraphPrediction.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/service/impl/Prediction.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/service/impl/Prediction.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/sbc/src/App.vue" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/sbc/src/App.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/sbc/src/components/details/DetailContent.vue" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/sbc/src/components/details/DetailContent.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/sbc/src/router/Router.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/sbc/src/router/Router.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/sbc/src/router/Routes.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/sbc/src/router/Routes.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/service/meta/GraphCBC.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/service/meta/GraphCBC.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/service/meta/OutPrediction.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/service/meta/OutPrediction.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/sbc/src/components/Content.vue" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/sbc/src/components/Content.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/sbc/src/components/HelloWorld.vue" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/sbc/src/stores/CbcStore.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/sbc/src/stores/CbcStore.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/sbc/src/stores/ModalStore.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/sbc/src/stores/ModalStore.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/sbc/src/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/sbc/src/style.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -218,7 +222,9 @@
       <workItem from="1708676458558" duration="653000" />
       <workItem from="1708924812197" duration="10579000" />
       <workItem from="1709012455957" duration="25688000" />
-      <workItem from="1709095015890" duration="6950000" />
+      <workItem from="1709095015890" duration="12928000" />
+      <workItem from="1709213135990" duration="928000" />
+      <workItem from="1709283577484" duration="2411000" />
     </task>
     <task id="LOCAL-00001" summary="changes in data processing">
       <created>1667911144366</created>
@@ -339,7 +345,14 @@
       <option name="project" value="LOCAL" />
       <updated>1709040724775</updated>
     </task>
-    <option name="localTasksCounter" value="18" />
+    <task id="LOCAL-00018" summary="added background dataset for linear explainer">
+      <created>1709113441582</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1709113441582</updated>
+    </task>
+    <option name="localTasksCounter" value="19" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -374,6 +387,7 @@
     <MESSAGE value="fixed help modal and added filter for cbc keys" />
     <MESSAGE value="loading screen" />
     <MESSAGE value="prepared details page and updated some skeelton structures" />
-    <option name="LAST_COMMIT_MESSAGE" value="prepared details page and updated some skeelton structures" />
+    <MESSAGE value="added background dataset for linear explainer" />
+    <option name="LAST_COMMIT_MESSAGE" value="added background dataset for linear explainer" />
   </component>
 </project>

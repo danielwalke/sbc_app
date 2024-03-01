@@ -1,7 +1,6 @@
-from service.impl.Prediction import Prediction
+from service.impl.PredictionDetails import PredictionDetails
 from service.meta.OutDetailsPrediction import OutDetailsPrediction
 from service.meta.OutDetailsPredictions import OutDetailsPredictions
-from service.meta.OutPrediction import OutPrediction
 import shap
 
 
@@ -19,12 +18,8 @@ class DetailsPrediction:
             print(f"Start prediction for {model.__class__.__name__}")
             shap_explainer = shap.LinearExplainer(model, self.background_data) \
                 if model.__class__.__name__ == "LogisticRegression" else shap.TreeExplainer(model)
-            prediction = Prediction(self.cbc_items, model,self.thresholds, shap_explainer)
-            out_predictions: OutPrediction = prediction.get_output()
-            out_details_prediction = OutDetailsPrediction()
-            out_details_prediction.set_prediction(out_predictions.predictions[-1])
-            out_details_prediction.set_shap_values(out_predictions.shap_values[-1])
-            out_details_prediction.set_pred_proba(out_predictions.pred_probas[-1])
+            prediction = PredictionDetails(self.cbc_items, model,self.thresholds, shap_explainer)
+            out_details_prediction: OutDetailsPrediction = prediction.get_detailed_output()
             out_details_prediction.set_classifier_name(model.__class__.__name__)
             self.out_details_predictions.add_prediction_detail(out_details_prediction)
         return self.out_details_predictions

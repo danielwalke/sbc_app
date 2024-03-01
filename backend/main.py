@@ -3,7 +3,6 @@ from fastapi.middleware.cors import CORSMiddleware
 from torch.nn.functional import normalize
 from joblib import load
 from service.impl.Prediction import Prediction
-from service.impl.GraphPrediction import GraphPrediction
 from service.meta.OutPrediction import OutPrediction
 from service.meta.CBC import CBC
 from service.meta.GraphCBC import GraphCBC
@@ -22,6 +21,8 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+
 @app.on_event("startup")
 async def startup_event():
     data = pd.read_csv(r"./extdata/sbcdata.csv", header=0)
@@ -31,8 +32,8 @@ async def startup_event():
 
     X_train, X_val, y_train, y_val = train_test_split(X_train, y_train, test_size=0.2, random_state=0)
 
-    app.state.model = load('rf.joblib')
-    app.state.rf_model = load('models/rf.joblib')
+    app.state.model = load('models/rf.joblib')
+    app.state.rf_model = app.state.model #load('models/rf.joblib')
     app.state.dt_model = load('models/dt.joblib')
     app.state.lr_model = load('models/lr.joblib')
     app.state.xgb_model = load('models/xgb.joblib')
@@ -45,8 +46,11 @@ async def startup_event():
     }
     app.state.background_data = X_train
 
-def user_function(kwargs):
-    return normalize(kwargs["updated_features"] - kwargs["mean_neighbors"], p=2.0, dim=1)
+    graph_aware_clf_0 = load('models/graph_aware_rf_0.joblib')
+    graph_aware_clf_1 = load('models/graph_aware_rf_1.joblib')
+    app.state.graph_aware_clfs = [graph_aware_clf_0, graph_aware_clf_1]
+
+
 
 @app.get("/")
 def read_root():
@@ -57,18 +61,23 @@ def read_root():
 async def get_classifier_thresholds():
     return app.state.classifier_thresholds
 
+
 @app.post("/get_pred/")
-async def get_pred(cbc_items: list[CBC])->OutPrediction:
-    shap_explainer = shap.TreeExplainer(app.state.model)
-    prediction = Prediction(cbc_items, app.state.model, app.state.classifier_thresholds, shap_explainer)
+async def get_pred(cbc_items: list[CBC]) -> OutPrediction:
+    print(cbc_items)
+    prediction = Prediction(cbc_items, app.state.model, app.state.classifier_thresholds)
     return prediction.get_output()
+
 
 @app.post("/get_pred_details/")
-async def get_pred_details(cbc_items: list[CBC])->OutDetailsPredictions:
-    prediction = DetailsPrediction(cbc_items, app.state.classifiers, app.state.classifier_thresholds, app.state.background_data)
+async def get_pred_details(cbc_items: list[CBC]) -> OutDetailsPredictions:
+    print(cbc_items)
+    prediction = DetailsPrediction(cbc_items, app.state.classifiers, app.state.classifier_thresholds,
+                                   app.state.background_data)
     return prediction.get_output()
 
-@app.post("/get_graph_pred/")
-async def get_graph_pred(graph_cbc_items: list[GraphCBC])->OutPrediction:
-    prediction = GraphPrediction(graph_cbc_items, app.state.model)
-    return prediction.get_output()
+
+# @app.post("/get_graph_pred/")
+# async def get_graph_pred(graph_cbc_items: list[GraphCBC]) -> OutPrediction:
+#     prediction = GraphPrediction(graph_cbc_items, app.state.graph_aware_clfs)
+#     return prediction.get_output()

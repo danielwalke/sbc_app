@@ -38,8 +38,12 @@ export const useCbcStore = defineStore('cbcStore', {
 			const cbcOverClassifiers = []
 			const selectedCbc = state.cbcMeasurements.find(cbc => cbc.id === route.params.id)
 			for(const classifier of classifiers){
-				const classifierCbc = {...selectedCbc, classifier: classifier}
-				cbcOverClassifiers.push(classifierCbc)
+				const copySelectedCbc = {...selectedCbc}
+				copySelectedCbc.pred_proba = undefined
+				copySelectedCbc.pred = undefined
+				copySelectedCbc.confidence = undefined
+				copySelectedCbc.classifier = classifier
+				cbcOverClassifiers.push(copySelectedCbc)
 			}
 			return cbcOverClassifiers
 		},
@@ -70,6 +74,7 @@ export const useCbcStore = defineStore('cbcStore', {
 				for(const lineIdx in lines){
 					const line = lines[lineIdx]
 					if(line.length===0 || lineIdx==0) continue
+					if(lineIdx > 5) continue
 					const items = line.split(";")
 					this.addCbcMeasurements({
 						id: uuid(),
@@ -94,7 +99,6 @@ export const useCbcStore = defineStore('cbcStore', {
 			store.setHasPredictions(false)
 
 			axios.post(SERVER_URL + 'get_pred', store.getCbcMeasurements.map(c=>({
-				patientId: c.patientId,
 				age: c.age,
 				sex: c.sex,
 				HGB: c.HGB,
@@ -112,10 +116,6 @@ export const useCbcStore = defineStore('cbcStore', {
 						cbc.pred_proba = response.data.pred_probas[i]
 						const threshold = store.getClassifierThresholds["RandomForestClassifier"]
 						cbc.confidence = Math.round((1-Math.abs(cbc.pred_proba*threshold)/threshold)*10000)/100
-						cbc.chartData = {
-							labels: ["age", "sex", "HGB", "WBC", "RBC", "MCV", "PLT"],
-							datasets: [{ backgroundColor: response.data.shap_values[i].map(s => s<= 0 ? "blue" : "red"),fontColor:"white",data: response.data.shap_values[i] }]
-						}
 					}
 				})
 		},
@@ -128,7 +128,6 @@ export const useCbcStore = defineStore('cbcStore', {
 			store.setHasPredictions(false)
 
 			axios.post(SERVER_URL + 'get_pred_details', store.getCbcOverClassifiers.map(c=>({
-				patientId: c.patientId,
 				age: c.age,
 				sex: c.sex,
 				HGB: c.HGB,
@@ -171,5 +170,3 @@ export const useCbcStore = defineStore('cbcStore', {
 		}
 	},
 })
-
-//TODO: add watcher to cbc measurements to update filter -> cbc measurements injecten in filter modal

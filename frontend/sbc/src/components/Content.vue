@@ -15,11 +15,6 @@
 			<div class="non-editable">{{cbc.pred === undefined ? 'Unclassified' : cbc.pred }}</div>
 			<Details :fun="()=>handleDetails(cbc)"/>
 		</div>
-
-      <div class="col-span-2" v-if="has_predictions"></div>
-      <div class="col-span-7 flex justify-center max-h-48" v-if="has_predictions && cbc.chartData">
-        <Bar :data="cbc.chartData" :options="options"/>
-      </div>
     </div>
   </div>
 </template>

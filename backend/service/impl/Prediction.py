@@ -4,10 +4,9 @@ from service.meta.OutPrediction import OutPrediction
 
 
 class Prediction:
-    def __init__(self, cbc_items, model, thresholds, shap_explainer):
+    def __init__(self, cbc_items, model, thresholds):
         self.cbc_items = cbc_items
         self.model = model
-        self.shap_explainer = shap_explainer
         self.thresholds = thresholds
 
     def get_features(self):
@@ -27,22 +26,13 @@ class Prediction:
     def get_prediction(self):
         return self.get_pred_proba() >= self.thresholds[self.model.__class__.__name__]
 
-    def get_shapley_values(self):
-        X = self.get_features()
-        shap_values = self.shap_explainer.shap_values(X)
-        return shap_values[1] if isinstance(shap_values, list) else shap_values
-
     def get_output(self):
         output = OutPrediction()
         print("Start classification")
+        print(self.get_pred_proba())
+        print(self.get_prediction())
         output.set_predictions(self.get_prediction().tolist())
         output.set_pred_probas(self.get_pred_proba().tolist())
         print("Finished classification")
-        print("Started Shapley values calculation")
-        output.set_shap_values(self.get_shapley_values().tolist())
         print(output)
-        print("Finished Shapley values calculation")
-        # print(np.sum(output.shap_values, axis=-1))
-        # print(np.array(output.pred_probas))
-        # print(np.array(output.pred_probas) - np.sum(output.shap_values, axis=-1))
         return output

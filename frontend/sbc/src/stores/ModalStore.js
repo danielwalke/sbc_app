@@ -13,7 +13,8 @@ export const useModalStore = defineStore('modal', {
 		getIsFilterModalOpen: (state) => state.isFilterModalOpen,
 		getFilterOptions: (state) =>{
 			const cbcStore = useCbcStore()
-			const options = cbcStore.getCbcMeasurements.map(cbc => cbc[state.filterKey])
+			const definedFilterMeasurements = cbcStore.getCbcMeasurements.filter( cbc => cbc[state.filterKey] !== undefined)
+			const options = definedFilterMeasurements.map(cbc => cbc[state.filterKey])
 			const uniqueOptions = Array.from(new Set(options))
 			return uniqueOptions.map(option => ({
 				value: option,
@@ -22,7 +23,8 @@ export const useModalStore = defineStore('modal', {
 		},
 		getAllFilterOptions: (state) =>{
 			const cbcStore = useCbcStore()
-			const options = cbcStore.getUnfilteredCbcMeasurements.map(cbc => cbc[state.filterKey])
+			const definedFilterMeasurements = cbcStore.getCbcMeasurements.filter( cbc => cbc[state.filterKey] !== undefined)
+			const options = definedFilterMeasurements.map(cbc => cbc[state.filterKey])
 			const uniqueOptions = Array.from(new Set(options))
 			return uniqueOptions.map(option => ({
 				value: option,
