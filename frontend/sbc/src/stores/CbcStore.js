@@ -74,7 +74,6 @@ export const useCbcStore = defineStore('cbcStore', {
 				for(const lineIdx in lines){
 					const line = lines[lineIdx]
 					if(line.length===0 || lineIdx==0) continue
-					if(lineIdx > 5) continue
 					const items = line.split(";")
 					this.addCbcMeasurements({
 						id: uuid(),
