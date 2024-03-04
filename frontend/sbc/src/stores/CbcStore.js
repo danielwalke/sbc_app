@@ -96,7 +96,9 @@ export const useCbcStore = defineStore('cbcStore', {
 			const store = useCbcStore()
 			store.setIsLoading(true)
 			store.setHasPredictions(false)
-
+			console.time("predictions");
+			const requestDate = new Date()
+			console.log(`${requestDate.getHours()}:${requestDate.getMinutes()}:${requestDate.getSeconds()}:${requestDate.getMilliseconds()}`)
 			axios.post(SERVER_URL + 'get_pred', store.getCbcMeasurements.map(c=>({
 				age: c.age,
 				sex: c.sex,
@@ -116,6 +118,7 @@ export const useCbcStore = defineStore('cbcStore', {
 						const threshold = store.getClassifierThresholds["RandomForestClassifier"]
 						cbc.confidence = Math.round((1-Math.abs(cbc.pred_proba*threshold)/threshold)*10000)/100
 					}
+					console.timeEnd("predictions");
 				})
 		},
 		setHasPredictionDetails(value){
@@ -125,7 +128,7 @@ export const useCbcStore = defineStore('cbcStore', {
 			const store = useCbcStore()
 			store.setIsLoading(true)
 			store.setHasPredictions(false)
-
+			console.time("details")
 			axios.post(SERVER_URL + 'get_pred_details', store.getCbcOverClassifiers.map(c=>({
 				age: c.age,
 				sex: c.sex,
@@ -151,6 +154,7 @@ export const useCbcStore = defineStore('cbcStore', {
 							datasets: [{ backgroundColor: prediction_detail.shap_values.map(s => s<= 0 ? "blue" : "red"),fontColor:"white",data: prediction_detail.shap_values}]
 						}
 					}
+					console.timeEnd("details")
 				})
 		},
 		setClassifierNames(classifierNames){

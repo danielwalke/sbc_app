@@ -1,7 +1,7 @@
 import numpy as np
 import shap
 from service.meta.OutPrediction import OutPrediction
-
+import time
 
 class Prediction:
     def __init__(self, cbc_items, model, thresholds):
@@ -29,10 +29,9 @@ class Prediction:
     def get_output(self):
         output = OutPrediction()
         print("Start classification")
-        print(self.get_pred_proba())
-        print(self.get_prediction())
+        start = time.time()
         output.set_predictions(self.get_prediction().tolist())
         output.set_pred_probas(self.get_pred_proba().tolist())
+        print(f"Required Classification time: {time.time() - start} s")
         print("Finished classification")
-        print(output)
         return output

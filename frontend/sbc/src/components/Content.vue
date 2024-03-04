@@ -22,7 +22,7 @@
 <script setup>
 import { Bar } from 'vue-chartjs'
 import {chartOptions} from "../lib/constants/ChartOptions.js";
-import {computed, ref} from "vue";
+import {computed, onUpdated, ref, onBeforeUpdate} from "vue";
 import {editableCbcKeys} from "../lib/TableGrid.js"
 import Details from "./icons/Details.vue";
 import {useCbcStore} from "../stores/CbcStore.js";
@@ -70,6 +70,14 @@ async function handleDetails(cbc){
 	await router.push(`details/${cbc.id}`)
 }
 
+onBeforeUpdate(()=>{
+	console.log("Before Update")
+	console.time("RenderTime")
+})
+onUpdated(()=>{
+	console.timeEnd("RenderTime")
+	console.log("Updated")
+})
 </script>
 
 <style scoped>

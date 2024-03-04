@@ -12,6 +12,7 @@ import pandas as pd
 from dataAnalysis.DataAnalysis import DataAnalysis
 from sklearn.model_selection import train_test_split
 import shap
+from datetime import datetime
 
 app = FastAPI()
 app.add_middleware(
@@ -64,14 +65,13 @@ async def get_classifier_thresholds():
 
 @app.post("/get_pred/")
 async def get_pred(cbc_items: list[CBC]) -> OutPrediction:
-    print(cbc_items)
+    print(datetime.now())
     prediction = Prediction(cbc_items, app.state.model, app.state.classifier_thresholds)
     return prediction.get_output()
 
 
 @app.post("/get_pred_details/")
 async def get_pred_details(cbc_items: list[CBC]) -> OutDetailsPredictions:
-    print(cbc_items)
     prediction = DetailsPrediction(cbc_items, app.state.classifiers, app.state.classifier_thresholds,
                                    app.state.background_data)
     return prediction.get_output()
