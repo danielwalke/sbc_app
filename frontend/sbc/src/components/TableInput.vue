@@ -46,7 +46,7 @@ const modalStore = useModalStore()
 const hasFilters = computed(()=> modalStore.getFilters.length > 0)
 
 function resetFilters(){
-	modalStore.setFilter([])
+	modalStore.setFilters([])
 }
 
 function submit(){
