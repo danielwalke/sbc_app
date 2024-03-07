@@ -3,6 +3,7 @@
 		<div class="flex justify-center items-center gap-4">
 			<FileInput />
 			<button class="rounded-md shadow-md hover:scale-105 p-4 bg-sky-700 cursor-pointer hover:bg-sky-600" v-if="hasFilters" @click="resetFilters">Reset Filter</button>
+			<div class="bg-gray-600 p-4 rounded-md">Samples count: {{cbc_counts}}</div>
 		</div>
 		<TableHeader :is-detail-page="false"/>
 		<Content/>
@@ -35,7 +36,7 @@ ChartJS.register(Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale)
 const store = useCbcStore()
 
 const has_predictions = computed(()=>store.has_predictions)
-const cbcs  = computed(()=>store.getCbcMeasurements)
+const cbc_counts  = computed(()=>store.getCbcMeasurements.length)
 
 function addCbcMeasurement(){
 	store.addCbcMeasurements({...DEFAULT_CBC})

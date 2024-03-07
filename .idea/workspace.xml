@@ -4,9 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="875a38dc-bf1f-4839-9933-7efb22d78c92" name="Changes" comment="latest changes">
+    <list default="true" id="875a38dc-bf1f-4839-9933-7efb22d78c92" name="Changes" comment="fixed bug in reseting filters">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/sbc/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/sbc/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/sbc/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/sbc/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/sbc/src/components/TableInput.vue" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/sbc/src/components/TableInput.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/sbc/src/components/modals/FilterModal.vue" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/sbc/src/components/modals/FilterModal.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/sbc/src/stores/CbcStore.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/sbc/src/stores/CbcStore.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -214,7 +218,8 @@
       <workItem from="1709213135990" duration="928000" />
       <workItem from="1709283577484" duration="8055000" />
       <workItem from="1709532169795" duration="4538000" />
-      <workItem from="1709615041556" duration="1308000" />
+      <workItem from="1709615041556" duration="1918000" />
+      <workItem from="1709789941489" duration="6183000" />
     </task>
     <task id="LOCAL-00001" summary="changes in data processing">
       <created>1667911144366</created>
@@ -377,7 +382,14 @@
       <option name="project" value="LOCAL" />
       <updated>1709543592447</updated>
     </task>
-    <option name="localTasksCounter" value="24" />
+    <task id="LOCAL-00024" summary="fixed bug in reseting filters">
+      <created>1709617910275</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1709617910275</updated>
+    </task>
+    <option name="localTasksCounter" value="25" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -418,6 +430,7 @@
     <MESSAGE value="dictionary for explanaition of features" />
     <MESSAGE value="corrected descriptions" />
     <MESSAGE value="latest changes" />
-    <option name="LAST_COMMIT_MESSAGE" value="latest changes" />
+    <MESSAGE value="fixed bug in reseting filters" />
+    <option name="LAST_COMMIT_MESSAGE" value="fixed bug in reseting filters" />
   </component>
 </project>

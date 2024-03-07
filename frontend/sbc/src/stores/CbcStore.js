@@ -6,6 +6,21 @@ import {useModalStore} from "./ModalStore.js";
 import { v4 as uuid } from 'uuid';
 import {useRoute} from "vue-router";
 
+function calculate_confidence_score(class_probability, threshold = 0.5){
+	let m
+	let n
+	if(class_probability <= threshold){
+		m = - 1 / threshold
+		n = 1
+	}else{
+		m = 1 / (1-threshold)
+		n = - threshold * m
+	}
+	const confidence = m*class_probability+n
+	return confidence
+}
+
+
 export const useCbcStore = defineStore('cbcStore', {
 	state: () => ({ cbcMeasurements: [{...DEFAULT_CBC, id : uuid()}], isLoading: false, has_predictions:false, cbcOverClassifiers: [], classifierNames: [], classifierThresholds: undefined, hasPredictionDetails: false}),
 	getters: {
@@ -116,7 +131,7 @@ export const useCbcStore = defineStore('cbcStore', {
 						cbc.pred = response.data.predictions[i] ? 'Sepsis' : 'Control'
 						cbc.pred_proba = response.data.pred_probas[i]
 						const threshold = store.getClassifierThresholds["RandomForestClassifier"]
-						cbc.confidence = Math.round((1-Math.abs(cbc.pred_proba*threshold)/threshold)*10000)/100
+						cbc.confidence = Math.round(calculate_confidence_score(cbc.pred_proba, threshold)*10000)/100
 					}
 					console.timeEnd("predictions");
 				})
@@ -148,7 +163,7 @@ export const useCbcStore = defineStore('cbcStore', {
 						cbc.classifier = prediction_detail.classifier_name
 						cbc.pred_proba = prediction_detail.pred_proba
 						const threshold = store.getClassifierThresholds[cbc.classifier]
-						cbc.confidence = Math.round((1-Math.abs(cbc.pred_proba*threshold)/threshold)*10000)/100
+						cbc.confidence = Math.round(calculate_confidence_score(cbc.pred_proba, threshold)*10000)/100
 						cbc.chartData = {
 							labels: ["age", "sex", "HGB", "WBC", "RBC", "MCV", "PLT"],
 							datasets: [{ backgroundColor: prediction_detail.shap_values.map(s => s<= 0 ? "blue" : "red"),fontColor:"white",data: prediction_detail.shap_values}]

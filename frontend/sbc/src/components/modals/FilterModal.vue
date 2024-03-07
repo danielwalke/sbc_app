@@ -20,9 +20,9 @@
 				<div class="p-4 md:p-5 space-y-4">
 					<div v-if="isCategorical">
 						<form class="max-w-sm mx-auto">
-							<select id="countries" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-								<option @click="()=>handleOptionSelection({value: undefined})">Select All</option>
-								<option v-for="option in allFilterOptions"  @click="()=>handleOptionSelection(option)" :value="option.value">{{option.name}}</option>
+							<select v-model="selectedValue" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+								<option type="button"  :value="undefined">Select All</option>
+								<option type="button"  v-for="option in allFilterOptions"  :value="option.value">{{option.name}}</option>
 							</select>
 						</form>
 					</div>
@@ -71,7 +71,7 @@
 
 <script setup lang="js">
 import {useModalStore} from "../../stores/ModalStore.js";
-import {computed, ref} from "vue";
+import {computed, onMounted, onUpdated, ref, watch} from "vue";
 import {useCbcStore} from "../../stores/CbcStore.js";
 import Slider from '@vueform/slider'
 
@@ -87,6 +87,10 @@ const headerContent = computed(()=> store.getHeaderContent)
 const isCategorical = computed(()=> store.getFilterOptions.length < 10)
 const filterOptions = computed(()=> store.getFilterOptions)
 const allFilterOptions = computed(()=> store.getAllFilterOptions)
+const filterKey = computed(()=> store.getFilterKey)
+
+const selectedValue = ref(undefined)
+const lastFilterKey = ref("")
 
 const defaultRangeValues = ()=>{
 	if(isCategorical.value) return [0,0]
@@ -120,22 +124,25 @@ function close(){
 	store.setIsFilterModalOpen(false)
 }
 
-function handleOptionSelection(option){
-	console.log(option.value)
-	if(option.value === undefined) {
-		console.log(store.getFilters)
-		store.setFilters(store.getFilters.filter(filter => filter["filterKey"] !== store.getFilterKey))
-	}
-	if(option.value !== undefined) {
+watch(selectedValue, (newSelectedValue) => {
+	store.setFilters(store.getFilters.filter(filter => filter["filterKey"] !== store.getFilterKey))
+	if(newSelectedValue !== undefined) {
 		store.addFilter({
 			filterKey: store.getFilterKey,
-			selectedValue: option.value,
+			selectedValue: newSelectedValue,
 			minValue: undefined,
 			maxValue: undefined
 		})
 	}
+})
 
-}
+watch(filterKey, (newFilterKey) => {
+	const filter = store.getFilters.find(filter => filter["filterKey"] !== newFilterKey.value)
+	if(filter === undefined) return
+	selectedValue.value = filter.selectedValue
+
+})
+
 </script>
 
 <style scoped>
