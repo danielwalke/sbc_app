@@ -54,11 +54,6 @@ function submitDetails(){
 </script>
 
 <style scoped>
-.grid-container {
-	display: grid;
-	grid-template-columns: repeat(13, minmax(0, 1fr));
-	gap: 1rem;
-}
 
 .non-editable{
 	@apply p-2 bg-gray-600 rounded-md w-full text-center select-none

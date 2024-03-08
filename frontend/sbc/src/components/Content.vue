@@ -1,6 +1,6 @@
 <template>
-  <div class="max-h-[80%] overflow-y-auto w-full" @scroll="updateViewPort">
-    <div class="w-full grid leading-6 pt-2 gap-4 grid-container" :class="''"
+  <div class="max-h-[80%] overflow-y-auto w-full overflow-x-auto" @scroll="updateViewPort">
+    <div class="min-w-full grid leading-6 pt-2 gap-4 grid-container" :class="''"
          v-for="(cbc, idx) in filteredCbcs" :id="idx">
       <div v-for="cbcKey in editableCbcKeys" class="flex justify-center items-center flex-col h-fit">
           <input
@@ -67,7 +67,7 @@ function updateViewPort(){
 }
 
 async function handleDetails(cbc){
-	await router.push(`details/${cbc.id}`)
+	await router.push(`sbc_frontend/details/${cbc.id}`)
 }
 
 onBeforeUpdate(()=>{
@@ -81,11 +81,7 @@ onUpdated(()=>{
 </script>
 
 <style scoped>
-.grid-container {
-	display: grid;
-	grid-template-columns: repeat(13, minmax(0, 1fr));
-	gap: 1rem;
-}
+
 
 .non-editable{
 	@apply p-2 bg-gray-600 rounded-md w-full text-center select-none

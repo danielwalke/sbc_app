@@ -4,20 +4,15 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="875a38dc-bf1f-4839-9933-7efb22d78c92" name="Changes" comment="fixed bugs in confidence and selection of filters">
-      <change afterPath="$PROJECT_DIR$/frontend/sbc/src/components/disclaimer/Disclaimer.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/sbc/src/components/footer/Footer.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/workflows/main.yml" afterDir="false" />
+    <list default="true" id="875a38dc-bf1f-4839-9933-7efb22d78c92" name="Changes" comment="disclaimer and impressum">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/sbc/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/sbc/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/sbc/src/App.vue" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/sbc/src/App.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/sbc/src/components/TableInput.vue" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/sbc/src/components/TableInput.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/sbc/src/components/about/About.vue" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/sbc/src/components/about/About.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/sbc/src/components/Content.vue" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/sbc/src/components/Content.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/sbc/src/components/details/DetailContent.vue" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/sbc/src/components/details/DetailContent.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/sbc/src/router/Router.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/sbc/src/router/Router.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/sbc/src/components/footer/Footer.vue" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/sbc/src/components/footer/Footer.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/sbc/src/components/input/TableHeader.vue" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/sbc/src/components/input/TableHeader.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/sbc/src/router/Routes.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/sbc/src/router/Routes.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/sbc/src/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/sbc/src/style.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/sbc/vite.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/sbc/vite.config.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/sbc/tailwind.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/sbc/tailwind.config.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -228,7 +223,7 @@
       <workItem from="1709532169795" duration="4538000" />
       <workItem from="1709615041556" duration="1918000" />
       <workItem from="1709789941489" duration="6858000" />
-      <workItem from="1709876345575" duration="4439000" />
+      <workItem from="1709876345575" duration="5308000" />
     </task>
     <task id="LOCAL-00001" summary="changes in data processing">
       <created>1667911144366</created>
@@ -405,7 +400,14 @@
       <option name="project" value="LOCAL" />
       <updated>1709801442727</updated>
     </task>
-    <option name="localTasksCounter" value="26" />
+    <task id="LOCAL-00026" summary="disclaimer and impressum">
+      <created>1709894857065</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1709894857065</updated>
+    </task>
+    <option name="localTasksCounter" value="27" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -423,7 +425,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="changes in data processing" />
     <MESSAGE value="changes for data filtering" />
     <MESSAGE value="preprocessing pipeline" />
     <MESSAGE value="preprocessing pipeline II" />
@@ -448,6 +449,7 @@
     <MESSAGE value="latest changes" />
     <MESSAGE value="fixed bug in reseting filters" />
     <MESSAGE value="fixed bugs in confidence and selection of filters" />
-    <option name="LAST_COMMIT_MESSAGE" value="fixed bugs in confidence and selection of filters" />
+    <MESSAGE value="disclaimer and impressum" />
+    <option name="LAST_COMMIT_MESSAGE" value="disclaimer and impressum" />
   </component>
 </project>

@@ -1,7 +1,7 @@
 <template>
 	<div class="grid-container">
 		<div v-for="cbcKey in editableCbcKeys" class="grid-item">
-			<div class="flex gap-3 pt-2">
+			<div class="header-item pt-2">
 				<p class="text-center">{{cbcKey}}</p>
 				<Filter v-if="!isDetailPage" :fun="()=> filterCbcKeyFunction(cbcKey)" :classes="getFilterClass(cbcKey)"/>
 				<Help :fun="() => helpCbcKeyFunction(cbcKey)"/>
@@ -9,32 +9,32 @@
 			<p class="text-center">({{unit(cbcKey)}})</p>
 		</div>
 		<div class="grid-item" >
-			<div class="flex gap-2">
+			<div class="header-item">
 				Ground-truth
 				<Filter v-if="!isDetailPage" :fun="()=> filterCbcKeyFunction('groundTruth')" :classes="getFilterClass('groundTruth')"/>
 				<Help :fun="() => helpCbcKeyFunction('groundTruth')"/>
 			</div>
 		</div>
 		<div class="grid-item" >
-			<div class="flex gap-2">
+			<div class="header-item">
 				Confidence
 				<Filter v-if="!isDetailPage" :fun="()=> filterCbcKeyFunction('confidence')" :classes="getFilterClass('confidence')"/>
 				<Help :fun="() => helpCbcKeyFunction('confidence')"/>
 			</div>
 		</div>
 		<div class="grid-item">
-			<div class="flex gap-2">
+			<div class="header-item">
 				Prediction
 				<Filter v-if="!isDetailPage" :fun="()=> filterCbcKeyFunction('pred')" :classes="getFilterClass('pred')"/>
 				<Help :fun="() => helpCbcKeyFunction('pred')"/>
 			</div>
 		</div>
-		<div class="grid-item" >
+		<div class="header-item" >
 			<div class="flex gap-2" v-if="!isDetailPage">
 				Details
 				<Help :fun="() => helpCbcKeyFunction('details')"/>
 			</div>
-			<div class="flex gap-2" v-else>
+			<div class="header-item" v-else>
 				Classifier
 				<Help :fun="() => helpCbcKeyFunction('classifier')"/>
 			</div>
@@ -87,9 +87,8 @@ function getFilterClass(cbcKey){
 	@apply flex justify-center items-center flex-col h-fit
 }
 
-.grid-container {
-	display: grid;
-	grid-template-columns: repeat(13, minmax(0, 1fr));
-	gap: 1rem;
+.header-item{
+	@apply flex gap-2 flex-col 2xl:flex-row
 }
+
 </style>

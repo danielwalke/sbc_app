@@ -32,3 +32,13 @@ button, label, .grid-item{
 .custom-height{
   height: calc(100% - 48px);
 }
+
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat(13, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+input{
+  @apply min-w-20
+}
