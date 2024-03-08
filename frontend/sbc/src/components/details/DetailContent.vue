@@ -1,6 +1,6 @@
 <template>
-	<TableHeader :is-detail-page="true" class="pt-4"/>
-	<div class="max-h-[80%] overflow-y-auto w-full">
+	<div class="custom-height overflow-y-auto w-full">
+		<TableHeader :is-detail-page="true" class="pt-4"/>
 		<div class="w-full grid leading-6 pt-2 gap-4 grid-container pl-4 pr-4" :class="''"
 				 v-for="(cbc, idx) in cbcOverClassifiers" :id="idx">
 			<div v-for="cbcKey in editableCbcKeys" class="flex justify-center items-center flex-col h-fit">
@@ -63,4 +63,5 @@ function submitDetails(){
 .non-editable{
 	@apply p-2 bg-gray-600 rounded-md w-full text-center select-none
 }
+
 </style>

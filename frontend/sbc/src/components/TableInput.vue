@@ -1,5 +1,5 @@
 <template>
-  <div class="w-full h-full pt-4 pl-4 pb-4">
+  <div class="w-full custom-height pt-4 pl-4 pb-4">
 		<div class="flex justify-center items-center gap-4">
 			<FileInput />
 			<button class="rounded-md shadow-md hover:scale-105 p-4 bg-sky-700 cursor-pointer hover:bg-sky-600" v-if="hasFilters" @click="resetFilters">Reset Filter</button>
@@ -56,5 +56,4 @@ function submit(){
 </script>
 
 <style scoped>
-
 </style>

@@ -9,7 +9,7 @@ export const router = createRouter({
 router.beforeEach((to, from, next) => {
 
 
-	if (to.path === "/") {
+	if (to.path === "/sbc_frontend") {
 		const cbcStore = useCbcStore()
 		cbcStore.setHasPredictionDetails(undefined)
 	}

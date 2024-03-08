@@ -28,3 +28,7 @@
 button, label, .grid-item{
   @apply select-none
 }
+
+.custom-height{
+  height: calc(100% - 48px);
+}
