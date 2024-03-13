@@ -11,5 +11,7 @@ export const CBC_KEY_TO_DESCRIPTION = {
 	confidence: "Confidence score of a model in % from 0 % to 100 % to describe how confident a classifier is for the prediction",
 	pred: "Prediction for the instance with the given classifier",
 	classifier: "Classifier used for the classification (default is Random Forest Classifier)",
-	sex: "Biological sex (character as 'M' for male or 'W' for female)"
+	sex: "Biological sex (character as 'M' for male or 'W' for female)",
+	details: "Click to get results from all classifiers and SHAP-values",
+
 }

@@ -1,10 +1,10 @@
 <template>
-	<div class="h-full w-full bg-gray-900 absolute z-10 top-0 left-0 overflow-hidden" :class="isLoading ? 'block':'hidden' ">
+	<div class="custom-height w-full bg-gray-900 absolute z-10 top-0 left-0 overflow-hidden" :class="isLoading ? 'block':'hidden' ">
 		<div class="p-4">
 			<div class="flex justify-center w-full pb-3">
 				<div class="non-editable skeleton max-w-40"></div>
 			</div>
-			<TableHeader :is-detail-page="true"/>
+			<TableHeader :is-detail-page="false"/>
 			<div class="w-full grid leading-6 pt-2 gap-4 grid-container"
 					 v-for="_ in 15" >
 				<div v-for="_ in editableCbcKeys" class="flex justify-center items-center flex-col h-fit">

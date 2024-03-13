@@ -142,7 +142,7 @@ export const useCbcStore = defineStore('cbcStore', {
 		submitCbcMeasurementDetails(){
 			const store = useCbcStore()
 			store.setIsLoading(true)
-			store.setHasPredictions(false)
+			store.setHasPredictionDetails(false)
 			console.time("details")
 			axios.post(SERVER_URL + 'get_pred_details', store.getCbcOverClassifiers.map(c=>({
 				age: c.age,

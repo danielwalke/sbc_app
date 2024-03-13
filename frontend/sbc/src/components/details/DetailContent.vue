@@ -45,6 +45,7 @@ function valueInput(event, cbc, cbcKey){
 }
 
 const cbcStore = useCbcStore()
+cbcStore.setHasPredictionDetails(false)
 const hasPredictionDetails = computed(()=> cbcStore.getHasPredictionDetails)
 const cbcOverClassifiers = computed(()=> cbcStore.getCbcOverClassifiers)
 

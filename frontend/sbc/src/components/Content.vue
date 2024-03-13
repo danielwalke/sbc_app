@@ -1,5 +1,5 @@
 <template>
-  <div class="max-h-[80%] overflow-y-auto w-full overflow-x-auto" @scroll="updateViewPort">
+  <div class="custom-content-height overflow-y-auto w-full overflow-x-auto pb-2 pt-2" @scroll="updateViewPort">
     <div class="min-w-full grid leading-6 pt-2 gap-4 grid-container" :class="''"
          v-for="(cbc, idx) in filteredCbcs" :id="idx">
       <div v-for="cbcKey in editableCbcKeys" class="flex justify-center items-center flex-col h-fit">
@@ -47,6 +47,10 @@ const filteredCbcs = computed(() =>{
   return preFilteredCbcs.filter((cbc, i) => i <= upperLimit.value && i>= lowerLimit.value)
 })
 
+function getLink(id){
+	return `sbc_frontend/details/${id}`
+}
+
 
 function isInViewport(element) {
   const rect = element.getBoundingClientRect();
@@ -67,7 +71,7 @@ function updateViewPort(){
 }
 
 async function handleDetails(cbc){
-	await router.push(`sbc_frontend/details/${cbc.id}`)
+	await router.push(`/sbc_frontend/details/${cbc.id}`)
 }
 
 onBeforeUpdate(()=>{
@@ -85,5 +89,9 @@ onUpdated(()=>{
 
 .non-editable{
 	@apply p-2 bg-gray-600 rounded-md w-full text-center select-none
+}
+
+.custom-content-height{
+	max-height: calc(100% - 156px - 56px - 56px);
 }
 </style>

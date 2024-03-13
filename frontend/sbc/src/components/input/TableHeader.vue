@@ -88,7 +88,7 @@ function getFilterClass(cbcKey){
 }
 
 .header-item{
-	@apply flex gap-2 flex-col 2xl:flex-row
+	@apply flex gap-2 flex-col 2xl:flex-row justify-center
 }
 
 </style>
