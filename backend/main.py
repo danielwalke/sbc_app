@@ -33,7 +33,7 @@ async def startup_event():
 
     X_train, X_val, y_train, y_val = train_test_split(X_train, y_train, test_size=0.2, random_state=0)
 
-    app.state.model = load('models/rf.joblib')
+    app.state.model = load('models/rf_limited_jobs.joblib')
     app.state.rf_model = app.state.model #load('models/rf.joblib')
     app.state.dt_model = load('models/dt.joblib')
     app.state.lr_model = load('models/lr.joblib')
