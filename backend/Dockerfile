@@ -1,9 +1,5 @@
 # Use an official Python runtime as a parent image
-FROM python:3.9-slim
-
-ENV OPENBLAS_NUM_THREADS=8
-ENV GOTO_NUM_THREADS=8
-ENV OMP_NUM_THREADS=8
+FROM python:3.9.18-bullseye
 
 # Set the working directory in the container
 # WORKDIR ./
@@ -13,7 +9,7 @@ RUN mkdir /app
 RUN mkdir /app/extdata 
 COPY . /app
 COPY extdata/sbcdata.csv /extdata/.
-WORKDIR ./app
+WORKDIR /app
 
 # Install any needed packages specified in requirements.txt
 RUN pip install --no-cache-dir -r requirements.txt
