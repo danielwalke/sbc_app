@@ -13,6 +13,11 @@ from dataAnalysis.DataAnalysis import DataAnalysis
 from sklearn.model_selection import train_test_split
 import shap
 from datetime import datetime
+import os
+
+os.environ["OPENBLAS_NUM_THREADS"] = '8'
+
+import numpy as np
 
 app = FastAPI()
 app.add_middleware(
