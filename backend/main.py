@@ -28,6 +28,8 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+ADD_PATH = "/sbc"
+
 
 @app.on_event("startup")
 async def startup_event():
@@ -58,31 +60,31 @@ async def startup_event():
 
 
 
-@app.get("/")
+@app.get(ADD_PATH)
 def read_root():
     return {"Hello": "World"}
 
 
-@app.get("/classifier_thresholds")
+@app.get(ADD_PATH + "/classifier_thresholds")
 async def get_classifier_thresholds():
     return app.state.classifier_thresholds
 
 
-@app.post("/get_pred/")
+@app.post(ADD_PATH + "/get_pred/")
 async def get_pred(cbc_items: list[CBC]) -> OutPrediction:
     print(datetime.now())
     prediction = Prediction(cbc_items, app.state.model, app.state.classifier_thresholds)
     return prediction.get_output()
 
 
-@app.post("/get_pred_details/")
+@app.post(ADD_PATH + "/get_pred_details/")
 async def get_pred_details(cbc_items: list[CBC]) -> OutDetailsPredictions:
     prediction = DetailsPrediction(cbc_items, app.state.classifiers, app.state.classifier_thresholds,
                                    app.state.background_data)
     return prediction.get_output()
 
 
-# @app.post("/get_graph_pred/")
+# @app.post(ADD_PATH + "/get_graph_pred/")
 # async def get_graph_pred(graph_cbc_items: list[GraphCBC]) -> OutPrediction:
 #     prediction = GraphPrediction(graph_cbc_items, app.state.graph_aware_clfs)
 #     return prediction.get_output()
