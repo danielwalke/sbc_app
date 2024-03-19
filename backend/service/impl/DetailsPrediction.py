@@ -3,7 +3,6 @@ from service.meta.OutDetailsPrediction import OutDetailsPrediction
 from service.meta.OutDetailsPredictions import OutDetailsPredictions
 import shap
 
-
 class DetailsPrediction:
 
     def __init__(self, cbc_items, models, thresholds, background_data):

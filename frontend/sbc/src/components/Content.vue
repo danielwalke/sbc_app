@@ -1,5 +1,6 @@
 <template>
-  <div class="custom-content-height overflow-y-auto w-full overflow-x-auto pb-2 pt-2" @scroll="updateViewPort">
+  <div class="overflow-y-auto w-full overflow-x-auto pb-2 pt-2" @scroll="updateViewPort"
+  :class="isLargeWindow ? 'custom-content-height':'custom-content-height-small'">
     <div class="min-w-full grid leading-6 pt-2 gap-4 grid-container" :class="''"
          v-for="(cbc, idx) in filteredCbcs" :id="idx">
       <div v-for="cbcKey in editableCbcKeys" class="flex justify-center items-center flex-col h-fit">
@@ -29,6 +30,11 @@ import {useCbcStore} from "../stores/CbcStore.js";
 import {router} from "../router/Router.js";
 
 const options = chartOptions
+
+// TODO fix styling for mobile views!!!
+const isLargeWindow = ref(window.innerWidth >= 1600)
+console.log(isLargeWindow.value)
+console.log(window.innerWidth)
 
 function type(cbcKey){return cbcKey === "sex" ? "text" : "number"}
 
@@ -93,5 +99,9 @@ onUpdated(()=>{
 
 .custom-content-height{
 	max-height: calc(100% - 156px - 56px - 56px);
+}
+
+.custom-content-height-small{
+  max-height: calc(100% - 156px - 56px - 144px);
 }
 </style>

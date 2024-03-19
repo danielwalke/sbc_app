@@ -9,3 +9,4 @@ class CBC(BaseModel):
     WBC: float
     MCV: float
     PLT: float
+    ground_truth: bool

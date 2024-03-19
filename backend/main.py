@@ -2,6 +2,8 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from torch.nn.functional import normalize
 from joblib import load
+
+from service.impl.GraphPrediction import GraphPrediction
 from service.impl.Prediction import Prediction
 from service.meta.OutPrediction import OutPrediction
 from service.meta.CBC import CBC
@@ -39,11 +41,13 @@ async def startup_event():
     app.state.lr_model = load('models/lr.joblib')
     app.state.xgb_model = load('models/xgb.joblib')
     app.state.classifiers = [app.state.rf_model, app.state.dt_model, app.state.lr_model, app.state.xgb_model]
+
     app.state.classifier_thresholds = {
         "RandomForestClassifier": 0.3269368308502123,
         "XGBClassifier": 0.08329411,
         "DecisionTreeClassifier": 0.5479930767959986,
         "LogisticRegression": 0.4746955641186002,
+        "GraphAware": 0.5 ##TODO Adopt with highest geometric mean of ROC values
     }
     app.state.background_data = X_train
 
@@ -77,7 +81,7 @@ async def get_pred_details(cbc_items: list[CBC]) -> OutDetailsPredictions:
     return prediction.get_output()
 
 
-# @app.post("/get_graph_pred/")
-# async def get_graph_pred(graph_cbc_items: list[GraphCBC]) -> OutPrediction:
-#     prediction = GraphPrediction(graph_cbc_items, app.state.graph_aware_clfs)
-#     return prediction.get_output()
+@app.post("/get_graph_pred/")
+async def get_graph_pred(graph_cbc_items: list[GraphCBC]) -> OutPrediction:
+    prediction = GraphPrediction(graph_cbc_items, app.state.graph_aware_clfs)
+    return prediction.get_output()

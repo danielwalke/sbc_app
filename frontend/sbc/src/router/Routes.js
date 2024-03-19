@@ -1,4 +1,4 @@
-import TableInput from "../components/TableInput.vue";
+import TableInput from "../components/MainComponent.vue";
 import DetailContent from "../components/details/DetailContent.vue";
 import About from "../components/about/About.vue";
 import Disclaimer from "../components/disclaimer/Disclaimer.vue";

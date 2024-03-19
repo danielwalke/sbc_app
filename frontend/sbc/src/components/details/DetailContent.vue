@@ -32,9 +32,10 @@ import {useCbcStore} from "../../stores/CbcStore.js";
 import {computed} from "vue";
 import {useRoute, useRouter} from "vue-router";
 import TableHeader from "../input/TableHeader.vue";
-import SubmitButton from "../results/SubmitButton.vue";
+import SubmitButton from "../submit/SubmitButton.vue";
 import { Bar } from 'vue-chartjs'
 import {chartOptions} from "../../lib/constants/ChartOptions.js";
+
 const router = useRouter()
 const route = useRoute()
 

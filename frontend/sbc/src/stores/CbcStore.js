@@ -93,15 +93,15 @@ export const useCbcStore = defineStore('cbcStore', {
 					this.addCbcMeasurements({
 						id: uuid(),
 						patientId: items[0],
-						order: 0,
-						age: +items[1],
-						sex: items[2],
-						HGB: Math.round(+items[3]*100)/100,
-						WBC: Math.round(+items[4]*100)/100,
-						RBC: Math.round(+items[5]*100)/100,
-						MCV: Math.round(+items[6]*100)/100,
-						PLT: Math.round(+items[7]*100)/100,
-						groundTruth: items.length > 8 ? +items[8] === 1 ? 'Sepsis' : 'Control' : undefined
+						// order: +items[1],
+						age: +items[2],
+						sex: items[3],
+						HGB: Math.round(+items[4]*100)/100,
+						WBC: Math.round(+items[5]*100)/100,
+						RBC: Math.round(+items[6]*100)/100,
+						MCV: Math.round(+items[7]*100)/100,
+						PLT: Math.round(+items[8]*100)/100,
+						groundTruth: items.length > 8 ? items[9]: undefined
 					})
 				}
 			};
@@ -109,6 +109,8 @@ export const useCbcStore = defineStore('cbcStore', {
 		},
 		submitCbcMeasurements(){
 			const store = useCbcStore()
+			// store.submitCbcGraphMeasurements()
+			// return
 			store.setIsLoading(true)
 			store.setHasPredictions(false)
 			console.time("predictions");
@@ -122,6 +124,7 @@ export const useCbcStore = defineStore('cbcStore', {
 				RBC: c.RBC,
 				MCV: c.MCV,
 				PLT: c.PLT,
+				ground_truth: c.groundTruth !== undefined ? c.groundTruth === "Sepsis" : undefined,
 			})))
 				.then(function (response) {
 					store.setIsLoading(false)
@@ -152,6 +155,7 @@ export const useCbcStore = defineStore('cbcStore', {
 				RBC: c.RBC,
 				MCV: c.MCV,
 				PLT: c.PLT,
+				ground_truth: c.groundTruth !== undefined ? c.groundTruth === "Sepsis" : undefined,
 			})))
 				.then(function (response) {
 					store.setIsLoading(false)
@@ -185,6 +189,39 @@ export const useCbcStore = defineStore('cbcStore', {
 			store.setClassifierNames(Object.keys(response.data))
 			store.setClassifierThresholds(response.data)
 			store.setIsLoading(false)
-		}
+		},
+		submitCbcGraphMeasurements(){
+			const store = useCbcStore()
+			store.setIsLoading(true)
+			store.setHasPredictions(false)
+			console.time("predictions");
+			const requestDate = new Date()
+			console.log(`${requestDate.getHours()}:${requestDate.getMinutes()}:${requestDate.getSeconds()}:${requestDate.getMilliseconds()}`)
+			axios.post(SERVER_URL + 'get_graph_pred', store.getCbcMeasurements.map(c=>({
+				id: c.patientId,
+				order: c.order,
+				age: c.age,
+				sex: c.sex,
+				HGB: c.HGB,
+				WBC: c.WBC,
+				RBC: c.RBC,
+				MCV: c.MCV,
+				PLT: c.PLT,
+				ground_truth: c.groundTruth !== undefined ? c.groundTruth === "Sepsis" : undefined,
+			})))
+				.then(function (response) {
+					console.log(response.data)
+					store.setIsLoading(false)
+					store.setHasPredictions(true)
+					for(let i in store.getCbcMeasurements){
+						const cbc = store.getCbcMeasurements[i]
+						cbc.pred = response.data.predictions[i] ? 'Sepsis' : 'Control'
+						cbc.pred_proba = response.data.pred_probas[i]
+						const threshold = store.getClassifierThresholds["RandomForestClassifier"]
+						cbc.confidence = Math.round(calculate_confidence_score(cbc.pred_proba, threshold)*10000)/100
+					}
+					console.timeEnd("predictions");
+				})
+		},
 	},
 })
