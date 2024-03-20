@@ -4,21 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="875a38dc-bf1f-4839-9933-7efb22d78c92" name="Changes" comment="changed tailwind configs">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/sbc/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/sbc/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/sbc/src/components/Content.vue" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/sbc/src/components/Content.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/sbc/src/components/TableInput.vue" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/sbc/src/components/TableInput.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/sbc/src/components/about/About.vue" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/sbc/src/components/about/About.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/sbc/src/components/details/DetailContent.vue" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/sbc/src/components/details/DetailContent.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/sbc/src/components/icons/Filter.vue" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/sbc/src/components/icons/Filter.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/sbc/src/components/input/TableHeader.vue" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/sbc/src/components/input/TableHeader.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/sbc/src/components/loader/LoadingSkeleton.vue" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/sbc/src/components/loader/LoadingSkeleton.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/sbc/src/components/modals/FilterModal.vue" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/sbc/src/components/modals/FilterModal.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/sbc/src/lib/constants/CBCDescriptions.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/sbc/src/lib/constants/CBCDescriptions.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/sbc/src/stores/CbcStore.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/sbc/src/stores/CbcStore.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/sbc/src/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/sbc/src/style.css" afterDir="false" />
-    </list>
+    <list default="true" id="875a38dc-bf1f-4839-9933-7efb22d78c92" name="Changes" comment="fixed bugs" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -231,7 +217,7 @@
       <workItem from="1709876345575" duration="6155000" />
       <workItem from="1710133703872" duration="240000" />
       <workItem from="1710309037304" duration="255000" />
-      <workItem from="1710311328751" duration="6256000" />
+      <workItem from="1710311328751" duration="6284000" />
     </task>
     <task id="LOCAL-00001" summary="changes in data processing">
       <created>1667911144366</created>
@@ -429,7 +415,14 @@
       <option name="project" value="LOCAL" />
       <updated>1709896024646</updated>
     </task>
-    <option name="localTasksCounter" value="29" />
+    <task id="LOCAL-00029" summary="fixed bugs">
+      <created>1710336381743</created>
+      <option name="number" value="00029" />
+      <option name="presentableId" value="LOCAL-00029" />
+      <option name="project" value="LOCAL" />
+      <updated>1710336381743</updated>
+    </task>
+    <option name="localTasksCounter" value="30" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -447,7 +440,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="preprocessing pipeline II" />
     <MESSAGE value="cross validation&#10;oversampling" />
     <MESSAGE value="model class&#10;multiple classifier" />
     <MESSAGE value="removed oversampling&#10;fixed bug for preprocessing greifswald data" />
@@ -472,6 +464,7 @@
     <MESSAGE value="disclaimer and impressum" />
     <MESSAGE value="first media queries" />
     <MESSAGE value="changed tailwind configs" />
-    <option name="LAST_COMMIT_MESSAGE" value="changed tailwind configs" />
+    <MESSAGE value="fixed bugs" />
+    <option name="LAST_COMMIT_MESSAGE" value="fixed bugs" />
   </component>
 </project>
