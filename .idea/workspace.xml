@@ -4,11 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="875a38dc-bf1f-4839-9933-7efb22d78c92" name="Changes" comment="refactored">
+    <list default="true" id="875a38dc-bf1f-4839-9933-7efb22d78c92" name="Changes" comment="fixed height problem">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/sbc/src/components/MainComponent.vue" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/sbc/src/components/MainComponent.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/sbc/src/components/details/DetailContent.vue" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/sbc/src/components/details/DetailContent.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/sbc/src/components/input/Content.vue" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/sbc/src/components/input/Content.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/sbc/src/components/input/TableHeader.vue" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/sbc/src/components/input/TableHeader.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/sbc/src/components/loader/LoadingSkeleton.vue" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/sbc/src/components/loader/LoadingSkeleton.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/sbc/src/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/sbc/src/style.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -227,7 +229,7 @@
       <workItem from="1710939264069" duration="2124000" />
       <workItem from="1710944692904" duration="107000" />
       <workItem from="1710944937199" duration="251000" />
-      <workItem from="1711005388999" duration="3564000" />
+      <workItem from="1711005388999" duration="7561000" />
     </task>
     <task id="LOCAL-00001" summary="changes in data processing">
       <created>1667911144366</created>
@@ -460,7 +462,14 @@
       <option name="project" value="LOCAL" />
       <updated>1711007636979</updated>
     </task>
-    <option name="localTasksCounter" value="34" />
+    <task id="LOCAL-00034" summary="fixed height problem">
+      <created>1711009213163</created>
+      <option name="number" value="00034" />
+      <option name="presentableId" value="LOCAL-00034" />
+      <option name="project" value="LOCAL" />
+      <updated>1711009213163</updated>
+    </task>
+    <option name="localTasksCounter" value="35" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -478,7 +487,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="removed oversampling&#10;fixed bug for preprocessing greifswald data" />
     <MESSAGE value="fixed bugs in preprocessing&#10;removed k fold cv" />
     <MESSAGE value="fixed some bugs" />
     <MESSAGE value="minor improvements" />
@@ -503,6 +511,7 @@
     <MESSAGE value="removed http" />
     <MESSAGE value="added http" />
     <MESSAGE value="refactored" />
-    <option name="LAST_COMMIT_MESSAGE" value="refactored" />
+    <MESSAGE value="fixed height problem" />
+    <option name="LAST_COMMIT_MESSAGE" value="fixed height problem" />
   </component>
 </project>
