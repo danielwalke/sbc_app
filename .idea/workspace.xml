@@ -4,14 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="875a38dc-bf1f-4839-9933-7efb22d78c92" name="Changes" comment="added http">
-      <change beforePath="$PROJECT_DIR$/frontend/sbc/src/components/ChartTest.vue" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/sbc/src/components/Content.vue" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/sbc/src/components/input/Content.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/sbc/src/components/FilterDropdown.vue" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/sbc/src/components/TableInput.vue" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/sbc/src/components/MainComponent.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/sbc/src/components/results/ResultColumn.vue" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/sbc/src/components/results/ResultColumnPred.vue" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/sbc/src/components/results/ResultColumnProba.vue" beforeDir="false" />
+    <list default="true" id="875a38dc-bf1f-4839-9933-7efb22d78c92" name="Changes" comment="refactored">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/sbc/src/components/input/Content.vue" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/sbc/src/components/input/Content.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/sbc/src/router/Routes.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/sbc/src/router/Routes.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -230,7 +225,7 @@
       <workItem from="1710939264069" duration="2124000" />
       <workItem from="1710944692904" duration="107000" />
       <workItem from="1710944937199" duration="251000" />
-      <workItem from="1711005388999" duration="911000" />
+      <workItem from="1711005388999" duration="1465000" />
     </task>
     <task id="LOCAL-00001" summary="changes in data processing">
       <created>1667911144366</created>
@@ -442,7 +437,14 @@
       <option name="project" value="LOCAL" />
       <updated>1711005596237</updated>
     </task>
-    <option name="localTasksCounter" value="31" />
+    <task id="LOCAL-00031" summary="refactored">
+      <created>1711006456629</created>
+      <option name="number" value="00031" />
+      <option name="presentableId" value="LOCAL-00031" />
+      <option name="project" value="LOCAL" />
+      <updated>1711006456629</updated>
+    </task>
+    <option name="localTasksCounter" value="32" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -460,7 +462,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="model class&#10;multiple classifier" />
     <MESSAGE value="removed oversampling&#10;fixed bug for preprocessing greifswald data" />
     <MESSAGE value="fixed bugs in preprocessing&#10;removed k fold cv" />
     <MESSAGE value="fixed some bugs" />
@@ -485,6 +486,7 @@
     <MESSAGE value="changed tailwind configs" />
     <MESSAGE value="removed http" />
     <MESSAGE value="added http" />
-    <option name="LAST_COMMIT_MESSAGE" value="added http" />
+    <MESSAGE value="refactored" />
+    <option name="LAST_COMMIT_MESSAGE" value="refactored" />
   </component>
 </project>
