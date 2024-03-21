@@ -4,10 +4,15 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="875a38dc-bf1f-4839-9933-7efb22d78c92" name="Changes" comment="changed tailwind configs">
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/sbc/src/lib/constants/Server.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/sbc/src/lib/constants/Server.js" afterDir="false" />
+    <list default="true" id="875a38dc-bf1f-4839-9933-7efb22d78c92" name="Changes" comment="added http">
+      <change beforePath="$PROJECT_DIR$/frontend/sbc/src/components/ChartTest.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/sbc/src/components/Content.vue" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/sbc/src/components/input/Content.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/sbc/src/components/FilterDropdown.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/sbc/src/components/TableInput.vue" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/sbc/src/components/MainComponent.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/sbc/src/components/results/ResultColumn.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/sbc/src/components/results/ResultColumnPred.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/sbc/src/components/results/ResultColumnProba.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/sbc/src/router/Routes.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/sbc/src/router/Routes.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -56,11 +61,11 @@
       <recent name="C:\Users\danie\PycharmProjects\sbc\extdata" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\danie\git\sbc_app\frontend\sbc\src\components\input" />
       <recent name="C:\Users\danie\git\sbc_app\frontend\sbc\src\components" />
       <recent name="C:\Users\danie\PycharmProjects\sbc\dataAnalysis" />
       <recent name="C:\Users\danie\PycharmProjects\sbc\dataAnalysis\patientData\bloodValues" />
       <recent name="C:\Users\danie\PycharmProjects\sbc\dataAnalysis\patientData" />
-      <recent name="C:\Users\danie\PycharmProjects\sbc\dataAnalysis\bloodValues" />
     </key>
   </component>
   <component name="RunManager">
@@ -225,7 +230,7 @@
       <workItem from="1710939264069" duration="2124000" />
       <workItem from="1710944692904" duration="107000" />
       <workItem from="1710944937199" duration="251000" />
-      <workItem from="1711005388999" duration="24000" />
+      <workItem from="1711005388999" duration="911000" />
     </task>
     <task id="LOCAL-00001" summary="changes in data processing">
       <created>1667911144366</created>
@@ -423,7 +428,21 @@
       <option name="project" value="LOCAL" />
       <updated>1709896024646</updated>
     </task>
-    <option name="localTasksCounter" value="29" />
+    <task id="LOCAL-00029" summary="removed http">
+      <created>1711005433676</created>
+      <option name="number" value="00029" />
+      <option name="presentableId" value="LOCAL-00029" />
+      <option name="project" value="LOCAL" />
+      <updated>1711005433676</updated>
+    </task>
+    <task id="LOCAL-00030" summary="added http">
+      <created>1711005596237</created>
+      <option name="number" value="00030" />
+      <option name="presentableId" value="LOCAL-00030" />
+      <option name="project" value="LOCAL" />
+      <updated>1711005596237</updated>
+    </task>
+    <option name="localTasksCounter" value="31" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -441,8 +460,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="preprocessing pipeline II" />
-    <MESSAGE value="cross validation&#10;oversampling" />
     <MESSAGE value="model class&#10;multiple classifier" />
     <MESSAGE value="removed oversampling&#10;fixed bug for preprocessing greifswald data" />
     <MESSAGE value="fixed bugs in preprocessing&#10;removed k fold cv" />
@@ -466,6 +483,8 @@
     <MESSAGE value="disclaimer and impressum" />
     <MESSAGE value="first media queries" />
     <MESSAGE value="changed tailwind configs" />
-    <option name="LAST_COMMIT_MESSAGE" value="changed tailwind configs" />
+    <MESSAGE value="removed http" />
+    <MESSAGE value="added http" />
+    <option name="LAST_COMMIT_MESSAGE" value="added http" />
   </component>
 </project>
