@@ -1,27 +1,31 @@
 <template>
-	<div class="custom-height w-full bg-gray-900 absolute z-10 top-0 left-0 overflow-hidden" :class="isLoading ? 'block':'hidden' ">
+	<div class="custom-height w-full absolute z-10 top-0 left-0 overflow-hidden" :class="isLoading ? 'block':'hidden' " style="background-color: #242424">
 		<div class="p-4">
 			<div class="flex justify-center w-full pb-3">
 				<div class="non-editable skeleton max-w-40"></div>
 			</div>
-			<TableHeader :is-detail-page="false"/>
-			<div class="w-full grid leading-6 pt-2 gap-4 grid-container"
-					 v-for="_ in 15" >
-				<div v-for="_ in editableCbcKeys" class="flex justify-center items-center flex-col h-fit">
-					<div
-						class="p-2 rounded-md w-full w-32 h-12 text-right text-black skeleton-bright"></div>
-				</div>
-				<div class="non-editable skeleton"></div>
-				<div class="flex justify-between col-span-3 gap-4">
-					<div class="non-editable skeleton"></div>
-					<div class="non-editable skeleton"></div>
-					<div class="non-editable skeleton"></div>
-				</div>
+			<div class="w-full overflow-x-auto max-h-[80%]">
+				<table class="table-auto min-w-[1300px] h-full relative w-full">
+				<TableHeader :is-detail-page="false"/>
+				<tbody class="w-full grid leading-6 pt-2 gap-4 grid-container"
+						 v-for="_ in 15" >
+					<td v-for="_ in editableCbcKeys" class="flex justify-center items-center flex-col h-fit">
+						<div
+							class="p-2 rounded-md w-full w-32 h-12 text-right text-black skeleton-bright"></div>
+					</td>
+					<td class="non-editable skeleton"></td>
+					<td class="flex justify-between col-span-3 gap-4">
+						<div class="non-editable skeleton"></div>
+						<div class="non-editable skeleton"></div>
+						<div class="non-editable skeleton"></div>
+					</td>
 
-				<div class="col-span-2 " ></div>
-				<div class="col-span-7 flex justify-center max-h-48">
-					<div class="skeleton"></div>
-				</div>
+					<td class="col-span-2 " ></td>
+					<td class="col-span-7 flex justify-center max-h-48">
+						<div class="skeleton"></div>
+					</td>
+				</tbody>
+				</table>
 			</div>
 			<div class="flex justify-center w-full">
 				<div class="non-editable skeleton max-w-40"></div>
