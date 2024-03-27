@@ -4,7 +4,7 @@ from typing import Union
 class OutDetailsPrediction:
     prediction: Union[bool, None]
     pred_proba: Union[float, None]
-    shap_values: list
+    shap_values: Union[list, dict]
     classifier_name: Union[str, None]
 
     def __init__(self):

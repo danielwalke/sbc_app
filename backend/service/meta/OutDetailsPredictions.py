@@ -1,10 +1,11 @@
 from service.meta.OutDetailsPrediction import  OutDetailsPrediction
-
+from service.meta.OutGraphDetailsPredictions import  OutGraphDetailsPredictions
+from typing import Union
 ## extendable if someone wants to add some meta information as outout in the future ;)
 
 
 class OutDetailsPredictions:
-    prediction_details: list[OutDetailsPrediction] = []
+    prediction_details: Union[list[OutDetailsPrediction], list[OutGraphDetailsPredictions]] = []
 
     def __init__(self):
         super().__init__()

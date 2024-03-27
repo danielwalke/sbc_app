@@ -1,5 +1,5 @@
 from pydantic import BaseModel
-
+from typing import Union
 
 class CBC(BaseModel):
     age: float
@@ -9,3 +9,4 @@ class CBC(BaseModel):
     WBC: float
     MCV: float
     PLT: float
+    ground_truth: Union[None, int]

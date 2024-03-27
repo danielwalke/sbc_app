@@ -4,13 +4,38 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="875a38dc-bf1f-4839-9933-7efb22d78c92" name="Changes" comment="fixed height problem">
+    <list default="true" id="875a38dc-bf1f-4839-9933-7efb22d78c92" name="Changes" comment="simplest responsive design">
+      <change afterPath="$PROJECT_DIR$/backend/service/impl/DetailsPreidctionGraph.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/service/impl/GraphPredcitionDetails.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/service/meta/InGraphPrediction.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/service/meta/InPrediction.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/service/meta/OutGraphDetailsPredictions.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/sbc/src/components/input/ClassifierSelector.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/models/dt.joblib" beforeDir="false" afterPath="$PROJECT_DIR$/backend/models/dt.joblib" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/models/graph_aware_rf_0.joblib" beforeDir="false" afterPath="$PROJECT_DIR$/backend/models/graph_aware_rf_0.joblib" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/models/graph_aware_rf_1.joblib" beforeDir="false" afterPath="$PROJECT_DIR$/backend/models/graph_aware_rf_1.joblib" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/models/lr.joblib" beforeDir="false" afterPath="$PROJECT_DIR$/backend/models/lr.joblib" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/models/rf.joblib" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/models/rf_limited_jobs.joblib" beforeDir="false" afterPath="$PROJECT_DIR$/backend/models/rf_limited_jobs.joblib" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/models/xgb.joblib" beforeDir="false" afterPath="$PROJECT_DIR$/backend/models/xgb.joblib" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/backend/requirements.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/service/impl/EnsembleFramework.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/service/impl/EnsembleFramework.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/service/impl/GraphPrediction.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/service/impl/GraphPrediction.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/service/impl/Prediction.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/service/impl/Prediction.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/service/meta/CBC.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/service/meta/CBC.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/service/meta/OutDetailsPrediction.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/service/meta/OutDetailsPrediction.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/service/meta/OutDetailsPredictions.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/service/meta/OutDetailsPredictions.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/service/meta/OutPrediction.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/service/meta/OutPrediction.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/sbc/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/sbc/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/sbc/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/sbc/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/sbc/src/components/MainComponent.vue" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/sbc/src/components/MainComponent.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/sbc/src/components/details/DetailContent.vue" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/sbc/src/components/details/DetailContent.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/sbc/src/components/input/Content.vue" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/sbc/src/components/input/Content.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/sbc/src/components/input/TableHeader.vue" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/sbc/src/components/input/TableHeader.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/sbc/src/components/loader/LoadingSkeleton.vue" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/sbc/src/components/loader/LoadingSkeleton.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/sbc/src/components/results/SubmitButton.vue" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/sbc/src/components/results/SubmitButton.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/sbc/src/lib/constants/Server.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/sbc/src/lib/constants/Server.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/sbc/src/stores/CbcStore.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/sbc/src/stores/CbcStore.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/sbc/src/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/sbc/src/style.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -229,7 +254,10 @@
       <workItem from="1710939264069" duration="2124000" />
       <workItem from="1710944692904" duration="107000" />
       <workItem from="1710944937199" duration="251000" />
-      <workItem from="1711005388999" duration="7561000" />
+      <workItem from="1711005388999" duration="15598000" />
+      <workItem from="1711088855298" duration="10383000" />
+      <workItem from="1711346120834" duration="4151000" />
+      <workItem from="1711513798910" duration="1635000" />
     </task>
     <task id="LOCAL-00001" summary="changes in data processing">
       <created>1667911144366</created>
@@ -469,7 +497,14 @@
       <option name="project" value="LOCAL" />
       <updated>1711009213163</updated>
     </task>
-    <option name="localTasksCounter" value="35" />
+    <task id="LOCAL-00035" summary="simplest responsive design">
+      <created>1711013433897</created>
+      <option name="number" value="00035" />
+      <option name="presentableId" value="LOCAL-00035" />
+      <option name="project" value="LOCAL" />
+      <updated>1711013433897</updated>
+    </task>
+    <option name="localTasksCounter" value="36" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -487,7 +522,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="fixed bugs in preprocessing&#10;removed k fold cv" />
     <MESSAGE value="fixed some bugs" />
     <MESSAGE value="minor improvements" />
     <MESSAGE value="fixed minor bugs" />
@@ -512,6 +546,7 @@
     <MESSAGE value="added http" />
     <MESSAGE value="refactored" />
     <MESSAGE value="fixed height problem" />
-    <option name="LAST_COMMIT_MESSAGE" value="fixed height problem" />
+    <MESSAGE value="simplest responsive design" />
+    <option name="LAST_COMMIT_MESSAGE" value="simplest responsive design" />
   </component>
 </project>

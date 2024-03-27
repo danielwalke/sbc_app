@@ -2,6 +2,8 @@ import numpy as np
 import shap
 from service.meta.OutPrediction import OutPrediction
 import time
+from sklearn.metrics import roc_auc_score
+import math
 
 class Prediction:
     def __init__(self, cbc_items, model, thresholds):
@@ -19,6 +21,13 @@ class Prediction:
             X[i, :] = cbc_array
         return X
 
+    def get_labels(self):
+        y = np.zeros((len(self.cbc_items)))
+
+        for i, cbc_item in enumerate(self.cbc_items):
+            y[i] = cbc_item.ground_truth
+        return y
+
     def get_pred_proba(self):
         X = self.get_features()
         return self.model.predict_proba(X)[:, 1]
@@ -26,12 +35,20 @@ class Prediction:
     def get_prediction(self):
         return self.get_pred_proba() >= self.thresholds[self.model.__class__.__name__]
 
+    def get_auroc(self):
+        y = self.get_labels()
+        print(np.unique(y))
+        print(np.unique(y).shape[0])
+        return None if np.unique(y).shape[0] != 2 else roc_auc_score(y, self.get_pred_proba())
+
     def get_output(self):
         output = OutPrediction()
         print("Start classification")
         start = time.time()
         output.set_predictions(self.get_prediction().tolist())
         output.set_pred_probas(self.get_pred_proba().tolist())
+        output.set_auroc(self.get_auroc())
+        print(output.auroc)
         print(f"Required Classification time: {time.time() - start} s")
         print("Finished classification")
         return output
