@@ -4,16 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="875a38dc-bf1f-4839-9933-7efb22d78c92" name="Changes" comment="fixed bugs and added graphAware (tested auroc consistency with available csv export)">
-      <change afterPath="$PROJECT_DIR$/frontend/sbc/src/lib/API.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/sbc/src/lib/AUROC.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/sbc/src/lib/CBCMeasurements.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/sbc/src/lib/ConfidenceCalculation.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/sbc/src/lib/Exporter.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/sbc/src/lib/InputReader.js" afterDir="false" />
+    <list default="true" id="875a38dc-bf1f-4839-9933-7efb22d78c92" name="Changes" comment="refactored cbc store">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/sbc/src/lib/constants/FilterOptions.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/sbc/src/stores/CbcStore.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/sbc/src/stores/CbcStore.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/sbc/src/lib/API.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/sbc/src/lib/API.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/sbc/src/lib/constants/Server.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/sbc/src/lib/constants/Server.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/sbc/src/stores/PredictionsStore.js" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -234,7 +229,8 @@
       <workItem from="1711005388999" duration="15598000" />
       <workItem from="1711088855298" duration="10383000" />
       <workItem from="1711346120834" duration="4151000" />
-      <workItem from="1711513798910" duration="3742000" />
+      <workItem from="1711513798910" duration="6027000" />
+      <workItem from="1711612852178" duration="2284000" />
     </task>
     <task id="LOCAL-00001" summary="changes in data processing">
       <created>1667911144366</created>
@@ -488,7 +484,14 @@
       <option name="project" value="LOCAL" />
       <updated>1711523769215</updated>
     </task>
-    <option name="localTasksCounter" value="37" />
+    <task id="LOCAL-00037" summary="refactored cbc store">
+      <created>1711525888114</created>
+      <option name="number" value="00037" />
+      <option name="presentableId" value="LOCAL-00037" />
+      <option name="project" value="LOCAL" />
+      <updated>1711525888114</updated>
+    </task>
+    <option name="localTasksCounter" value="38" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -506,7 +509,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="minor improvements" />
     <MESSAGE value="fixed minor bugs" />
     <MESSAGE value="fixed bug" />
     <MESSAGE value="helper modal and preparation for other modals and details contents" />
@@ -531,6 +533,7 @@
     <MESSAGE value="fixed height problem" />
     <MESSAGE value="simplest responsive design" />
     <MESSAGE value="fixed bugs and added graphAware (tested auroc consistency with available csv export)" />
-    <option name="LAST_COMMIT_MESSAGE" value="fixed bugs and added graphAware (tested auroc consistency with available csv export)" />
+    <MESSAGE value="refactored cbc store" />
+    <option name="LAST_COMMIT_MESSAGE" value="refactored cbc store" />
   </component>
 </project>
