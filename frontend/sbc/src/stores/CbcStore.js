@@ -79,31 +79,34 @@ export const useCbcStore = defineStore('cbcStore', {
 		setHasPredictions(value){
 			this.has_predictions = value
 		},
+		parseFile(content){
+			const lines = content.split("\n")
+			for(const lineIdx in lines){
+				const line = lines[lineIdx]
+				if(line.length===0 || lineIdx==0) continue
+				const items = line.split(";")
+				this.addCbcMeasurements({
+					id: uuid(),
+					patientId: items[0],
+					order: 0,
+					age: +items[1],
+					sex: items[2],
+					HGB: Math.round(+items[3]*100)/100,
+					WBC: Math.round(+items[4]*100)/100,
+					RBC: Math.round(+items[5]*100)/100,
+					MCV: Math.round(+items[6]*100)/100,
+					PLT: Math.round(+items[7]*100)/100,
+					groundTruth: items.length > 8 ? +items[8] === 1 ? 'Sepsis' : 'Control' : undefined
+				})
+			}
+		},
 		readCbcFile(file){
 			const reader = new FileReader();
 			let content = null;
 			reader.onload = (res) => {
 				this.cbcMeasurements = []
 				content = res.target.result;
-				const lines = content.split("\n")
-				for(const lineIdx in lines){
-					const line = lines[lineIdx]
-					if(line.length===0 || lineIdx==0) continue
-					const items = line.split(";")
-					this.addCbcMeasurements({
-						id: uuid(),
-						patientId: items[0],
-						order: 0,
-						age: +items[1],
-						sex: items[2],
-						HGB: Math.round(+items[3]*100)/100,
-						WBC: Math.round(+items[4]*100)/100,
-						RBC: Math.round(+items[5]*100)/100,
-						MCV: Math.round(+items[6]*100)/100,
-						PLT: Math.round(+items[7]*100)/100,
-						groundTruth: items.length > 8 ? +items[8] === 1 ? 'Sepsis' : 'Control' : undefined
-					})
-				}
+				this.parseFile(content)
 			};
 			reader.readAsText(file);
 		},

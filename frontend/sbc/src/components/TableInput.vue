@@ -2,6 +2,7 @@
   <div class="w-full custom-height pt-4 pl-4 pb-4">
 		<div class="flex justify-center items-center gap-4">
 			<FileInput />
+			<button class="rounded-md shadow-md hover:scale-105 p-4 bg-sky-700 cursor-pointer hover:bg-sky-600" @click="uploadTest">Test</button>
 			<button class="rounded-md shadow-md hover:scale-105 p-4 bg-sky-700 cursor-pointer hover:bg-sky-600" v-if="hasFilters" @click="resetFilters">Reset Filter</button>
 			<div class="bg-gray-600 p-4 rounded-md">Samples count: {{cbc_counts}}</div>
 		</div>
@@ -25,11 +26,11 @@ import SubmitButton from "./results/SubmitButton.vue";
 import FileInput from "./input/FileInput.vue";
 import { Chart as ChartJS, Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale } from 'chart.js'
 import Content from "./Content.vue";
-import FilterDropdown from "./FilterDropdown.vue";
 import TableHeader from "./input/TableHeader.vue";
 import {DEFAULT_CBC} from "../lib/constants/CBC_Constants.js";
 import {useCbcStore} from "../stores/CbcStore.js";
 import {useModalStore} from "../stores/ModalStore.js";
+import {getTestFile} from "../../testCsvs/leipzig_test_100000.js";
 
 ChartJS.register(Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale)
 
@@ -52,6 +53,15 @@ function resetFilters(){
 
 function submit(){
 	store.submitCbcMeasurements()
+}
+
+async function uploadTest() {
+	store.setIsLoading(true)
+	store.setCbcMeasurements([])
+	const testFile = getTestFile()
+	store.parseFile(testFile)
+	store.setIsLoading(false)
+
 }
 </script>
 
