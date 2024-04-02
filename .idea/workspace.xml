@@ -4,13 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="875a38dc-bf1f-4839-9933-7efb22d78c92" name="Changes" comment="refactored code and corrected docker file">
+    <list default="true" id="875a38dc-bf1f-4839-9933-7efb22d78c92" name="Changes" comment="changed test files">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/test_csvs/test.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/leipzig_test_1000.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data/leipzig_test_1000.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/leipzig_test_10000.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data/leipzig_test_10000.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/leipzig_test_100000.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data/leipzig_test_100000.csv" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -232,7 +227,7 @@
       <workItem from="1711005388999" duration="7561000" />
       <workItem from="1711628275676" duration="1469000" />
       <workItem from="1712029464993" duration="5590000" />
-      <workItem from="1712043565806" duration="2148000" />
+      <workItem from="1712043565806" duration="3568000" />
     </task>
     <task id="LOCAL-00001" summary="changes in data processing">
       <created>1667911144366</created>
@@ -479,7 +474,14 @@
       <option name="project" value="LOCAL" />
       <updated>1712035628881</updated>
     </task>
-    <option name="localTasksCounter" value="36" />
+    <task id="LOCAL-00036" summary="changed test files">
+      <created>1712045849676</created>
+      <option name="number" value="00036" />
+      <option name="presentableId" value="LOCAL-00036" />
+      <option name="project" value="LOCAL" />
+      <updated>1712045849676</updated>
+    </task>
+    <option name="localTasksCounter" value="37" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -497,7 +499,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="fixed some bugs" />
     <MESSAGE value="minor improvements" />
     <MESSAGE value="fixed minor bugs" />
     <MESSAGE value="fixed bug" />
@@ -522,6 +523,7 @@
     <MESSAGE value="refactored" />
     <MESSAGE value="fixed height problem" />
     <MESSAGE value="refactored code and corrected docker file" />
-    <option name="LAST_COMMIT_MESSAGE" value="refactored code and corrected docker file" />
+    <MESSAGE value="changed test files" />
+    <option name="LAST_COMMIT_MESSAGE" value="changed test files" />
   </component>
 </project>
