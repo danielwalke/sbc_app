@@ -1,5 +1,5 @@
 <template>
-	<div class="custom-height w-full absolute z-10 top-0 left-0 overflow-hidden" :class="isLoading ? 'block':'hidden' " style="background-color: #242424">
+	<div class="custom-height w-full absolute z-10 top-0 left-0 overflow-hidden " :class="isLoading ? 'block':'hidden' " style="background-color: #242424">
 		<div class="p-4">
 			<div class="flex justify-center w-full pb-3">
 				<div class="non-editable skeleton max-w-40"></div>

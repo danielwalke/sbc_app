@@ -11,7 +11,7 @@ cbcStore.fetchClassifierNames()
 </script>
 
 <template>
-  <div class="h-screen w-screen">
+  <div class="h-screen w-screen min-h-[640px] overflow-y-auto">
 		<router-view></router-view>
 		<HelpModal/>
 		<FilterModal/>
