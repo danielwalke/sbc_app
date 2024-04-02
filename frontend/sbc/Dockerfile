@@ -1,5 +1,5 @@
 # Use the official Node.js image as a base image
-FROM node:14 as builder
+FROM node:16.14.0-alpine
 
 # Set the working directory
 WORKDIR /app
@@ -16,20 +16,16 @@ COPY .. .
 # Build the application
 RUN npm run build
 
-# Use a smaller base image for the production build
-FROM node:14-alpine
-
-# Set the working directory
-WORKDIR /app
-
 # Copy only the built artifacts from the previous stage
 COPY /dist /app/dist
 
 # Expose the port that your application will run on
-EXPOSE 3000
+EXPOSE 4173
 
 # Install serve to run the application
-RUN npm install -g serve
+#RUN npm install -g serve
+RUN npm install
 
 # Command to run the application
-CMD ["serve", "-s", "dist"]
+#CMD ["serve", "-s", "dist"]
+CMD ["npm", "run", "preview"]

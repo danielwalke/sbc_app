@@ -1,1 +1,3 @@
 /backend/extdata/*.csv
+/frontend/sbc/node_modules/*
+/frontend/sbc/dist
