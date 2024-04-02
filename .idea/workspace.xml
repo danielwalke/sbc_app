@@ -4,14 +4,31 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="875a38dc-bf1f-4839-9933-7efb22d78c92" name="Changes" comment="fixed height problem">
+    <list default="true" id="875a38dc-bf1f-4839-9933-7efb22d78c92" name="Changes" comment="refactored some code">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/sbc/src/components/MainComponent.vue" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/sbc/src/components/MainComponent.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/sbc/.github/workflows/deploy.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/sbc/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/sbc/Dockerfile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/sbc/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/sbc/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/sbc/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/sbc/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/sbc/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/sbc/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/sbc/src/components/MainComponent.vue" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/sbc/src/components/details/DetailContent.vue" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/sbc/src/components/details/DetailContent.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/sbc/src/components/input/Content.vue" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/sbc/src/components/input/Content.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/sbc/src/components/input/ClassifierSelector.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/sbc/src/components/input/Content.vue" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/sbc/src/components/input/TableHeader.vue" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/sbc/src/components/input/TableHeader.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/sbc/src/components/loader/LoadingSkeleton.vue" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/sbc/src/components/loader/LoadingSkeleton.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/sbc/src/components/results/SubmitButton.vue" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/sbc/src/components/results/SubmitButton.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/sbc/src/lib/API.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/sbc/src/lib/AUROC.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/sbc/src/lib/CBCMeasurements.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/sbc/src/lib/ConfidenceCalculation.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/sbc/src/lib/Exporter.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/sbc/src/lib/InputReader.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/sbc/src/lib/constants/Server.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/sbc/src/lib/constants/Server.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/sbc/src/router/Routes.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/sbc/src/router/Routes.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/sbc/src/stores/CbcStore.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/sbc/src/stores/CbcStore.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/sbc/src/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/sbc/src/style.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/sbc/vite.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/sbc/vite.config.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -230,6 +247,8 @@
       <workItem from="1710944692904" duration="107000" />
       <workItem from="1710944937199" duration="251000" />
       <workItem from="1711005388999" duration="7561000" />
+      <workItem from="1711628275676" duration="1469000" />
+      <workItem from="1712029464993" duration="4687000" />
     </task>
     <task id="LOCAL-00001" summary="changes in data processing">
       <created>1667911144366</created>
