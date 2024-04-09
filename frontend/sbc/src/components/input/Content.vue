@@ -39,7 +39,7 @@ function type(cbcKey){return cbcKey === "sex" ? "text" : "number"}
 
 const screenHeight = ref(window.innerHeight)
 const screenWidth = ref(window.innerWidth)
-const maxHeight = ref(85)
+const maxHeight = ref(80)
 updateScreenHeight()
 function updateScreenHeight(){
 	if(screenHeight.value <= 700){
