@@ -4,11 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="875a38dc-bf1f-4839-9933-7efb22d78c92" name="Changes" comment="refactored cbc store">
+    <list default="true" id="875a38dc-bf1f-4839-9933-7efb22d78c92" name="Changes" comment="workspace changes">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/sbc/src/lib/API.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/sbc/src/lib/API.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/sbc/src/lib/constants/Server.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/sbc/src/lib/constants/Server.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/sbc/src/stores/PredictionsStore.js" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -25,7 +22,7 @@
     </option>
   </component>
   <component name="Git.Settings">
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/frontend/sbc" />
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -231,6 +228,8 @@
       <workItem from="1711346120834" duration="4151000" />
       <workItem from="1711513798910" duration="6027000" />
       <workItem from="1711612852178" duration="2284000" />
+      <workItem from="1712915609742" duration="606000" />
+      <workItem from="1713340034336" duration="24000" />
     </task>
     <task id="LOCAL-00001" summary="changes in data processing">
       <created>1667911144366</created>
