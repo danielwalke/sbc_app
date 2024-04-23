@@ -8,6 +8,7 @@ class PredictionDetails(Prediction):
     def __init__(self, cbc_items, model, thresholds, shap_explainer):
         super().__init__(cbc_items, model, thresholds)
         self.shap_explainer = shap_explainer
+        self.model = model
 
     def get_shapley_values(self):
         X = self.get_features()
@@ -23,6 +24,7 @@ class PredictionDetails(Prediction):
         print("Finished classification")
         print("Started Shapley values calculation")
         output.set_shap_values(self.get_shapley_values().tolist()[-1])
+        output.set_classifier_name(self.model.__class__.__name__)
         print(output)
         print("Finished Shapley values calculation")
         return output

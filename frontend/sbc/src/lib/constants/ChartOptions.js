@@ -9,15 +9,6 @@ export const chartOptions = {
                 color: 'white', // Set font color for legend labels
             },
         },
-        title: {
-            display: true,
-            text: 'SHAP-values',
-            font: {
-                size: 14, // Set font size for the title
-                weight: 'bold',
-            },
-            color: 'white', // Set font color for the title
-        },
     },
     scales: {
         x: {

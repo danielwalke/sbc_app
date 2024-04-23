@@ -13,8 +13,11 @@
 						X
 					</button>
 				</div>
+				<div v-if="!hasPredictions && isSubmissionRequired" class="bg-red-500 font-semibold p-4">
+					Submit the data before you can apply this filter!
+				</div>
 				<!-- Modal body -->
-				<div class="p-4 md:p-5 space-y-4">
+				<div class="p-4 md:p-5 space-y-4" v-else>
 					<div v-if="isCategorical">
 						<form class="max-w-sm mx-auto">
 							<select v-model="selectedValue" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
@@ -85,6 +88,8 @@ const isCategorical = computed(()=> store.getFilterOptions.length < 10)
 const filterOptions = computed(()=> store.getFilterOptions)
 const allFilterOptions = computed(()=> store.getAllFilterOptions)
 const filterKey = computed(()=> store.getFilterKey)
+const hasPredictions = computed(()=> cbcStore.getHasPredictions)
+const isSubmissionRequired = computed(()=> ["confidence", "pred"].includes(filterKey.value))
 
 const selectedValue = ref(undefined)
 const lastFilterKey = ref("")

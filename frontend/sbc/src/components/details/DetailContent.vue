@@ -20,7 +20,10 @@
 					<td class="non-editable">{{cbc.classifier}}</td>
 
 					<td class="col-span-2" v-if="hasPredictionDetails"></td>
-					<td class="col-span-7 flex justify-center max-h-48" v-if="hasPredictionDetails">
+					<td class="col-span-7 flex flex-col pt-4 pb-4 justify-center max-h-48" v-if="hasPredictionDetails">
+						<div class="flex gap-2 justify-center font-semibold">
+							<div>SHAP-values</div><div class="text-red-600">Sepsis</div><div>vs.</div><div class="text-blue-600">Control</div>
+						</div>
 						<Bar :data="cbc.chartData" :options="chartOptions"/>
 					</td>
 				</tr>
@@ -34,7 +37,7 @@
 <script setup lang="js">
 import {editableCbcKeys} from "../../lib/TableGrid.js"
 import {useCbcStore} from "../../stores/CbcStore.js";
-import {computed} from "vue";
+import {computed, onMounted} from "vue";
 import {useRoute, useRouter} from "vue-router";
 import TableHeader from "../input/TableHeader.vue";
 import SubmitButton from "../results/SubmitButton.vue";
@@ -44,6 +47,7 @@ const router = useRouter()
 const route = useRoute()
 
 function type(cbcKey){return cbcKey === "sex" ? "text" : "number"}
+
 function valueInput(event, cbc, cbcKey){
 	if(cbcKey === "sex") return cbc[cbcKey] = event.target.value
 	cbc[cbcKey] = +event.target.value
@@ -54,6 +58,9 @@ cbcStore.setHasPredictionDetails(false)
 const hasPredictionDetails = computed(()=> cbcStore.getHasPredictionDetails)
 const cbcOverClassifiers = computed(()=> cbcStore.getCbcOverClassifiers)
 
+onMounted(()=>{
+	submitDetails()
+})
 function submitDetails(){
 	cbcStore.submitCbcMeasurementDetails()
 }
