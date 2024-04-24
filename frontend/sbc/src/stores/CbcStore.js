@@ -159,22 +159,12 @@ export const useCbcStore = defineStore('cbcStore', {
 				PLT: c.PLT,
 			})))
 				.then(function (response) {
-					console.log(store.getCbcOverClassifiers.map(c=>({
-						age: c.age,
-						sex: c.sex,
-						HGB: c.HGB,
-						WBC: c.WBC,
-						RBC: c.RBC,
-						MCV: c.MCV,
-						PLT: c.PLT,
-					})))
 					store.setIsLoading(false)
 					store.setHasPredictionDetails(true)
 					for(let i in response.data.prediction_details){
 						const cbc = store.getCbcOverClassifiers[i]
 						const prediction_detail = response.data.prediction_details[i]
 						cbc.pred = prediction_detail.prediction ? 'Sepsis' : 'Control'
-						console.log(cbc.pred)
 						cbc.classifier = prediction_detail.classifier_name
 						cbc.pred_proba = prediction_detail.pred_proba
 						const threshold = store.getClassifierThresholds[cbc.classifier]
@@ -203,6 +193,27 @@ export const useCbcStore = defineStore('cbcStore', {
 		},
 		setCbcOverClassifiers(newCbcOverClassifiers){
 			this.cbcOverClassifiers =newCbcOverClassifiers
+		},
+		submitCbcDetail(cbc){
+			const store = useCbcStore()
+			store.setIsLoading(true)
+			axios.post(SERVER_URL + 'get_pred_detail', cbc)
+				.then(function (response) {
+					store.setIsLoading(false)
+					for(let i in response.data.prediction_details){
+						const prediction_detail = response.data.prediction_details[0]
+						console.log(prediction_detail)
+						cbc.pred = prediction_detail.prediction ? 'Sepsis' : 'Control'
+						cbc.classifier = prediction_detail.classifier_name
+						cbc.pred_proba = prediction_detail.pred_proba
+						const threshold = store.getClassifierThresholds[cbc.classifier]
+						cbc.confidence = Math.round(calculate_confidence_score(cbc.pred_proba, threshold)*10000)/100
+						cbc.chartData = {
+							labels: ["age", "sex", "HGB", "WBC", "RBC", "MCV", "PLT"],
+							datasets: [{ backgroundColor: prediction_detail.shap_values.map(s => s<= 0 ? "#2563eb" : "#dc2626"),fontColor:"white",data: prediction_detail.shap_values}]
+						}
+					}
+				})
 		}
 	},
 })

@@ -20,12 +20,7 @@
 					<td class="non-editable">{{cbc.classifier}}</td>
 
 					<td class="col-span-2" v-if="hasPredictionDetails"></td>
-					<td class="col-span-7 flex flex-col pt-4 pb-4 justify-center max-h-48" v-if="hasPredictionDetails">
-						<div class="flex gap-2 justify-center font-semibold">
-							<div>SHAP-values</div><div class="text-red-600">Sepsis</div><div>vs.</div><div class="text-blue-600">Control</div>
-						</div>
-						<Bar :data="cbc.chartData" :options="chartOptions"/>
-					</td>
+					<Chart :cbc="cbc" v-if="hasPredictionDetails"/>
 				</tr>
 				</tbody>
 			</table>
@@ -41,8 +36,8 @@ import {computed, onMounted, watch, ref} from "vue";
 import {useRoute, useRouter} from "vue-router";
 import TableHeader from "../input/TableHeader.vue";
 import SubmitButton from "../results/SubmitButton.vue";
-import { Bar } from 'vue-chartjs'
-import {chartOptions} from "../../lib/constants/ChartOptions.js";
+import Chart from "../chart/Chart.vue";
+
 const router = useRouter()
 const route = useRoute()
 const cbcStore = useCbcStore()

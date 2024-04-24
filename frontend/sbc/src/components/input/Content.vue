@@ -3,7 +3,7 @@
 		<table class="table-auto min-w-[1300px] h-full relative">
 			<TableHeader :is-detail-page="false"/>
 			<tbody class="w-full overflow-x-auto pb-2 pt-2 block" >
-			<tr class="grid leading-6 pt-2 gap-4 grid-container" :class="''"
+			<tr class="grid leading-6 pt-2 gap-4 grid-container mb-2" :class="cbc.chartData ? ' ' : ''"
 					v-for="(cbc, idx) in filteredCbcs" :id="idx">
 				<td v-for="cbcKey in editableCbcKeys" class="flex justify-center items-center flex-col h-fit">
 					<input
@@ -16,6 +16,12 @@
 				<td class="non-editable w-full">{{cbc.confidence === undefined ? 'Unclassified' : cbc.confidence}}</td>
 				<td class="non-editable w-full">{{cbc.pred === undefined ? 'Unclassified' : cbc.pred }}</td>
 				<td><Details :fun="()=>handleDetails(cbc)"/></td>
+				<td class="grid-container " style="grid-column: span 13" v-if="cbc.chartData">
+					<div class="col-span-2"></div>
+					<Chart  :cbc="cbc"/>
+					<div class="col-span-3"></div>
+					<div><List :fun="()=>handleShowClassifiers(cbc)"/></div>
+				</td>
 			</tr>
 			</tbody>
 		</table>
@@ -26,12 +32,14 @@
 <script setup>
 import { Bar } from 'vue-chartjs'
 import {chartOptions} from "../../lib/constants/ChartOptions.js";
-import {computed, onUpdated, ref, onBeforeUpdate, onBeforeMount, onUnmounted} from "vue";
+import {computed, onUpdated, ref, onBeforeUpdate, onBeforeMount, onUnmounted, watch} from "vue";
 import {editableCbcKeys} from "../../lib/TableGrid.js"
 import Details from "./../icons/Details.vue";
 import {useCbcStore} from "../../stores/CbcStore.js";
 import {router} from "../../router/Router.js";
 import TableHeader from "./TableHeader.vue";
+import Chart from "../chart/Chart.vue";
+import List from "../icons/List.vue";
 
 const options = chartOptions
 
@@ -106,6 +114,12 @@ function updateViewPort(){
 }
 
 async function handleDetails(cbc){
+	store.setHasPredictions(true)
+	store.submitCbcDetail(cbc)
+}
+
+
+async function handleShowClassifiers(cbc){
 	await router.push(`/sbc_frontend/details/${cbc.id}`)
 }
 

@@ -83,6 +83,12 @@ async def get_pred_details(cbc_items: list[CBC]) -> OutDetailsPredictions:
                                    app.state.background_data)
     return prediction.get_output()
 
+@app.post(ADD_PATH + "/get_pred_detail/")
+async def get_pred_detail(cbc_item: CBC) -> OutDetailsPredictions:
+    prediction = DetailsPrediction([cbc_item], [app.state.model], app.state.classifier_thresholds,
+                                   app.state.background_data)
+    return prediction.get_output()
+
 
 # @app.post(ADD_PATH + "/get_graph_pred/")
 # async def get_graph_pred(graph_cbc_items: list[GraphCBC]) -> OutPrediction:
