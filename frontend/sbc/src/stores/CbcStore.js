@@ -200,6 +200,9 @@ export const useCbcStore = defineStore('cbcStore', {
 			store.setClassifierNames(Object.keys(response.data))
 			store.setClassifierThresholds(response.data)
 			store.setIsLoading(false)
+		},
+		setCbcOverClassifiers(newCbcOverClassifiers){
+			this.cbcOverClassifiers =newCbcOverClassifiers
 		}
 	},
 })

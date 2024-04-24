@@ -6,8 +6,6 @@
   <component name="ChangeListManager">
     <list default="true" id="875a38dc-bf1f-4839-9933-7efb22d78c92" name="Changes" comment="workspace changes">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/service/impl/DetailsPrediction.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/service/impl/DetailsPrediction.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/service/impl/PredictionDetails.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/service/impl/PredictionDetails.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -234,6 +232,7 @@
       <workItem from="1712065732554" duration="3000" />
       <workItem from="1712141898432" duration="845000" />
       <workItem from="1712148971106" duration="5000" />
+      <workItem from="1713932578554" duration="1564000" />
     </task>
     <task id="LOCAL-00001" summary="changes in data processing">
       <created>1667911144366</created>

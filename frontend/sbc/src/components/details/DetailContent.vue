@@ -37,7 +37,7 @@
 <script setup lang="js">
 import {editableCbcKeys} from "../../lib/TableGrid.js"
 import {useCbcStore} from "../../stores/CbcStore.js";
-import {computed, onMounted} from "vue";
+import {computed, onMounted, watch, ref} from "vue";
 import {useRoute, useRouter} from "vue-router";
 import TableHeader from "../input/TableHeader.vue";
 import SubmitButton from "../results/SubmitButton.vue";
@@ -45,22 +45,35 @@ import { Bar } from 'vue-chartjs'
 import {chartOptions} from "../../lib/constants/ChartOptions.js";
 const router = useRouter()
 const route = useRoute()
-
-function type(cbcKey){return cbcKey === "sex" ? "text" : "number"}
-
-function valueInput(event, cbc, cbcKey){
-	if(cbcKey === "sex") return cbc[cbcKey] = event.target.value
-	cbc[cbcKey] = +event.target.value
-}
-
 const cbcStore = useCbcStore()
 cbcStore.setHasPredictionDetails(false)
 const hasPredictionDetails = computed(()=> cbcStore.getHasPredictionDetails)
-const cbcOverClassifiers = computed(()=> cbcStore.getCbcOverClassifiers)
+
+function type(cbcKey){return cbcKey === "sex" ? "text" : "number"}
+
+const cbcOverClassifiers =ref(cbcStore.getCbcOverClassifiers)
+
+const cbcOverClassifiersComputed =computed(()=> cbcStore.getCbcOverClassifiers)
+
+watch(cbcOverClassifiersComputed, function(newValue){
+	cbcOverClassifiers.value = newValue
+})
+
+function valueInput(event, edited_cbc, cbcKey){
+	for(const cbc of cbcOverClassifiers.value){
+		if(cbcKey === "sex") return cbc[cbcKey] = event.target.value
+		cbc[cbcKey] = +event.target.value
+	}
+	cbcStore.setCbcOverClassifiers(cbcOverClassifiers.value)
+}
 
 onMounted(()=>{
+	if(cbcStore.getCbcOverClassifiers.some(item => item.age === undefined)){
+		return
+	}
 	submitDetails()
 })
+
 function submitDetails(){
 	cbcStore.submitCbcMeasurementDetails()
 }
