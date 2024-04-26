@@ -113,7 +113,7 @@ export const useCbcStore = defineStore('cbcStore', {
 			};
 			reader.readAsText(file);
 		},
-		submitCbcMeasurements(){
+		async submitCbcMeasurements(){
 			const store = useCbcStore()
 			store.setIsLoading(true)
 			store.setHasPredictions(false)
@@ -139,6 +139,12 @@ export const useCbcStore = defineStore('cbcStore', {
 						cbc.confidence = Math.round(calculate_confidence_score(cbc.pred_proba, threshold)*10000)/100
 					}
 					console.timeEnd("predictions");
+				})
+				.then(()=>{
+					const cbcsWithDetails = store.getCbcMeasurements.filter(cbc => cbc.chartData)
+					for(const cbc of cbcsWithDetails){
+						this.submitCbcDetail(cbc)
+					}
 				})
 		},
 		setHasPredictionDetails(value){
