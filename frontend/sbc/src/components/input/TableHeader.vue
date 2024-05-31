@@ -3,7 +3,10 @@
 	<tr class="grid-container">
 		<th v-for="cbcKey in editableCbcKeys" class="grid-item">
 			<div class="header-item pt-2">
-				<p class="text-center">{{cbcKey}}</p>
+				<div class="flex gap-2 text-center hover:cursor-pointer" @click="()=> sortData(cbcKey)">{{cbcKey}}
+					<ChevoronUp v-if="sortKey === cbcKey && !sortDirectionReversed"/>
+					<ChevronDown v-if="sortKey === cbcKey && sortDirectionReversed"/>
+				</div>
 				<Filter v-if="!isDetailPage" :fun="()=> filterCbcKeyFunction(cbcKey)" :classes="getFilterClass(cbcKey)"/>
 				<Help :fun="() => helpCbcKeyFunction(cbcKey)"/>
 			</div>
@@ -11,21 +14,30 @@
 		</th>
 		<th class="grid-item" >
 			<div class="header-item">
-				Ground-truth
+				<div class="flex gap-2 text-center hover:cursor-pointer" @click="()=> sortData('groundTruth')">Ground-truth
+					<ChevoronUp v-if="sortKey === 'groundTruth' && !sortDirectionReversed"/>
+					<ChevronDown v-if="sortKey === 'groundTruth' && sortDirectionReversed"/>
+				</div>
 				<Filter v-if="!isDetailPage" :fun="()=> filterCbcKeyFunction('groundTruth')" :classes="getFilterClass('groundTruth')"/>
 				<Help :fun="() => helpCbcKeyFunction('groundTruth')"/>
 			</div>
 		</th>
 		<th class="grid-item" >
 			<div class="header-item">
-				Confidence
+				<div class="flex gap-2 text-center hover:cursor-pointer" @click="()=> sortData('confidence')">Confidence
+					<ChevoronUp v-if="sortKey === 'confidence' && !sortDirectionReversed"/>
+					<ChevronDown v-if="sortKey === 'confidence' && sortDirectionReversed"/>
+				</div>
 				<Filter v-if="!isDetailPage" :fun="()=> filterCbcKeyFunction('confidence')" :classes="getFilterClass('confidence')"/>
 				<Help :fun="() => helpCbcKeyFunction('confidence')"/>
 			</div>
 		</th>
 		<th class="grid-item">
 			<div class="header-item">
-				Prediction
+				<div class="flex gap-2 text-center hover:cursor-pointer" @click="()=> sortData('pred')">Prediction
+					<ChevoronUp v-if="sortKey === 'pred' && !sortDirectionReversed"/>
+					<ChevronDown v-if="sortKey === 'pred' && sortDirectionReversed"/>
+				</div>
 				<Filter v-if="!isDetailPage" :fun="()=> filterCbcKeyFunction('pred')" :classes="getFilterClass('pred')"/>
 				<Help :fun="() => helpCbcKeyFunction('pred')"/>
 			</div>
@@ -53,6 +65,8 @@ import Filter from "../icons/Filter.vue";
 import {useModalStore} from "../../stores/ModalStore.js";
 import {useCbcStore} from "../../stores/CbcStore.js";
 import {CBC_KEY_TO_DESCRIPTION} from "../../lib/constants/CBCDescriptions.js";
+import ChevoronUp from "../icons/ChevoronUp.vue";
+import ChevronDown from "../icons/ChevronDown.vue";
 
 const modalStore = useModalStore()
 const cbcStore = useCbcStore()
@@ -60,6 +74,9 @@ const cbcStore = useCbcStore()
 const props = defineProps({
 	isDetailPage: Boolean
 })
+
+const sortKey = computed(()=> cbcStore.getLastSortKey)
+const sortDirectionReversed = computed(()=> cbcStore.getSortDirectionReversed)
 
 function unit(cbcKey){
 	return UNITS_DICT[cbcKey]
@@ -81,6 +98,10 @@ const filterKeys = computed(()=>modalStore.getFilters.map(filter => filter["filt
 function getFilterClass(cbcKey){
 	if(filterKeys.value.includes(cbcKey)) return "text-red-500"
 	return ""
+}
+
+function sortData(cbcKey){
+	cbcStore.sortData(cbcKey)
 }
 </script>
 

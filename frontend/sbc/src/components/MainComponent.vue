@@ -42,7 +42,7 @@ const has_predictions = computed(()=>store.has_predictions)
 const cbc_counts  = computed(()=>store.getCbcMeasurements.length)
 
 function addCbcMeasurement(){
-	store.addCbcMeasurements({...DEFAULT_CBC, uuid: uuid()})
+	store.unshiftCbcMeasurements({...DEFAULT_CBC})
 }
 
 const modalStore = useModalStore()

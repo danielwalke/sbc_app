@@ -10,19 +10,29 @@ function calculate_confidence_score(class_probability, threshold = 0.5){
 	let m
 	let n
 	if(class_probability <= threshold){
-		m = - 1 / threshold
-		n = 1
+		m = 0.5 / threshold
+		n = 0
 	}else{
-		m = 1 / (1-threshold)
-		n = - threshold * m
+		m = 0.5 / (1- threshold)
+		n = 0.5 - m * threshold
 	}
 	const confidence = m*class_probability+n
 	return confidence
 }
 
+function compare( a, b, key ) {
+	if ( a[key] < b[key] ){
+		return -1;
+	}
+	if ( a[key] > b[key] ){
+		return 1;
+	}
+	return 0;
+}
+
 
 export const useCbcStore = defineStore('cbcStore', {
-	state: () => ({ cbcMeasurements: [{...DEFAULT_CBC, id : uuid()}], isLoading: false, has_predictions:false, cbcOverClassifiers: [], classifierNames: [], classifierThresholds: undefined, hasPredictionDetails: false}),
+	state: () => ({ cbcMeasurements: [{...DEFAULT_CBC, id : uuid()}], isLoading: false, has_predictions:false, cbcOverClassifiers: [], classifierNames: [], classifierThresholds: undefined, hasPredictionDetails: false, isSorted: false, uuidToIdxMapper:undefined, lastSortKey: undefined, sortDirectionReversed: false }),
 	getters: {
 		getCbcMeasurements: (state) => {
 			const modalStore = useModalStore()
@@ -63,12 +73,20 @@ export const useCbcStore = defineStore('cbcStore', {
 			return cbcOverClassifiers
 		},
 		getClassifierThresholds: (state) => state.classifierThresholds,
-		getHasPredictionDetails: (state) => state.hasPredictionDetails
+		getHasPredictionDetails: (state) => state.hasPredictionDetails,
+		getIsSorted: (state) => state.isSorted,
+		getUuidToIdxMapper: (state) => state.uuidToIdxMapper,
+		getLastSortKey: (state) => state.lastSortKey,
+		getSortDirectionReversed: (state) => state.sortDirectionReversed
 	},
 	actions: {
 		addCbcMeasurements(value ){
 			value.id = uuid()
 			this.cbcMeasurements.push(value)
+		},
+		unshiftCbcMeasurements(value ){
+			value.id = uuid()
+			this.cbcMeasurements.unshift(value)
 		},
 		setCbcMeasurements(value) {
 			this.cbcMeasurements = value
@@ -220,6 +238,45 @@ export const useCbcStore = defineStore('cbcStore', {
 						}
 					}
 				})
+		},
+		setIsSorted(value){
+			this.isSorted = value
+		},
+		setUuidToIdxMapper(value){
+			this.uuidToIdxMapper = value
+		},
+		setLastSortKey(value){
+			this.lastSortKey = value
+		},
+		setSortDirectionReversed(value){
+			this.sortDirectionReversed = value
+		},
+		sortData(sortKey){
+			const store = useCbcStore()
+			if(!store.getIsSorted){
+				const uuidToIdxMapper = {}
+				for(const idx in store.getCbcMeasurements){
+					const cbc = store.getCbcMeasurements[idx]
+					uuidToIdxMapper[cbc.id] = idx
+				}
+				store.setUuidToIdxMapper(uuidToIdxMapper)
+			}
+			let sortedMeasurements = store.getCbcMeasurements.sort((cbc_a, cbc_b) => compare(cbc_a, cbc_b, sortKey))
+			if(store.getLastSortKey === sortKey){
+				if(store.getSortDirectionReversed){
+					sortedMeasurements = store.getCbcMeasurements.sort((cbc_a, cbc_b) => compare(cbc_a, cbc_b, sortKey))
+				}
+				if(!store.getSortDirectionReversed){
+					sortedMeasurements = store.getCbcMeasurements.sort((cbc_a, cbc_b) => compare(cbc_b, cbc_a, sortKey))
+				}
+				store.setSortDirectionReversed(!store.getSortDirectionReversed)
+			}
+			store.setCbcMeasurements(sortedMeasurements)
+			store.setIsSorted(true)
+			store.setLastSortKey(sortKey)
+		},
+		resetSort(){
+			store.setIsSorted(false)
 		}
 	},
 })
