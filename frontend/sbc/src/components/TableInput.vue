@@ -8,7 +8,7 @@
 		</div>
 		<TableHeader :is-detail-page="false"/>
 		<Content/>
-		<div class="p-2">
+		<div class="">
 			<div class="flex justify-center w-full mt-4">
 				<button
 				@click="addCbcMeasurement"
