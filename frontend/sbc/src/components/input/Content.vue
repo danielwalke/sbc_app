@@ -22,6 +22,7 @@
 					<div class="col-span-3"></div>
 					<div><List :fun="()=>handleShowClassifiers(cbc)"/></div>
 				</td>
+				<hr style="grid-column: span 13" v-if="newPatient(idx)"/>
 			</tr>
 			</tbody>
 		</table>
@@ -30,9 +31,8 @@
 </template>
 
 <script setup>
-import { Bar } from 'vue-chartjs'
 import {chartOptions} from "../../lib/constants/ChartOptions.js";
-import {computed, onUpdated, ref, onBeforeUpdate, onBeforeMount, onUnmounted, watch} from "vue";
+import {computed, ref, onBeforeMount, onUnmounted} from "vue";
 import {editableCbcKeys} from "../../lib/TableGrid.js"
 import Details from "./../icons/Details.vue";
 import {useCbcStore} from "../../stores/CbcStore.js";
@@ -91,7 +91,8 @@ function valueInput(event, cbc, cbcKey){
 
 const filteredCbcs = computed(() =>{
 	let preFilteredCbcs = [...store.getCbcMeasurements]
-	return preFilteredCbcs.filter((cbc, i) => i <= upperLimit.value && i>= lowerLimit.value)
+	const filteredCbcs =  preFilteredCbcs.filter((cbc, i) => i <= upperLimit.value && i>= lowerLimit.value)
+	return filteredCbcs
 })
 
 
@@ -121,6 +122,11 @@ async function handleDetails(cbc){
 
 async function handleShowClassifiers(cbc){
 	await router.push(`/sbc_frontend/details/${cbc.id}`)
+}
+
+function newPatient(idx){
+	if(idx >= filteredCbcs.value.length - 1) return false
+	return filteredCbcs.value[idx].patientId !== filteredCbcs.value[idx + 1].patientId
 }
 
 </script>

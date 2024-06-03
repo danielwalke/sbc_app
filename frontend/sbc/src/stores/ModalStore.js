@@ -32,7 +32,12 @@ export const useModalStore = defineStore('modal', {
 			}))
 		},
 		getFilterKey: (state) => state.filterKey,
-		getFilters: (state) => state.filters
+		getFilters: (state) => state.filters,
+		getSelectedItemsFromFilter: (state) => {
+			let filter = state.getFilters.find(filter => filter["filterKey"] === state.getFilterKey)
+			if(filter === undefined) return []
+			return filter["filterItems"]
+		}
 	},
 	actions: {
 		setIsHelpModalOpen(value){
@@ -55,6 +60,30 @@ export const useModalStore = defineStore('modal', {
 		},
 		setFilters(value){
 			this.filters = value
+		},
+		addSelectedItemToFilter(item){
+
+			let filter = this.getFilters.find(filter => filter["filterKey"] === this.getFilterKey)
+
+			if(filter === undefined) {
+				filter = {
+					filterKey: this.getFilterKey,
+					selectedValue: undefined,
+					minValue: undefined,
+					maxValue: undefined,
+					filterItems: [item]
+				}
+				return this.filters.push(filter)
+			}
+			filter["filterItems"].push(item)
+
+		},
+		removeItemFromFilter(itemToDelete){
+			let filter = this.getFilters.find(filter => filter["filterKey"] === this.getFilterKey)
+			filter["filterItems"] = filter["filterItems"].filter(item => item !== itemToDelete)
+			if(filter["filterItems"].length === 0){
+				this.filters = this.filters.filter(f => f["filterKey"] !== filter["filterKey"])
+			}
 		}
 	},
 })

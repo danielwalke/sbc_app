@@ -18,16 +18,9 @@
 				</div>
 				<!-- Modal body -->
 				<div class="p-4 md:p-5 space-y-4" v-else>
-					<div v-if="isCategorical">
-						<form class="max-w-sm mx-auto">
-							<select v-model="selectedValue" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-								<option type="button"  :value="undefined">Select All</option>
-								<option type="button"  v-for="option in allFilterOptions"  :value="option.value">{{option.name}}</option>
-							</select>
-						</form>
-					</div>
-					<div v-else>
-						<Slider v-model="rangeValues" :min="defaultRangeValues()[0]" :max="defaultRangeValues()[1]" :classes="{
+					<Toggler/>
+					<div v-if="!isCategorical && !hasFilteredItems">
+						<Slider v-model="rangeValues" :min="defaultRangeValues[0]" :max="defaultRangeValues[1]" :classes="{
   target: 'relative box-border select-none touch-none tap-highlight-transparent touch-callout-none disabled:cursor-not-allowed',
   focused: 'slider-focused',
   tooltipFocus: 'slider-tooltip-focus',
@@ -57,10 +50,11 @@
   drag: 'slider-state-drag',
 }"/>
 					</div>
+					<CustomSearch/>
 				</div>
 				<!-- Modal footer -->
 				<div class="flex items-center p-4 md:p-5 border-t border-gray-200 rounded-b dark:border-gray-600">
-					<button @click="close" data-modal-hide="default-modal" type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+					<button @click="close" data-modal-hide="default-modal" >
 						Close
 					</button>
 				</div>
@@ -74,11 +68,12 @@ import {useModalStore} from "../../stores/ModalStore.js";
 import {computed, onMounted, onUpdated, ref, watch} from "vue";
 import {useCbcStore} from "../../stores/CbcStore.js";
 import Slider from '@vueform/slider'
+import CustomSearch from "../filter/CustomSearch.vue";
+import Toggler from "../filter/Toggler.vue";
 
 const props = defineProps({
 	options: Array
 })
-const testValue = ref([0,10])
 const store = useModalStore()
 const cbcStore = useCbcStore()
 
@@ -90,20 +85,25 @@ const allFilterOptions = computed(()=> store.getAllFilterOptions)
 const filterKey = computed(()=> store.getFilterKey)
 const hasPredictions = computed(()=> cbcStore.getHasPredictions)
 const isSubmissionRequired = computed(()=> ["confidence", "pred"].includes(filterKey.value))
+const hasFilteredItems = computed(()=> {
+	if(filterKey.value === undefined) return false
+	if(filterKey.value in store.getFilters) return store.getFilters[filterKey.value]["filterItems"].length > 0
+	return false
+})
 
 const selectedValue = ref(undefined)
 const lastFilterKey = ref("")
 
-const defaultRangeValues = ()=>{
+const defaultRangeValues = computed(()=>{
 	if(isCategorical.value) return [0,0]
 	const numericFilterOptions = allFilterOptions.value.map(o => +o.value)
 	return [Math.min(...numericFilterOptions), Math.max(...numericFilterOptions)]
-}
+})
 
 const rangeValues = computed({
 	get() {
 		const filter = store.getFilters.find(filter => filter["filterKey"] === store.getFilterKey)
-		if(filter === undefined) return defaultRangeValues()
+		if(filter === undefined) return defaultRangeValues.value
 		return [filter.minValue, filter.maxValue]
 	},
 	set(values) {
@@ -113,7 +113,8 @@ const rangeValues = computed({
 				filterKey: store.getFilterKey,
 				selectedValue: undefined,
 				minValue: undefined,
-				maxValue: undefined
+				maxValue: undefined,
+				filterItems: []
 			}
 		}
 		filter.minValue = values[0]
@@ -134,7 +135,8 @@ watch(selectedValue, (newSelectedValue) => {
 			filterKey: store.getFilterKey,
 			selectedValue: newSelectedValue,
 			minValue: undefined,
-			maxValue: undefined
+			maxValue: undefined,
+			filterItems: []
 		})
 	}
 })
@@ -148,11 +150,6 @@ watch(filterKey, (newFilterKey) => {
 	}
 	selectedValue.value = filter.selectedValue
 
-})
-
-onUpdated(()=>{
-	console.log("updated")
-	console.log(store.getFilters)
 })
 
 </script>

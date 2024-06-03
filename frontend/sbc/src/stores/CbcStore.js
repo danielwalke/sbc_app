@@ -31,27 +31,63 @@ function compare( a, b, key ) {
 }
 
 
+function getSortedData(state, cbcMeasurements){
+
+	if(state.sortKey === undefined) return cbcMeasurements
+	let sortedMeasurements = cbcMeasurements.sort((cbc_a, cbc_b) => compare(cbc_a, cbc_b, state.sortKey))
+	if(state.lastSortKey === state.sortKey){
+		if(state.sortDirectionReversed){
+			sortedMeasurements = cbcMeasurements.sort((cbc_a, cbc_b) => compare(cbc_a, cbc_b, state.sortKey))
+		}
+		if(!state.sortDirectionReversed){
+			sortedMeasurements = cbcMeasurements.sort((cbc_a, cbc_b) => compare(cbc_b, cbc_a, state.sortKey))
+		}
+
+	}
+	return sortedMeasurements
+}
+
+function addTimeSeriesData(state, filteredCbcMeasurements){
+	if(!state.addTimeSeriesData) return filteredCbcMeasurements
+	const filteredPatientIds = filteredCbcMeasurements.map(cbc => cbc.patientId)
+	const filteredUuids = filteredCbcMeasurements.map(cbc => cbc.id)
+	const timeSeriesData = state.cbcMeasurements.filter(cbc => filteredPatientIds.includes(cbc.patientId) && !filteredUuids.includes(cbc.id))
+	filteredCbcMeasurements.push(...timeSeriesData)
+	return filteredCbcMeasurements
+}
+
 export const useCbcStore = defineStore('cbcStore', {
-	state: () => ({ cbcMeasurements: [{...DEFAULT_CBC, id : uuid()}], isLoading: false, has_predictions:false, cbcOverClassifiers: [], classifierNames: [], classifierThresholds: undefined, hasPredictionDetails: false, isSorted: false, uuidToIdxMapper:undefined, lastSortKey: undefined, sortDirectionReversed: false }),
+	state: () => ({ cbcMeasurements: [{...DEFAULT_CBC, id : uuid()}], isLoading: false, has_predictions:false, cbcOverClassifiers: [], classifierNames: [], classifierThresholds: undefined, hasPredictionDetails: false, isSorted: undefined, uuidToIdxMapper:undefined, lastSortKey: undefined, sortDirectionReversed: false, cbcCopy: undefined, addTimeSeriesData: false, sortKey:undefined }),
 	getters: {
 		getCbcMeasurements: (state) => {
 			const modalStore = useModalStore()
-			const filterKey = modalStore.getFilterKey
 			const noFilter = modalStore.getFilters.length === 0
-			if(noFilter) return state.cbcMeasurements
+			if(noFilter) return getSortedData(state, state.cbcMeasurements)
+			const itemsFilters = modalStore.getFilters.filter(filter => filter["filterItems"].length > 0)
+			const rangeFilters = modalStore.getFilters.filter(filter => filter["filterItems"].length === 0)
 			let filteredCbcMeasurements = [...state.cbcMeasurements]
-			for(const filter of modalStore.getFilters){
+			if(itemsFilters.length > 0){
+				for(const filter of itemsFilters){
+					filteredCbcMeasurements = filteredCbcMeasurements.filter(cbc => filter["filterItems"].includes(cbc[filter["filterKey"]]))
+				}
+				filteredCbcMeasurements = addTimeSeriesData(state, filteredCbcMeasurements)
+				return getSortedData(state, filteredCbcMeasurements)
+			}
+			for(const filter of rangeFilters){
 				filteredCbcMeasurements = filteredCbcMeasurements.filter(cbc => {
 						const filterKey = filter["filterKey"]
 						const selectedValue = filter["selectedValue"]
-						const minValue = filter["minValue"]
-						const maxValue = filter["maxValue"]
+						const minValue = Math.round(filter["minValue"]) //round here because slider library visualizes ints but stores floats
+						const maxValue = Math.round(filter["maxValue"]) //round here because slider library visualizes ints but stores floats
+						if(selectedValue === undefined && maxValue === undefined && minValue === undefined) return true
 						if (selectedValue !== undefined) return cbc[filterKey] === selectedValue
-						return +cbc[filterKey] >= minValue && +cbc[filterKey] <= maxValue
+						// if(minValue === undefined && maxValue === undefined) return filter["filterItems"].includes(cbc[filterKey])
+						return (+cbc[filterKey] >= minValue && +cbc[filterKey] <= maxValue) //|| filter["filterItems"].includes(cbc[filterKey])
 					}
 				)
 			}
-			return filteredCbcMeasurements
+			filteredCbcMeasurements = addTimeSeriesData(state, filteredCbcMeasurements)
+			return getSortedData(state, filteredCbcMeasurements)
 		},
 		getUnfilteredCbcMeasurements: (state) => state.cbcMeasurements,
 		getIsLoading: (state) => state.isLoading,
@@ -77,7 +113,10 @@ export const useCbcStore = defineStore('cbcStore', {
 		getIsSorted: (state) => state.isSorted,
 		getUuidToIdxMapper: (state) => state.uuidToIdxMapper,
 		getLastSortKey: (state) => state.lastSortKey,
-		getSortDirectionReversed: (state) => state.sortDirectionReversed
+		getSortDirectionReversed: (state) => state.sortDirectionReversed,
+		getCbcCopy: (state)=> state.cbcCopy, // backup because filtering and ordering is replacing all cbc measurements
+		getAddTimeSeriesData: (state) => state.addTimeSeriesData
+
 	},
 	actions: {
 		addCbcMeasurements(value ){
@@ -109,15 +148,15 @@ export const useCbcStore = defineStore('cbcStore', {
 				this.addCbcMeasurements({
 					id: uuid(),
 					patientId: items[0],
-					order: 0,
-					age: +items[1],
-					sex: items[2],
-					HGB: Math.round(+items[3]*100)/100,
-					WBC: Math.round(+items[4]*100)/100,
-					RBC: Math.round(+items[5]*100)/100,
-					MCV: Math.round(+items[6]*100)/100,
-					PLT: Math.round(+items[7]*100)/100,
-					groundTruth: items.length > 8 ? +items[8] === 1 ? 'Sepsis' : 'Control' : undefined
+					order: +items[1],
+					age: +items[2],
+					sex: items[3],
+					HGB: Math.round(+items[4]*100)/100,
+					WBC: Math.round(+items[5]*100)/100,
+					RBC: Math.round(+items[6]*100)/100,
+					MCV: Math.round(+items[7]*100)/100,
+					PLT: Math.round(+items[8]*100)/100,
+					groundTruth: items.length > 9 ? +items[9] === 1 ? 'Sepsis' : 'Control' : undefined
 				})
 			}
 		},
@@ -226,7 +265,6 @@ export const useCbcStore = defineStore('cbcStore', {
 					store.setIsLoading(false)
 					for(let i in response.data.prediction_details){
 						const prediction_detail = response.data.prediction_details[0]
-						console.log(prediction_detail)
 						cbc.pred = prediction_detail.prediction ? 'Sepsis' : 'Control'
 						cbc.classifier = prediction_detail.classifier_name
 						cbc.pred_proba = prediction_detail.pred_proba
@@ -251,32 +289,32 @@ export const useCbcStore = defineStore('cbcStore', {
 		setSortDirectionReversed(value){
 			this.sortDirectionReversed = value
 		},
+		setSortKey(val){
+			this.sortKey = val
+ 		},
 		sortData(sortKey){
 			const store = useCbcStore()
-			if(!store.getIsSorted){
+			if(store.getCbcCopy === undefined) this.cbcCopy = store.getUnfilteredCbcMeasurements
+			const cbcMeasurements= store.getCbcMeasurements
+			if(store.getIsSorted === undefined){
 				const uuidToIdxMapper = {}
-				for(const idx in store.getCbcMeasurements){
-					const cbc = store.getCbcMeasurements[idx]
+				for(const idx in cbcMeasurements){
+					const cbc = cbcMeasurements[idx]
 					uuidToIdxMapper[cbc.id] = idx
 				}
 				store.setUuidToIdxMapper(uuidToIdxMapper)
 			}
-			let sortedMeasurements = store.getCbcMeasurements.sort((cbc_a, cbc_b) => compare(cbc_a, cbc_b, sortKey))
-			if(store.getLastSortKey === sortKey){
-				if(store.getSortDirectionReversed){
-					sortedMeasurements = store.getCbcMeasurements.sort((cbc_a, cbc_b) => compare(cbc_a, cbc_b, sortKey))
-				}
-				if(!store.getSortDirectionReversed){
-					sortedMeasurements = store.getCbcMeasurements.sort((cbc_a, cbc_b) => compare(cbc_b, cbc_a, sortKey))
-				}
-				store.setSortDirectionReversed(!store.getSortDirectionReversed)
-			}
-			store.setCbcMeasurements(sortedMeasurements)
+			store.setSortKey(sortKey)
+			store.setSortDirectionReversed(!store.getSortDirectionReversed)
 			store.setIsSorted(true)
 			store.setLastSortKey(sortKey)
 		},
 		resetSort(){
+			const store = useCbcStore()
 			store.setIsSorted(false)
+		},
+		setAddTimeSeriesData(val){
+			this.addTimeSeriesData = val
 		}
 	},
 })
