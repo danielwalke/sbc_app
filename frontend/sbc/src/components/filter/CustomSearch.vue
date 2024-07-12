@@ -27,6 +27,10 @@ import Delete from "../icons/Delete.vue";
 import {useModalStore} from "../../stores/ModalStore.js";
 
 const searchField = ref("")
+watch(searchField, (value, oldValue, onCleanup)=>{
+	if(value.includes(",")) searchField.value = searchField.value.replace(",", ".")
+})
+
 const cbcStore = useCbcStore()
 const modalStore = useModalStore()
 const filterKey = computed(()=> modalStore.getFilterKey)
@@ -39,7 +43,7 @@ const selectedItems = computed(
 )
 const options = computed(()=>{
 	if(filterKey.value === undefined) return []
-	const filterKeyValues = cbcStore.getUnfilteredCbcMeasurements.map(cbc => cbc[filterKey.value])
+	const filterKeyValues = cbcStore.getCbcMeasurements.map(cbc => cbc[filterKey.value])
 	const filteredOptions = filterKeyValues.filter(value => {
 		if(value === undefined) return false
 		return value.toString().toLowerCase().includes(searchField.value.toString().toLocaleLowerCase())

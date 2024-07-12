@@ -79,10 +79,15 @@ const cbcStore = useCbcStore()
 
 const isOpen = computed(()=> store.getIsFilterModalOpen)
 const headerContent = computed(()=> store.getHeaderContent)
-const isCategorical = computed(()=> store.getFilterOptions.length < 10)
+
 const filterOptions = computed(()=> store.getFilterOptions)
 const allFilterOptions = computed(()=> store.getAllFilterOptions)
 const filterKey = computed(()=> store.getFilterKey)
+
+const isCategorical = computed(()=> {
+	return ["sex","groundTruth", "pred"].includes(store.getFilterKey)// store.getFilterOptions.length < 2
+})
+
 const hasPredictions = computed(()=> cbcStore.getHasPredictions)
 const isSubmissionRequired = computed(()=> ["confidence", "pred"].includes(filterKey.value))
 const hasFilteredItems = computed(()=> {
@@ -96,14 +101,17 @@ const lastFilterKey = ref("")
 
 const defaultRangeValues = computed(()=>{
 	if(isCategorical.value) return [0,0]
+
 	const numericFilterOptions = allFilterOptions.value.map(o => +o.value)
+	if(numericFilterOptions.some(isNaN)) return [0, 0]
+	if(numericFilterOptions.length === 0)	return [0, 0]
 	return [Math.min(...numericFilterOptions), Math.max(...numericFilterOptions)]
 })
 
 const rangeValues = computed({
 	get() {
 		const filter = store.getFilters.find(filter => filter["filterKey"] === store.getFilterKey)
-		if(filter === undefined) return defaultRangeValues.value
+		if(filter === undefined) return [defaultRangeValues.value[0], defaultRangeValues.value[1]]
 		return [filter.minValue, filter.maxValue]
 	},
 	set(values) {
@@ -116,10 +124,12 @@ const rangeValues = computed({
 				maxValue: undefined,
 				filterItems: []
 			}
+			store.addFilter(filter)
 		}
 		filter.minValue = values[0]
 		filter.maxValue = values[1]
-		store.addFilter(filter)
+		console.log(filter)
+		console.log(store.getFilters)
 	}
 })
 

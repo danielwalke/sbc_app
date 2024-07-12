@@ -47,23 +47,23 @@ function type(cbcKey){return cbcKey === "sex" ? "text" : "number"}
 
 const screenHeight = ref(window.innerHeight)
 const screenWidth = ref(window.innerWidth)
-const maxHeight = ref(80)
+const maxHeight = ref(85)
 updateScreenHeight()
 function updateScreenHeight(){
 	if(screenHeight.value <= 700){
-		return maxHeight.value = 55
+		return maxHeight.value = 60
 	}
 	if(screenHeight.value <= 850){
-		return maxHeight.value = 65
-	}
-	if(screenHeight.value <= 1000){
 		return maxHeight.value = 70
 	}
-	if(screenHeight.value <= 1200){
+	if(screenHeight.value <= 1000){
 		return maxHeight.value = 75
 	}
-	if(screenHeight.value <= 1300){
+	if(screenHeight.value <= 1200){
 		return maxHeight.value = 80
+	}
+	if(screenHeight.value <= 1300){
+		return maxHeight.value = 85
 	}
 }
 

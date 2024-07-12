@@ -29,7 +29,7 @@ const handleCheckboxChange = () => {
 				></div>
 			</div>
 		</label>
-		<div class="text-black font-semibold text-center">{{!isChecked ? 'Add time series' : 'Remove time series'}}</div>
+		<div class="text-black font-semibold text-center">Include Time series data</div>
 	</div>
 
 </template>

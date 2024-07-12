@@ -5,7 +5,7 @@ import {useCbcStore} from "./CbcStore.js";
 
 export const useModalStore = defineStore('modal', {
 	state: () => ({ isHelpModalOpen: false, headerContent: undefined, helpMainContent: undefined,
-	isFilterModalOpen: false, filterKey: undefined, filters: []}),
+	isFilterModalOpen: false, filterKey: undefined, filters: [], isInputModelOpen: false}),
 	getters: {
 		getHeaderContent: (state) => state.headerContent,
 		getHelpMainContent: (state) => state.helpMainContent,
@@ -37,7 +37,8 @@ export const useModalStore = defineStore('modal', {
 			let filter = state.getFilters.find(filter => filter["filterKey"] === state.getFilterKey)
 			if(filter === undefined) return []
 			return filter["filterItems"]
-		}
+		},
+		getIsInputModelOpen: (state) => state.isInputModelOpen,
 	},
 	actions: {
 		setIsHelpModalOpen(value){
@@ -51,6 +52,9 @@ export const useModalStore = defineStore('modal', {
 		},
 		setIsFilterModalOpen(value) {
 			this.isFilterModalOpen = value
+		},
+		setIsInputModalOpen(value) {
+			this.isInputModelOpen = value
 		},
 		setFilterKey(value){
 			this.filterKey = value

@@ -1,5 +1,6 @@
 <template>
-	<div class="w-full custom-height">
+	<div class="w-full custom-height select-none">
+		<Back/>
 		<div class="w-full overflow-x-auto max-h-[80%]">
 			<table class="table-auto min-w-[1300px] h-full relative">
 				<TableHeader :is-detail-page="true" class="pt-4"/>
@@ -37,6 +38,7 @@ import {useRoute, useRouter} from "vue-router";
 import TableHeader from "../input/TableHeader.vue";
 import SubmitButton from "../results/SubmitButton.vue";
 import Chart from "../chart/Chart.vue";
+import Back from "../navigation/Back.vue";
 
 const router = useRouter()
 const route = useRoute()

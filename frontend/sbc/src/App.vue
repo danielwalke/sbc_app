@@ -4,6 +4,7 @@ import FilterModal from "./components/modals/FilterModal.vue";
 import LoadingSkeleton from "./components/loader/LoadingSkeleton.vue";
 import {useCbcStore} from "./stores/CbcStore.js";
 import Footer from "./components/footer/Footer.vue";
+import InputModal from "./components/modals/InputModal.vue";
 
 
 const cbcStore = useCbcStore()
@@ -16,6 +17,7 @@ cbcStore.fetchClassifierNames()
 		<HelpModal/>
 		<FilterModal/>
 		<LoadingSkeleton/>
+		<InputModal/>
 		<Footer/>
   </div>
 </template>
