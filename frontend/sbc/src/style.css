@@ -34,7 +34,7 @@ button, label, .grid-item{
 }
 .grid-container {
   display: grid;
-  grid-template-columns: repeat(13, minmax(0, 1fr));
+  grid-template-columns: repeat(12, minmax(0, 1fr));
   gap: 1rem;
 }
 
@@ -51,7 +51,7 @@ td{
 
 .grid-container-small {
   display: grid;
-  grid-template-columns: repeat(13, minmax(0, 1fr));
+  grid-template-columns: repeat(12, minmax(0, 1fr));
   gap: 1rem;
 }
 

@@ -10,7 +10,7 @@
               @input="event => valueInput(event, cbc, cbcKey)" @change="event => valueInput(event, cbc, cbcKey)"/>
       </div>
 			<div class="non-editable">{{cbc.groundTruth === undefined ? 'Unknown' : cbc.groundTruth}}</div>
-			<div class="flex justify-between col-span-3 gap-4">
+			<div class="flex justify-between col-span-2 gap-4">
 			<div class="non-editable">{{cbc.confidence === undefined ? 'Unclassified' : cbc.confidence}}</div>
 			<div class="non-editable">{{cbc.pred === undefined ? 'Unclassified' : cbc.pred }}</div>
 			<Details :fun="()=>handleDetails(cbc)"/>

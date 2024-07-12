@@ -16,8 +16,7 @@
 					</td>
 					<td class="non-editable">{{cbc.groundTruth === undefined ? 'Unknown' : cbc.groundTruth}}</td>
 
-					<td class="non-editable">{{cbc.confidence === undefined ? 'Unclassified' : cbc.confidence}}</td>
-					<td class="non-editable">{{cbc.pred === undefined ? 'Unclassified' : cbc.pred }}</td>
+					<td class="non-editable">{{cbc.confidence === undefined ? 'Unclassified' : getConfidenceString(cbc.confidence)}}</td>
 					<td class="non-editable">{{cbc.classifier}}</td>
 
 					<td class="col-span-2" v-if="hasPredictionDetails"></td>
@@ -73,6 +72,11 @@ onMounted(()=>{
 
 function submitDetails(){
 	cbcStore.submitCbcMeasurementDetails()
+}
+
+function getConfidenceString(percent){
+	const percentRounded = Math.round(percent*10)/10
+	return `${percentRounded} %`
 }
 </script>
 

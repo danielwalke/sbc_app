@@ -13,16 +13,15 @@
 						@input="event => valueInput(event, cbc, cbcKey)" @change="event => valueInput(event, cbc, cbcKey)"/>
 				</td>
 				<td class="non-editable w-full">{{cbc.groundTruth === undefined ? 'Unknown' : cbc.groundTruth}}</td>
-				<td class="non-editable w-full">{{cbc.confidence === undefined ? 'Unclassified' : cbc.confidence}}</td>
-				<td class="non-editable w-full">{{cbc.pred === undefined ? 'Unclassified' : cbc.pred }}</td>
+				<td class="non-editable w-full">{{cbc.confidence === undefined ? 'Unclassified' : getConfidenceString(cbc.confidence)}}</td>
 				<td><Details :fun="()=>handleDetails(cbc)"/></td>
-				<td class="grid-container " style="grid-column: span 13" v-if="cbc.chartData">
+				<td class="grid-container " style="grid-column: span 12" v-if="cbc.chartData">
 					<div class="col-span-2"></div>
 					<Chart  :cbc="cbc"/>
-					<div class="col-span-3"></div>
+					<div class="col-span-2"></div>
 					<div><List :fun="()=>handleShowClassifiers(cbc)"/></div>
 				</td>
-				<hr style="grid-column: span 13" v-if="newPatient(idx)"/>
+				<hr style="grid-column: span 12" v-if="newPatient(idx)"/>
 			</tr>
 			</tbody>
 		</table>
@@ -128,7 +127,10 @@ function newPatient(idx){
 	if(idx >= filteredCbcs.value.length - 1) return false
 	return filteredCbcs.value[idx].patientId !== filteredCbcs.value[idx + 1].patientId
 }
-
+function getConfidenceString(percent){
+	const percentRounded = Math.round(percent*10)/10
+	return `${percentRounded} %`
+}
 </script>
 
 <style scoped>

@@ -14,8 +14,7 @@
 							class="p-2 rounded-md w-full w-32 h-12 text-right text-black skeleton-bright"></div>
 					</td>
 					<td class="non-editable skeleton"></td>
-					<td class="flex justify-between col-span-3 gap-4">
-						<div class="non-editable skeleton"></div>
+					<td class="flex justify-between col-span-2 gap-4">
 						<div class="non-editable skeleton"></div>
 						<div class="non-editable skeleton"></div>
 					</td>
@@ -60,7 +59,7 @@ const isLoading = computed(()=>cbcStore.getIsLoading)
 
 .grid-container {
 	display: grid;
-	grid-template-columns: repeat(13, minmax(0, 1fr));
+	grid-template-columns: repeat(12, minmax(0, 1fr));
 	gap: 1rem;
 }
 

@@ -24,22 +24,12 @@
 		</th>
 		<th class="grid-item" >
 			<div class="header-item">
-				<div class="flex gap-2 text-center hover:cursor-pointer" @click="()=> sortData('confidence')">Confidence
+				<div class="flex gap-2 text-center hover:cursor-pointer" @click="()=> sortData('confidence')">Sepsis probability
 					<ChevoronUp v-if="sortKey === 'confidence' && !sortDirectionReversed"/>
 					<ChevronDown v-if="sortKey === 'confidence' && sortDirectionReversed"/>
 				</div>
 				<Filter v-if="!isDetailPage" :fun="()=> filterCbcKeyFunction('confidence')" :classes="getFilterClass('confidence')"/>
 				<Help :fun="() => helpCbcKeyFunction('confidence')"/>
-			</div>
-		</th>
-		<th class="grid-item">
-			<div class="header-item">
-				<div class="flex gap-2 text-center hover:cursor-pointer" @click="()=> sortData('pred')">Prediction
-					<ChevoronUp v-if="sortKey === 'pred' && !sortDirectionReversed"/>
-					<ChevronDown v-if="sortKey === 'pred' && sortDirectionReversed"/>
-				</div>
-				<Filter v-if="!isDetailPage" :fun="()=> filterCbcKeyFunction('pred')" :classes="getFilterClass('pred')"/>
-				<Help :fun="() => helpCbcKeyFunction('pred')"/>
 			</div>
 		</th>
 		<th class="header-item" >
