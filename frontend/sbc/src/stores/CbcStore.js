@@ -175,6 +175,8 @@ export const useCbcStore = defineStore('cbcStore', {
 			reader.readAsText(file);
 		},
 		async submitCbcMeasurements(){
+			const modalStore = useModalStore()
+			modalStore.setFilters(modalStore.getFilters.filter(filter => !["confidence"].includes(filter["filterKey"])))
 			const store = useCbcStore()
 			store.setIsLoading(true)
 			store.setHasPredictions(false)
