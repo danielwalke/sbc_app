@@ -71,3 +71,6 @@ button{
   @apply p-2 bg-gray-600 rounded-md text-center select-none
 }
 
+.custom-content-height{
+  max-height: calc(100% - 156px - 56px - 144px);
+}

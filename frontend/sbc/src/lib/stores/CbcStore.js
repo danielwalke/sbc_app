@@ -1,26 +1,27 @@
 import { defineStore } from 'pinia'
 import {DEFAULT_CBC} from "../constants/CBC_Constants.js";
 import { v4 as uuid } from 'uuid';
-import {initializeClassifiersCbcs} from "../classifierDetails/InitializeClassifierObjects.js";
 import {sortData} from "../sorting/SortData.js";
 import {fetchClassifierNamesAndThresholds} from "../api/ClassifierInitialization.js";
 import {getCbcMeasurements} from "../filter/CBCMeasurements.js";
 
 export const useCbcStore = defineStore('cbcStore', {
-	state: () => ({cbcMeasurements: [{...DEFAULT_CBC, id : uuid()}],
-						isLoading: false,
-						has_predictions:false,
-						cbcOverClassifiers: [],
-						classifierNames: [],
-						classifierThresholds: undefined,
-						hasPredictionDetails: false,
-						isSorted: undefined,
-						uuidToIdxMapper:undefined,
-						lastSortKey: undefined,
-						sortDirectionReversed: false,
-						addTimeSeriesData: false,
-						sortKey:undefined,
-						predictionType: "prospective"}),
+	state: () => ({
+		cbcMeasurements: [{...DEFAULT_CBC, id : uuid()}],
+		isLoading: false,
+		has_predictions:false,
+		cbcOverClassifiers: [],
+		classifierNames: [],
+		classifierThresholds: undefined,
+		hasPredictionDetails: false,
+		isSorted: undefined,
+		uuidToIdxMapper:undefined,
+		lastSortKey: undefined,
+		sortDirectionReversed: false,
+		addTimeSeriesData: false,
+		sortKey:undefined,
+		predictionType: "prospective"
+	}),
 	getters: {
 		getCbcMeasurements: (state) => getCbcMeasurements(state),
 		getUnfilteredCbcMeasurements: (state) => state.cbcMeasurements,
