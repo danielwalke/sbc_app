@@ -4,14 +4,11 @@ from service.meta.OutDetailsPrediction import  OutDetailsPrediction
 
 
 class OutDetailsPredictions:
-    prediction_details: list[OutDetailsPrediction] = []
+    prediction_details: OutDetailsPrediction = None
 
     def __init__(self):
         super().__init__()
-        self.prediction_details = []
+        self.prediction_detail = None
 
-    def set_prediction_details(self, prediction_details):
-        self.prediction_details = prediction_details
-
-    def add_prediction_detail(self, prediction_detail):
-        self.prediction_details.append(prediction_detail)
+    def set_prediction_detail(self, prediction_detail):
+        self.prediction_detail = prediction_detail

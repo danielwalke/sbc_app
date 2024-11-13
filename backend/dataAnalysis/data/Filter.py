@@ -31,6 +31,7 @@ class Filter:
                                                           "TargetIcu.str.contains('MICU')))",
                                                                                            engine='python')
         self.data = sirs_complete_first_non_icu_unique_data
+        self.data = self.data.copy()
         self.data['Label'] = self.data['Diagnosis']
 
         control_filter = (self.data["Diagnosis"] == 'Control') | \
@@ -40,6 +41,7 @@ class Filter:
         sepsis_filter = (self.data["Diagnosis"] == 'Sepsis') & \
                         (self.data["SecToIcu"] <= 3600 * 6) & \
                         (self.data["TargetIcu"].str.contains('MICU', na=False))
+
         self.data.loc[control_filter, "Label"] = "Control"
         self.data.loc[sepsis_filter, "Label"] = "Sepsis"
 

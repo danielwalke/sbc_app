@@ -20,5 +20,5 @@ class DetailsPrediction:
             prediction = PredictionDetails([self.cbc_items[i]], model,self.thresholds, shap_explainer)
             out_details_prediction: OutDetailsPrediction = prediction.get_detailed_output()
             out_details_prediction.set_classifier_name(model.__class__.__name__)
-            self.out_details_predictions.add_prediction_detail(out_details_prediction)
+            self.out_details_predictions.set_prediction_detail(out_details_prediction)
         return self.out_details_predictions

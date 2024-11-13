@@ -37,7 +37,7 @@
 import {editableCbcKeys} from "../../lib/TableGrid.js"
 import {useCbcStore} from "../../stores/CbcStore.js";
 import {computed} from "vue";
-import TableHeader from "../input/TableHeader.vue";
+import TableHeader from "../header/input/TableHeader.vue";
 
 const cbcStore = useCbcStore()
 const isLoading = computed(()=>cbcStore.getIsLoading)

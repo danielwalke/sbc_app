@@ -1,7 +1,13 @@
 import { defineStore } from 'pinia'
 import {DEFAULT_CBC, PREDICTION_THRESHOLD} from "../lib/constants/CBC_Constants.js";
 import axios from "axios";
-import {SERVER_URL} from "../lib/constants/Server.js";
+import {
+	ENDPOINT_PROSPECTIVE_PREDICTION_DETAILS,
+	ENDPOINT_PROSPECTIVE_PREDICTIONS,
+	ENDPOINT_PROSPECTIVE_THRESHOLDS, ENDPOINT_RETROSPECTIVE_PREDICTION_DETAILS, ENDPOINT_RETROSPECTIVE_PREDICTIONS,
+	ENDPOINT_RETROSPECTIVE_THRESHOLDS,
+	SERVER_URL
+} from "../lib/constants/Server.js";
 import {useModalStore} from "./ModalStore.js";
 import { v4 as uuid } from 'uuid';
 import {useRoute} from "vue-router";
@@ -56,8 +62,23 @@ function addTimeSeriesData(state, filteredCbcMeasurements){
 	return filteredCbcMeasurements
 }
 
+function getCbcInformation(c){
+	return {
+		id: c.patientId,
+		order: c.order,
+		age: c.age,
+		sex: c.sex,
+		HGB: c.HGB,
+		WBC: c.WBC,
+		RBC: c.RBC,
+		MCV: c.MCV,
+		PLT: c.PLT,
+		ground_truth: c.groundTruth === "Sepsis" ? 1 : c.groundTruth === "Control"? 0: undefined,
+	}
+}
+
 export const useCbcStore = defineStore('cbcStore', {
-	state: () => ({ cbcMeasurements: [{...DEFAULT_CBC, id : uuid()}], isLoading: false, has_predictions:false, cbcOverClassifiers: [], classifierNames: [], classifierThresholds: undefined, hasPredictionDetails: false, isSorted: undefined, uuidToIdxMapper:undefined, lastSortKey: undefined, sortDirectionReversed: false, addTimeSeriesData: false, sortKey:undefined }),
+	state: () => ({ cbcMeasurements: [{...DEFAULT_CBC, id : uuid()}], isLoading: false, has_predictions:false, cbcOverClassifiers: [], classifierNames: [], classifierThresholds: undefined, hasPredictionDetails: false, isSorted: undefined, uuidToIdxMapper:undefined, lastSortKey: undefined, sortDirectionReversed: false, addTimeSeriesData: false, sortKey:undefined, predictionType: "prospective"}),
 	getters: {
 		getCbcMeasurements: (state) => {
 			const modalStore = useModalStore()
@@ -97,29 +118,15 @@ export const useCbcStore = defineStore('cbcStore', {
 		getUnfilteredCbcMeasurements: (state) => state.cbcMeasurements,
 		getIsLoading: (state) => state.isLoading,
 		getHasPredictions: (state) => state.has_predictions,
-		getCbcOverClassifiers: (state) => {
-			const route = useRoute()
-			if(route.params.id === undefined) return []
-			const classifiers = state.classifierNames
-			const cbcOverClassifiers = []
-			const selectedCbc = state.cbcMeasurements.find(cbc => cbc.id === route.params.id)
-			for(const classifier of classifiers){
-				const copySelectedCbc = {...selectedCbc}
-				copySelectedCbc.pred_proba = undefined
-				copySelectedCbc.pred = undefined
-				copySelectedCbc.confidence = undefined
-				copySelectedCbc.classifier = classifier
-				cbcOverClassifiers.push(copySelectedCbc)
-			}
-			return cbcOverClassifiers
-		},
+		getCbcOverClassifiers: (state) =>  state.cbcOverClassifiers,
 		getClassifierThresholds: (state) => state.classifierThresholds,
 		getHasPredictionDetails: (state) => state.hasPredictionDetails,
 		getIsSorted: (state) => state.isSorted,
 		getUuidToIdxMapper: (state) => state.uuidToIdxMapper,
 		getLastSortKey: (state) => state.lastSortKey,
 		getSortDirectionReversed: (state) => state.sortDirectionReversed,
-		getAddTimeSeriesData: (state) => state.addTimeSeriesData
+		getAddTimeSeriesData: (state) => state.addTimeSeriesData,
+		getPredictionType: (state) => state.predictionType
 
 	},
 	actions: {
@@ -160,7 +167,8 @@ export const useCbcStore = defineStore('cbcStore', {
 					RBC: Math.round(+items[6]*100)/100,
 					MCV: Math.round(+items[7]*100)/100,
 					PLT: Math.round(+items[8]*100)/100,
-					groundTruth: items.length > 9 ? +items[9] === 1 ? 'Sepsis' : 'Control' : undefined
+					groundTruth: items.length > 9 ? +items[9] === 1 ? 'Sepsis' : 'Control' : undefined,
+					shapType:"combined"
 				})
 			}
 		},
@@ -178,19 +186,14 @@ export const useCbcStore = defineStore('cbcStore', {
 			const modalStore = useModalStore()
 			modalStore.setFilters(modalStore.getFilters.filter(filter => !["confidence"].includes(filter["filterKey"])))
 			const store = useCbcStore()
+			console.log(store.predictionType)
 			store.setIsLoading(true)
 			store.setHasPredictions(false)
 			const requestDate = new Date()
+			const data = store.getCbcMeasurements.map(c=> getCbcInformation(c))
 			console.log(`${requestDate.getHours()}:${requestDate.getMinutes()}:${requestDate.getSeconds()}:${requestDate.getMilliseconds()}`)
-			axios.post(SERVER_URL + 'get_pred', store.getCbcMeasurements.map(c=>({
-				age: c.age,
-				sex: c.sex,
-				HGB: c.HGB,
-				WBC: c.WBC,
-				RBC: c.RBC,
-				MCV: c.MCV,
-				PLT: c.PLT,
-			})))
+			const endpoint = store.predictionType === "prospective" ? ENDPOINT_PROSPECTIVE_PREDICTIONS : ENDPOINT_RETROSPECTIVE_PREDICTIONS
+			axios.post(endpoint, {data: data, classifier: "RandomForestClassifier"})
 				.then(function (response) {
 					store.setIsLoading(false)
 					store.setHasPredictions(true)
@@ -213,39 +216,6 @@ export const useCbcStore = defineStore('cbcStore', {
 		setHasPredictionDetails(value){
 			this.hasPredictionDetails = value
 		},
-		submitCbcMeasurementDetails(){
-			const store = useCbcStore()
-			store.setIsLoading(true)
-			store.setHasPredictionDetails(false)
-			console.time("details")
-			axios.post(SERVER_URL + 'get_pred_details', store.getCbcOverClassifiers.map(c=>({
-				age: c.age,
-				sex: c.sex,
-				HGB: c.HGB,
-				WBC: c.WBC,
-				RBC: c.RBC,
-				MCV: c.MCV,
-				PLT: c.PLT,
-			})))
-				.then(function (response) {
-					store.setIsLoading(false)
-					store.setHasPredictionDetails(true)
-					for(let i in response.data.prediction_details){
-						const cbc = store.getCbcOverClassifiers[i]
-						const prediction_detail = response.data.prediction_details[i]
-						cbc.pred = prediction_detail.prediction ? 'Sepsis' : 'Control'
-						cbc.classifier = prediction_detail.classifier_name
-						cbc.pred_proba = prediction_detail.pred_proba
-						const threshold = store.getClassifierThresholds[cbc.classifier]
-						cbc.confidence = Math.round(calculate_confidence_score(cbc.pred_proba, threshold)*10000)/100
-						cbc.chartData = {
-							labels: ["age", "sex", "HGB", "WBC", "RBC", "MCV", "PLT"],
-							datasets: [{ backgroundColor: prediction_detail.shap_values.map(s => s<= 0 ? "#2563eb" : "#dc2626"),fontColor:"white",data: prediction_detail.shap_values}]
-						}
-					}
-					console.timeEnd("details")
-				})
-		},
 		setClassifierNames(classifierNames){
 			this.classifierNames = classifierNames
 		},
@@ -255,33 +225,67 @@ export const useCbcStore = defineStore('cbcStore', {
 		async fetchClassifierNames(){
 			const store = useCbcStore()
 			store.setIsLoading(true)
-			const response = await axios.get(SERVER_URL + 'classifier_thresholds')
-			store.setClassifierNames(Object.keys(response.data))
-			store.setClassifierThresholds(response.data)
-			store.setIsLoading(false)
+			const classifier_endpoint = store.predictionType === "prospective" ? ENDPOINT_PROSPECTIVE_THRESHOLDS : ENDPOINT_RETROSPECTIVE_THRESHOLDS
+			try{
+				const response = await axios.get(classifier_endpoint)
+				store.setClassifierNames(Object.keys(response.data))
+				store.setClassifierThresholds(response.data)
+				store.setIsLoading(false)
+			}catch (e){
+				console.error(e)
+			}
 		},
 		setCbcOverClassifiers(newCbcOverClassifiers){
 			this.cbcOverClassifiers =newCbcOverClassifiers
 		},
-		submitCbcDetail(cbc){
+		submitCbcDetail(selected_cbc, classifier = "RandomForestClassifier"){
 			const store = useCbcStore()
 			store.setIsLoading(true)
-			axios.post(SERVER_URL + 'get_pred_detail', cbc)
+			const endpoint = store.predictionType === "prospective" ? ENDPOINT_PROSPECTIVE_PREDICTION_DETAILS : ENDPOINT_RETROSPECTIVE_PREDICTION_DETAILS
+			const associatedCbcs = store.cbcMeasurements.filter(cbc => cbc.patientId === selected_cbc.patientId)
+			const associatedUuids = associatedCbcs.map(cbc => cbc.id)
+			const selectedCbcIdx = associatedUuids.indexOf(selected_cbc.id)
+			const data = associatedCbcs.map(cbc => getCbcInformation(cbc))
+			axios.post(endpoint, {data: data, classifier: classifier})
 				.then(function (response) {
 					store.setIsLoading(false)
-					for(let i in response.data.prediction_details){
-						const prediction_detail = response.data.prediction_details[0]
-						cbc.pred = prediction_detail.prediction ? 'Sepsis' : 'Control'
-						cbc.classifier = prediction_detail.classifier_name
-						cbc.pred_proba = prediction_detail.pred_proba
-						const threshold = store.getClassifierThresholds[cbc.classifier]
-						cbc.confidence = Math.round(calculate_confidence_score(cbc.pred_proba, threshold)*10000)/100
-						cbc.chartData = {
-							labels: ["age", "sex", "HGB", "WBC", "RBC", "MCV", "PLT"],
-							datasets: [{ backgroundColor: prediction_detail.shap_values.map(s => s<= 0 ? "#2563eb" : "#dc2626"),fontColor:"white",data: prediction_detail.shap_values}]
-						}
+					const prediction_detail = response.data.prediction_detail
+					selected_cbc.pred = prediction_detail.predictions[selectedCbcIdx] ? 'Sepsis' : 'Control'
+					// selected_cbc.classifier = prediction_detail.classifier_name
+					selected_cbc.pred_proba = prediction_detail.pred_probas[selectedCbcIdx]
+					const threshold = store.getClassifierThresholds[classifier]
+					selected_cbc.confidence = Math.round(calculate_confidence_score(selected_cbc.pred_proba, threshold)*10000)/100
+					const shap_values_comb = Array.isArray(prediction_detail.shap_values_list["combined"][0])  ? prediction_detail.shap_values_list["combined"][selectedCbcIdx] : prediction_detail.shap_values_list["combined"]
+					const shap_values_time = Array.isArray(prediction_detail.shap_values_list["time"][0])  ? prediction_detail.shap_values_list["time"][selectedCbcIdx] : prediction_detail.shap_values_list["time"]
+					const shap_values_origin = Array.isArray(prediction_detail.shap_values_list["original"][0])  ? prediction_detail.shap_values_list["original"][selectedCbcIdx] : prediction_detail.shap_values_list["original"]
+					const labels = ["age", "sex", "HGB", "WBC", "RBC", "MCV", "PLT"]
+					selected_cbc.chartData = {}
+					selected_cbc.chartData["combined"] = {
+						labels: labels,
+						datasets: [{ backgroundColor: shap_values_comb.map(s => s<= 0 ? "#2563eb" : "#dc2626"),fontColor:"white",data: shap_values_comb}]
+					}
+					selected_cbc.chartData["time"] = {
+						labels: labels,
+						datasets: [{ backgroundColor: shap_values_time.map(s => s<= 0 ? "#2563eb" : "#dc2626"),fontColor:"white",data: shap_values_time}]
+					}
+					selected_cbc.chartData["original"] = {
+						labels: labels,
+						datasets: [{ backgroundColor: shap_values_origin.map(s => s<= 0 ? "#2563eb" : "#dc2626"),fontColor:"white",data: shap_values_origin}]
 					}
 				})
+		},
+		async submitCbcMeasurementDetails(){
+			const store = useCbcStore()
+			store.setIsLoading(true)
+			store.setHasPredictionDetails(false)
+			console.time("details")
+
+			for(let i in this.cbcOverClassifiers){
+				const selectedCbc = this.cbcOverClassifiers[i]
+				await this.submitCbcDetail(selectedCbc, selectedCbc.classifier)
+				console.log(selectedCbc)
+			}
+			console.log(this.cbcOverClassifiers)
 		},
 		setIsSorted(value){
 			this.isSorted = value
@@ -321,6 +325,26 @@ export const useCbcStore = defineStore('cbcStore', {
 		setAddTimeSeriesData(val){
 			this.addTimeSeriesData = val
 			this.sortKey = "patientId"
+		},
+		setPredictionType(val){
+			this.predictionType = val
+			this.fetchClassifierNames()
+		},
+		initializeCbcOverClassifiers(){
+			const route = useRoute()
+			if(route.params.id === undefined) return []
+			this.cbcOverClassifiers = []
+			const classifiers = this.classifierNames
+			const selectedCbc = this.cbcMeasurements.find(cbc => cbc.id === route.params.id)
+			for(const classifier of classifiers){
+				const copySelectedCbc = {...selectedCbc}
+				copySelectedCbc.pred_proba = undefined
+				copySelectedCbc.pred = undefined
+				copySelectedCbc.confidence = undefined
+				copySelectedCbc.classifier = classifier
+				this.cbcOverClassifiers.push(copySelectedCbc)
+			}
+
 		}
 	},
 })

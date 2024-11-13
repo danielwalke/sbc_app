@@ -11,6 +11,7 @@ export const DEFAULT_CBC = {
     groundTruth: undefined,
     pred: undefined,
     pred_proba: undefined,
+    shapType: "combined"
 
 }
 

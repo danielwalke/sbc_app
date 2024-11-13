@@ -15,12 +15,15 @@
 							@input="event => valueInput(event, cbc, cbcKey)" @change="event => valueInput(event, cbc, cbcKey)"/>
 					</td>
 					<td class="non-editable">{{cbc.groundTruth === undefined ? 'Unknown' : cbc.groundTruth}}</td>
-
 					<td class="non-editable">{{cbc.confidence === undefined ? 'Unclassified' : getConfidenceString(cbc.confidence)}}</td>
 					<td class="non-editable">{{cbc.classifier}}</td>
 
-					<td class="col-span-2" v-if="hasPredictionDetails"></td>
-					<Chart :cbc="cbc" v-if="hasPredictionDetails"/>
+          <div class="col-span-2 flex flex-col gap-2 pt-0 pb-2 pl-2 pr-2">
+            <button class="h-14" @click="()=> cbc.shapType = 'combined'" :class="cbc.shapType === 'combined' ? '' : 'bg-gray-700 hover:bg-gray-600' ">combined</button>
+            <button class="h-14" @click="()=> cbc.shapType = 'original'" :class="cbc.shapType === 'original' ? '' : 'bg-gray-700 hover:bg-gray-600' ">Sample</button>
+            <button class="h-14" @click="()=> cbc.shapType = 'time'" :class="cbc.shapType === 'time' ? '' : 'bg-gray-700 hover:bg-gray-600' ">Time</button>
+          </div>
+          <Chart  :cbc="cbc" :shap-type="cbc.shapType"/>
 				</tr>
 				</tbody>
 			</table>
@@ -34,7 +37,7 @@ import {editableCbcKeys} from "../../lib/TableGrid.js"
 import {useCbcStore} from "../../stores/CbcStore.js";
 import {computed, onMounted, watch, ref} from "vue";
 import {useRoute, useRouter} from "vue-router";
-import TableHeader from "../input/TableHeader.vue";
+import TableHeader from "../header/input/TableHeader.vue";
 import SubmitButton from "../results/SubmitButton.vue";
 import Chart from "../chart/Chart.vue";
 import Back from "../navigation/Back.vue";
@@ -42,12 +45,13 @@ import Back from "../navigation/Back.vue";
 const router = useRouter()
 const route = useRoute()
 const cbcStore = useCbcStore()
+cbcStore.initializeCbcOverClassifiers()
 cbcStore.setHasPredictionDetails(false)
 const hasPredictionDetails = computed(()=> cbcStore.getHasPredictionDetails)
 
 function type(cbcKey){return cbcKey === "sex" ? "text" : "number"}
 
-const cbcOverClassifiers =ref(cbcStore.getCbcOverClassifiers)
+const cbcOverClassifiers = computed(()=> cbcStore.getCbcOverClassifiers) // ref(cbcStore.getCbcOverClassifiers)
 
 const cbcOverClassifiersComputed =computed(()=> cbcStore.getCbcOverClassifiers)
 
