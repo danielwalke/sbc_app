@@ -45,7 +45,7 @@
 
 <script setup>
 import {ref, onMounted, onBeforeUnmount, computed} from 'vue'
-import {useCbcStore} from "../../stores/CbcStore.js";
+import {useCbcStore} from "../../../lib/stores/CbcStore.js";
 
 const props = defineProps({
   options: {

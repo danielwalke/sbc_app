@@ -1,11 +1,15 @@
 import { defineStore } from 'pinia'
 import {useCbcStore} from "./CbcStore.js";
 
-
-
 export const useModalStore = defineStore('modal', {
-	state: () => ({ isHelpModalOpen: false, headerContent: undefined, helpMainContent: undefined,
-	isFilterModalOpen: false, filterKey: undefined, filters: [], isInputModelOpen: false}),
+	state: () => ({
+		isHelpModalOpen: false,
+		headerContent: undefined,
+		helpMainContent: undefined,
+		isFilterModalOpen: false,
+		filterKey: undefined,
+		filters: [],
+		isInputModelOpen: false}),
 	getters: {
 		getHeaderContent: (state) => state.headerContent,
 		getHelpMainContent: (state) => state.helpMainContent,
@@ -66,9 +70,7 @@ export const useModalStore = defineStore('modal', {
 			this.filters = value
 		},
 		addSelectedItemToFilter(item){
-
 			let filter = this.getFilters.find(filter => filter["filterKey"] === this.getFilterKey)
-
 			if(filter === undefined) {
 				filter = {
 					filterKey: this.getFilterKey,
@@ -80,7 +82,6 @@ export const useModalStore = defineStore('modal', {
 				return this.filters.push(filter)
 			}
 			filter["filterItems"].push(item)
-
 		},
 		removeItemFromFilter(itemToDelete){
 			let filter = this.getFilters.find(filter => filter["filterKey"] === this.getFilterKey)

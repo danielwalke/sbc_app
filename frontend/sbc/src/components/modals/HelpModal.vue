@@ -37,7 +37,7 @@
 </template>
 
 <script setup lang="js">
-import {useModalStore} from "../../stores/ModalStore.js";
+import {useModalStore} from "../../lib/stores/ModalStore.js";
 import {computed} from "vue";
 
 const store = useModalStore()
@@ -52,10 +52,4 @@ function close(){
 </script>
 
 <style scoped>
-.centered-div {
-	position: absolute;
-	top: 50%;
-	left: 50%;
-	transform: translate(-50%, -50%);
-}
 </style>

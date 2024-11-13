@@ -47,13 +47,13 @@
 </template>
 
 <script setup lang="js">
-import {DEFAULT_CBC, UNITS_DICT} from "../../../lib/constants/CBC_Constants.js";
+import {UNITS_DICT} from "../../../lib/constants/CBC_Constants.js";
 import {computed} from "vue";
 import {editableCbcKeys} from "../../../lib/TableGrid.js"
 import Help from "../../icons/Help.vue";
 import Filter from "../../icons/Filter.vue";
-import {useModalStore} from "../../../stores/ModalStore.js";
-import {useCbcStore} from "../../../stores/CbcStore.js";
+import {useModalStore} from "../../../lib/stores/ModalStore.js";
+import {useCbcStore} from "../../../lib/stores/CbcStore.js";
 import {CBC_KEY_TO_DESCRIPTION} from "../../../lib/constants/CBCDescriptions.js";
 import ChevoronUp from "../../icons/ChevoronUp.vue";
 import ChevronDown from "../../icons/ChevronDown.vue";

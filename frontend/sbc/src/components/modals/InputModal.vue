@@ -40,9 +40,9 @@
 <script setup lang="js">
 import FileInput from "../header/input/FileInput.vue";
 import {DEFAULT_CBC} from "../../lib/constants/CBC_Constants.js";
-import {useCbcStore} from "../../stores/CbcStore.js";
+import {useCbcStore} from "../../lib/stores/CbcStore.js";
 import {computed} from "vue";
-import {useModalStore} from "../../stores/ModalStore.js";
+import {useModalStore} from "../../lib/stores/ModalStore.js";
 
 
 const store = useCbcStore()

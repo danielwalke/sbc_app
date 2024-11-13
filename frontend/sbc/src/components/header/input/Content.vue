@@ -7,7 +7,7 @@
 					v-for="(cbc, idx) in filteredCbcs" :id="idx">
 				<td v-for="cbcKey in editableCbcKeys" class="flex justify-center items-center flex-col h-fit">
 					<input
-						class="p-2 rounded-md w-full w-32 text-right text-black" :value="cbc[cbcKey]"
+						class="p-2 rounded-md w-full text-right text-black" :value="cbc[cbcKey]"
 						:type="type(cbcKey)"
 						:placeholder="cbcKey"
 						@input="event => valueInput(event, cbc, cbcKey)" @change="event => valueInput(event, cbc, cbcKey)"/>
@@ -16,11 +16,7 @@
 				<td class="non-editable w-full">{{cbc.confidence === undefined ? 'Unclassified' : getConfidenceString(cbc.confidence)}}</td>
 				<td><Details :fun="()=>handleDetails(cbc)"/></td>
 				<td class="grid-container " style="grid-column: span 12" v-if="cbc.chartData">
-					<div class="col-span-2 flex flex-col gap-2 pt-0 pb-2 pl-2 pr-2">
-            <button class="h-14" @click="()=> cbc.shapType = 'combined'" :class="cbc.shapType === 'combined' ? '' : 'bg-gray-700 hover:bg-gray-600' ">combined</button>
-            <button class="h-14" @click="()=> cbc.shapType = 'original'" :class="cbc.shapType === 'original' ? '' : 'bg-gray-700 hover:bg-gray-600' ">Sample</button>
-            <button class="h-14" @click="()=> cbc.shapType = 'time'" :class="cbc.shapType === 'time' ? '' : 'bg-gray-700 hover:bg-gray-600' ">Time</button>
-          </div>
+					<ChartSelection :cbc="cbc"/>
 					<Chart  :cbc="cbc" :shap-type="cbc.shapType"/>
 					<div class="col-span-2"></div>
 					<div><List :fun="()=>handleShowClassifiers(cbc)"/></div>
@@ -34,46 +30,30 @@
 </template>
 
 <script setup>
-import {chartOptions} from "../../../lib/constants/ChartOptions.js";
 import {computed, ref, onBeforeMount, onUnmounted} from "vue";
 import {editableCbcKeys} from "../../../lib/TableGrid.js"
 import Details from "../../icons/Details.vue";
-import {useCbcStore} from "../../../stores/CbcStore.js";
-import {router} from "../../../router/Router.js";
+import {useCbcStore} from "../../../lib/stores/CbcStore.js";
+import {router} from "../../../lib/router/Router.js";
 import TableHeader from "./TableHeader.vue";
 import Chart from "../../chart/Chart.vue";
 import List from "../../icons/List.vue";
-
-const options = chartOptions
+import ChartSelection from "../../chart/ChartSelection.vue";
+import {updateScreenHeight} from "../../../lib/responsive/HeightRegularization.js";
+import {submitCbcDetail} from "../../../lib/api/CBCDetails.js";
 
 function type(cbcKey){return cbcKey === "sex" ? "text" : "number"}
 
 const screenHeight = ref(window.innerHeight)
 const screenWidth = ref(window.innerWidth)
 const maxHeight = ref(85)
-updateScreenHeight()
-function updateScreenHeight(){
-	if(screenHeight.value <= 700){
-		return maxHeight.value = 60
-	}
-	if(screenHeight.value <= 850){
-		return maxHeight.value = 70
-	}
-	if(screenHeight.value <= 1000){
-		return maxHeight.value = 75
-	}
-	if(screenHeight.value <= 1200){
-		return maxHeight.value = 80
-	}
-	if(screenHeight.value <= 1300){
-		return maxHeight.value = 85
-	}
-}
+
+updateScreenHeight(screenHeight, maxHeight)
 
 function screenSizeHandler(){
 	screenHeight.value = window.innerHeight
 	screenWidth.value = window.innerWidth
-	updateScreenHeight()
+	updateScreenHeight(screenHeight, maxHeight)
 }
 
 onBeforeMount(()=>{
@@ -83,7 +63,6 @@ onUnmounted(()=>{
 	window.removeEventListener("resize", screenSizeHandler);
 })
 const store = useCbcStore()
-const has_predictions = computed(()=>store.has_predictions)
 const upperLimit = ref(50)
 const lowerLimit = ref(0)
 
@@ -119,7 +98,7 @@ function updateViewPort(){
 
 async function handleDetails(cbc){
 	store.setHasPredictions(true)
-	store.submitCbcDetail(cbc)
+	await submitCbcDetail(cbc)
 }
 
 
@@ -138,8 +117,4 @@ function getConfidenceString(percent){
 </script>
 
 <style scoped>
-
-.custom-content-height{
-	max-height: calc(100% - 156px - 56px - 144px);
-}
 </style>

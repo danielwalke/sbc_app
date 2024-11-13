@@ -17,12 +17,7 @@
 					<td class="non-editable">{{cbc.groundTruth === undefined ? 'Unknown' : cbc.groundTruth}}</td>
 					<td class="non-editable">{{cbc.confidence === undefined ? 'Unclassified' : getConfidenceString(cbc.confidence)}}</td>
 					<td class="non-editable">{{cbc.classifier}}</td>
-
-          <div class="col-span-2 flex flex-col gap-2 pt-0 pb-2 pl-2 pr-2">
-            <button class="h-14" @click="()=> cbc.shapType = 'combined'" :class="cbc.shapType === 'combined' ? '' : 'bg-gray-700 hover:bg-gray-600' ">combined</button>
-            <button class="h-14" @click="()=> cbc.shapType = 'original'" :class="cbc.shapType === 'original' ? '' : 'bg-gray-700 hover:bg-gray-600' ">Sample</button>
-            <button class="h-14" @click="()=> cbc.shapType = 'time'" :class="cbc.shapType === 'time' ? '' : 'bg-gray-700 hover:bg-gray-600' ">Time</button>
-          </div>
+          <ChartSelection :cbc="cbc"/>
           <Chart  :cbc="cbc" :shap-type="cbc.shapType"/>
 				</tr>
 				</tbody>
@@ -34,20 +29,19 @@
 
 <script setup lang="js">
 import {editableCbcKeys} from "../../lib/TableGrid.js"
-import {useCbcStore} from "../../stores/CbcStore.js";
-import {computed, onMounted, watch, ref} from "vue";
-import {useRoute, useRouter} from "vue-router";
+import {useCbcStore} from "../../lib/stores/CbcStore.js";
+import {computed, onMounted, watch} from "vue";
 import TableHeader from "../header/input/TableHeader.vue";
-import SubmitButton from "../results/SubmitButton.vue";
+import SubmitButton from "../submit/SubmitButton.vue";
 import Chart from "../chart/Chart.vue";
-import Back from "../navigation/Back.vue";
+import Back from "../header/navigation/Back.vue";
+import ChartSelection from "../chart/ChartSelection.vue";
+import {submitCbcClassifierDetails} from "../../lib/api/CBCClassifierDetails.js";
+import {initializeClassifiersCbcs} from "../../lib/classifierDetails/InitializeClassifierObjects.js";
 
-const router = useRouter()
-const route = useRoute()
 const cbcStore = useCbcStore()
-cbcStore.initializeCbcOverClassifiers()
+initializeClassifiersCbcs()
 cbcStore.setHasPredictionDetails(false)
-const hasPredictionDetails = computed(()=> cbcStore.getHasPredictionDetails)
 
 function type(cbcKey){return cbcKey === "sex" ? "text" : "number"}
 
@@ -75,7 +69,7 @@ onMounted(()=>{
 })
 
 function submitDetails(){
-	cbcStore.submitCbcMeasurementDetails()
+  submitCbcClassifierDetails()
 }
 
 function getConfidenceString(percent){

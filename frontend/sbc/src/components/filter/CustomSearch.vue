@@ -21,13 +21,13 @@
 </template>
 
 <script setup lang="js">
-import {useCbcStore} from "../../stores/CbcStore.js";
+import {useCbcStore} from "../../lib/stores/CbcStore.js";
 import {computed, ref, watch} from "vue";
 import Delete from "../icons/Delete.vue";
-import {useModalStore} from "../../stores/ModalStore.js";
+import {useModalStore} from "../../lib/stores/ModalStore.js";
 
 const searchField = ref("")
-watch(searchField, (value, oldValue, onCleanup)=>{
+watch(searchField, (value)=>{
 	if(value.includes(",")) searchField.value = searchField.value.replace(",", ".")
 })
 

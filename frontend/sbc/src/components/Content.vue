@@ -4,7 +4,7 @@
          v-for="(cbc, idx) in filteredCbcs" :id="idx">
       <div v-for="cbcKey in editableCbcKeys" class="flex justify-center items-center flex-col h-fit">
           <input
-              class="p-2 rounded-md w-full w-32 text-right text-black" :value="cbc[cbcKey]"
+              class="p-2 rounded-md w-full text-right text-black" :value="cbc[cbcKey]"
               :type="type(cbcKey)"
               :placeholder="cbcKey"
               @input="event => valueInput(event, cbc, cbcKey)" @change="event => valueInput(event, cbc, cbcKey)"/>
@@ -20,37 +20,37 @@
 </template>
 
 <script setup>
-import { Bar } from 'vue-chartjs'
-import {chartOptions} from "../lib/constants/ChartOptions.js";
 import {computed, onUpdated, ref, onBeforeUpdate} from "vue";
 import {editableCbcKeys} from "../lib/TableGrid.js"
 import Details from "./icons/Details.vue";
-import {useCbcStore} from "../stores/CbcStore.js";
-import {router} from "../router/Router.js";
-
-const options = chartOptions
-
-function type(cbcKey){return cbcKey === "sex" ? "text" : "number"}
+import {useCbcStore} from "../lib/stores/CbcStore.js";
+import {router} from "../lib/router/Router.js";
 
 const store = useCbcStore()
-const has_predictions = computed(()=>store.has_predictions)
 const upperLimit = ref(50)
 const lowerLimit = ref(0)
-
-function valueInput(event, cbc, cbcKey){
-	if(cbcKey === "sex") return cbc[cbcKey] = event.target.value
-	cbc[cbcKey] = +event.target.value
-}
 
 const filteredCbcs = computed(() =>{
   let preFilteredCbcs = [...store.getCbcMeasurements]
   return preFilteredCbcs.filter((cbc, i) => i <= upperLimit.value && i>= lowerLimit.value)
 })
 
-function getLink(id){
-	return `sbc_frontend/details/${id}`
+onBeforeUpdate(()=>{
+  console.log("Before Update")
+  console.time("RenderTime")
+})
+
+onUpdated(()=>{
+  console.timeEnd("RenderTime")
+  console.log("Updated")
+})
+
+function valueInput(event, cbc, cbcKey){
+	if(cbcKey === "sex") return cbc[cbcKey] = event.target.value
+	cbc[cbcKey] = +event.target.value
 }
 
+function type(cbcKey){return cbcKey === "sex" ? "text" : "number"}
 
 function isInViewport(element) {
   const rect = element.getBoundingClientRect();
@@ -74,14 +74,7 @@ async function handleDetails(cbc){
 	await router.push(`/sbc_frontend/details/${cbc.id}`)
 }
 
-onBeforeUpdate(()=>{
-	console.log("Before Update")
-	console.time("RenderTime")
-})
-onUpdated(()=>{
-	console.timeEnd("RenderTime")
-	console.log("Updated")
-})
+
 </script>
 
 <style scoped>

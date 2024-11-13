@@ -47,7 +47,7 @@
   active: 'slider-active shadow-slider-active cursor-grabbing',
   draggable: 'cursor-ew-resize v:cursor-ns-resize',
   tap: 'slider-state-tap',
-  drag: 'slider-state-drag',
+  drag: 'slider-state-drag'
 }"/>
 					</div>
 					<CustomSearch/>
@@ -64,9 +64,9 @@
 </template>
 
 <script setup lang="js">
-import {useModalStore} from "../../stores/ModalStore.js";
-import {computed, onMounted, onUpdated, ref, watch} from "vue";
-import {useCbcStore} from "../../stores/CbcStore.js";
+import {useModalStore} from "../../lib/stores/ModalStore.js";
+import {computed, ref, watch} from "vue";
+import {useCbcStore} from "../../lib/stores/CbcStore.js";
 import Slider from '@vueform/slider'
 import CustomSearch from "../filter/CustomSearch.vue";
 import Toggler from "../filter/Toggler.vue";
@@ -151,7 +151,7 @@ watch(selectedValue, (newSelectedValue) => {
 	}
 })
 
-watch(filterKey, (newFilterKey) => {
+watch(filterKey, () => {
 
 	const filter = store.getFilters.find(filter => filter["filterKey"] === store.getFilterKey)
 	if(filter === undefined) {

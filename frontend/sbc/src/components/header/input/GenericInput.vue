@@ -5,7 +5,7 @@
 </template>
 
 <script setup lang="js">
-import {useModalStore} from "../../../stores/ModalStore.js";
+import {useModalStore} from "../../../lib/stores/ModalStore.js";
 
 const modalStore = useModalStore()
 function open(){

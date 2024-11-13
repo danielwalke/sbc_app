@@ -1,6 +1,6 @@
 <script setup lang="js">
 import {computed, ref} from 'vue'
-import {useCbcStore} from "../../stores/CbcStore.js";
+import {useCbcStore} from "../../lib/stores/CbcStore.js";
 import Help from "../icons/Help.vue";
 import LiddleClose from "../icons/LiddleClose.vue";
 

@@ -35,7 +35,7 @@
 
 <script setup lang="js">
 import {editableCbcKeys} from "../../lib/TableGrid.js"
-import {useCbcStore} from "../../stores/CbcStore.js";
+import {useCbcStore} from "../../lib/stores/CbcStore.js";
 import {computed} from "vue";
 import TableHeader from "../header/input/TableHeader.vue";
 

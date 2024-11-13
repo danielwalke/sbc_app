@@ -6,14 +6,15 @@
 </template>
 
 <script setup>
-import {useCbcStore} from "../../../stores/CbcStore.js";
-import {useModalStore} from "../../../stores/ModalStore.js";
+import {useCbcStore} from "../../../lib/stores/CbcStore.js";
+import {useModalStore} from "../../../lib/stores/ModalStore.js";
+import {readCbcFile} from "../../../lib/input/FileReader.js";
 
 const store = useCbcStore()
 const modalStore = useModalStore()
 function onFileInputChange(e) {
 	const file = e.target.files[0]
-	store.readCbcFile(file)
+	readCbcFile(file)
 	modalStore.setIsInputModalOpen(false)
 }
 </script>

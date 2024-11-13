@@ -38,7 +38,6 @@ ADD_PATH = "/sbc"
 
 @app.on_event("startup")
 async def startup_event():
-    print("Startup")
     data = pd.read_csv(r"./extdata/sbcdata.csv", header=0)
     data_analysis = DataAnalysis(data)
     training_data = data_analysis.get_training_data()
@@ -96,14 +95,10 @@ async def startup_event():
         "RandomForestClassifier": shap.TreeExplainer(app.state.prospective_models["RandomForestClassifier"]),
         "XGBClassifier": shap.TreeExplainer(app.state.prospective_models["XGBClassifier"]),
     }
-    print("Startup finished")
-
-
 
 @app.get(ADD_PATH)
 def read_root():
     return {"Hello": "World"}
-
 
 @app.get(ADD_PATH + "/classifier_thresholds_retrospective")
 async def get_classifier_thresholds_retrospective():
@@ -112,26 +107,6 @@ async def get_classifier_thresholds_retrospective():
 @app.get(ADD_PATH + "/classifier_thresholds_prospective")
 async def get_classifier_thresholds_prospective():
     return app.state.prospective_thresholds
-#
-# @app.post(ADD_PATH + "/get_pred/")
-# async def get_pred(cbc_items: list[CBC]) -> OutPrediction:
-#     print(datetime.now())
-#     prediction = Prediction(cbc_items, app.state.model, app.state.classifier_thresholds)
-#     return prediction.get_output()
-#
-#
-# @app.post(ADD_PATH + "/get_pred_details/")
-# async def get_pred_details(cbc_items: list[CBC]) -> OutDetailsPredictions:
-#     prediction = DetailsPrediction(cbc_items, app.state.classifiers, app.state.classifier_thresholds,
-#                                    app.state.background_data)
-#     return prediction.get_output()
-#
-# @app.post(ADD_PATH + "/get_pred_detail/")
-# async def get_pred_detail(cbc_item: CBC) -> OutDetailsPredictions:
-#     prediction = DetailsPrediction([cbc_item], [app.state.model], app.state.classifier_thresholds,
-#                                    app.state.background_data)
-#     return prediction.get_output()
-
 
 @app.post(ADD_PATH + "/get_graph_pred_prospective/")
 async def get_graph_pred_prospective(in_prediction: InGraphPrediction) -> OutPrediction:
