@@ -25,5 +25,8 @@ class DetailsPredictionGraph:
 
     def get_retrospective_output(self):
         print(f"Start prediction for retrospective analysis")
-        raise Exception("TODO")
-        pass
+        prediction = GraphPredictionDetails(self.graph_cbc_items, self.model, self.threshold, self.explainer)
+        out_details_prediction: OutGraphDetailsPredictions = prediction.get_detailed_retrospective_output()
+        out_details_prediction.set_classifier_name(f"retrospective_{self.model.__class__.__name__}")
+        self.out_details_predictions.set_prediction_detail(out_details_prediction)
+        return self.out_details_predictions
