@@ -107,6 +107,8 @@ class GraphPrediction:
 
     def get_auroc(self):
         X, edge_index, y, original_index = self.get_graph()
+        if not np.isnan(y).any():
+            print(roc_auc_score(y[original_index], self.get_pred_proba()))
         return None if np.unique(y).shape[0] != 2 else roc_auc_score(y[original_index], self.get_pred_proba())
 
     def get_output(self):

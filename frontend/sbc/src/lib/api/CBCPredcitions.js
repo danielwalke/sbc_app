@@ -19,7 +19,6 @@ export async function submitCbcMeasurements(){
 
     const data = store.getCbcMeasurements.map(c=> getCbcInformation(c))
     const endpoint = store.predictionType === "prospective" ? ENDPOINT_PROSPECTIVE_PREDICTIONS : ENDPOINT_RETROSPECTIVE_PREDICTIONS
-
     axios.post(endpoint, {data: data, classifier: "RandomForestClassifier"})
         .then(function (response) {
             store.setIsLoading(false)

@@ -5,8 +5,8 @@ class CBC(BaseModel):
     age: float
     sex: str
     HGB: float
-    RBC: float
     WBC: float
+    RBC: float
     MCV: float
     PLT: float
     ground_truth: Optional[int]

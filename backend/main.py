@@ -42,7 +42,7 @@ async def startup_event():
     data_analysis = DataAnalysis(data)
     training_data = data_analysis.get_training_data()
     ##TODO increase background data size
-    train_data_filtered = training_data.loc[:.1*training_data.shape[0],["Id", "Time", "Age", "Sex", "HGB", "RBC", "WBC", "MCV", "PLT", "Label"]]
+    train_data_filtered = training_data.loc[:.1*training_data.shape[0],["Id", "Time", "Age", "Sex", "HGB", "WBC","RBC", "MCV", "PLT", "Label"]]
     train_data_filtered["Label"] = train_data_filtered["Label"] == "Sepsis"
     train_data_filtered = train_data_filtered.rename(columns = {"Id": "id", "Time": "order", "Age": "age", "Sex": "sex", "Label": "ground_truth"})
     graph_cbc_items: List[GraphCBC] = [GraphCBC(**row) for row in train_data_filtered.to_dict(orient="records")]

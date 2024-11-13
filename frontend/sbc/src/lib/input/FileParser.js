@@ -6,6 +6,7 @@ export function parseFile(content){
     const filterStore = useModalStore()
     const cbcStore = useCbcStore()
     cbcStore.setHasPredictions(false)
+    cbcStore.setCbcMeasurements([])
     filterStore.setFilters([])
     const lines = content.split("\n")
     for(const lineIdx in lines){
