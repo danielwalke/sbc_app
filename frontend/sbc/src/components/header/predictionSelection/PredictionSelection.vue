@@ -1,9 +1,9 @@
 <template>
-  <div class="relative">
+  <div class="relative h-[56px]">
     <!-- Dropdown trigger button -->
     <button
         @click="toggleDropdown"
-        class="flex items-center justify-between w-48 px-4 py-2 bg-sky-700 text-white rounded-md shadow-sm hover:bg-sky-800 focus:outline-none focus:ring-2 focus:ring-sky-500 focus:ring-offset-2 transition-colors duration-200"
+        class="flex h-full items-center justify-between w-48 px-4 py-2 bg-sky-700 text-white rounded-md shadow-sm hover:bg-sky-800 focus:outline-none focus:ring-2 focus:ring-sky-500 focus:ring-offset-2 transition-colors duration-200"
         aria-haspopup="true"
         :aria-expanded="isOpen"
     >

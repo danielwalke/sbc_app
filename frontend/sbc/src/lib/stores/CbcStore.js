@@ -4,6 +4,7 @@ import { v4 as uuid } from 'uuid';
 import {sortData} from "../sorting/SortData.js";
 import {fetchClassifierNamesAndThresholds} from "../api/ClassifierInitialization.js";
 import {getCbcMeasurements} from "../filter/CBCMeasurements.js";
+import {submitCbcMeasurements} from "../api/CBCPredcitions.js";
 
 export const useCbcStore = defineStore('cbcStore', {
 	state: () => ({
@@ -92,6 +93,7 @@ export const useCbcStore = defineStore('cbcStore', {
 		async setPredictionType(val){
 			this.predictionType = val
 			await fetchClassifierNamesAndThresholds()
+			await submitCbcMeasurements()
 		}
 	},
 })
