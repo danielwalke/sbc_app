@@ -27,8 +27,8 @@ export const chartOptions = {
             grid: {
                 color: 'rgba(255,255,255, 0.3)', // Set font color for x-axis grid lines
             },
-            min: -1,
-            max: 1
+            /*min: -1,
+            max: 1*/
         },
     },
 }
