@@ -4,15 +4,17 @@ import torch
 import numpy as np
 
 class GraphPredictionDetails(GraphPrediction):
-    def __init__(self, cbc_items, model, thresholds, shap_explainer):
-        super().__init__(cbc_items, model, thresholds)
+    def __init__(self, cbc_items, model, thresholds, shap_explainer, standard_scaler):
+        super().__init__(cbc_items, model, thresholds, standard_scaler)
         self.shap_explainer = shap_explainer
 
     def get_shapley_values(self):
         features_origin,features_time  = self.get_features_list()
-        features= torch.cat([features_origin, features_time], dim = -1)
+        features= torch.cat([features_origin, features_time], dim = -1).cpu().numpy()
         explainer = self.shap_explainer
-        shap_values = explainer.shap_values(features.cpu().numpy())
+        if self.standard_scaler is not None:
+            features = self.standard_scaler.transform(features)
+        shap_values = explainer.shap_values(features)
         shap_values = np.array(shap_values)
         print(shap_values.shape)
         shap_values = shap_values.squeeze()

@@ -42,7 +42,7 @@ def get_reversed_edge_index(edge_index):
 
 
 class GraphPrediction:
-    def __init__(self, graph_cbc_items: list[GraphCBC], model, threshold):
+    def __init__(self, graph_cbc_items: list[GraphCBC], model, threshold, standard_scaler):
         self.graph_cbc_items: list[GraphCBC] = graph_cbc_items
         self.model = model
         hops = [0, 1]
@@ -52,11 +52,12 @@ class GraphPrediction:
                               handle_nan=0.0,
                               gpu_idx=0,
                               user_functions=[user_function for i in hops]
-                              )
+                        )
         self.framework.trained_clfs = model
         self.threshold = threshold
         self.graph = None
         self.pred_proba = None
+        self.standard_scaler = standard_scaler
 
     def construct_directed_graph(self):
         data = np.zeros((len(self.graph_cbc_items), 9 + 1))
@@ -90,6 +91,8 @@ class GraphPrediction:
         X, edge_index, _, original_index = self.get_graph()
         features_origin, features_time = self.framework.get_features(X, edge_index.type(torch.long), torch.ones(X.shape[0]).type(torch.bool))
         combined_features = torch.cat([features_origin, features_time], dim=-1)
+        if self.standard_scaler is not None:
+            combined_features = self.standard_scaler.transform(combined_features)
         self.pred_proba = self.model.predict_proba(combined_features)[original_index, 1]
 
     def get_graph(self):
@@ -107,7 +110,7 @@ class GraphPrediction:
 
     def get_auroc(self):
         X, edge_index, y, original_index = self.get_graph()
-        if not np.isnan(y).any():
+        if not np.isnan(y).any() and np.unique(y).shape[0] == 2:
             print(roc_auc_score(y[original_index], self.get_pred_proba()))
         return None if np.unique(y).shape[0] != 2 else roc_auc_score(y[original_index], self.get_pred_proba())
 
@@ -117,7 +120,10 @@ class GraphPrediction:
         print("Start classification")
         output.set_predictions(self.get_prediction().tolist())
         output.set_pred_probas(self.get_pred_proba().tolist())
-        output.set_auroc(self.get_auroc())
+        try:
+            output.set_auroc(self.get_auroc())
+        except:
+            print("Couldnt calculate auroc")
         print("Finished classification")
         return output
 
