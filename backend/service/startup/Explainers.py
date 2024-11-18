@@ -10,8 +10,7 @@ def get_background_data_cbc_items():
     data = pd.read_csv(r"./extdata/sbcdata.csv", header=0)
     data_analysis = DataAnalysis(data)
     training_data = data_analysis.get_training_data()
-    ##TODO increase background data size
-    train_data_filtered = training_data.loc[:.1 * training_data.shape[0],
+    train_data_filtered = training_data.loc[:.5 * training_data.shape[0],
                           ["Id", "Time", "Age", "Sex", "HGB", "WBC", "RBC", "MCV", "PLT", "Label"]]
     train_data_filtered["Label"] = train_data_filtered["Label"] == "Sepsis"
     train_data_filtered = train_data_filtered.rename(

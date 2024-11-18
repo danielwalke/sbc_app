@@ -24,7 +24,7 @@
 		</th>
 		<th class="grid-item" >
 			<div class="header-item">
-				<div class="flex gap-2 text-center hover:cursor-pointer" @click="()=> sortData('confidence')">Sepsis score
+				<div class="flex gap-2 text-center hover:cursor-pointer" @click="()=> sortData('confidence')">Sepsis risk
 					<ChevoronUp v-if="sortKey === 'confidence' && !sortDirectionReversed"/>
 					<ChevronDown v-if="sortKey === 'confidence' && sortDirectionReversed"/>
 				</div>
