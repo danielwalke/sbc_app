@@ -32,13 +32,16 @@ async function uploadTest() {
 </script>
 
 <template>
-  <div class="flex justify-center items-center gap-4 pb-4">
-    <Home/>
-    <GenericInput/>
-    <button class="rounded-md shadow-md hover:scale-105 p-4 bg-sky-700 cursor-pointer hover:bg-sky-600" @click="uploadTest">Test</button>
-    <button class="rounded-md shadow-md hover:scale-105 p-4 bg-sky-700 cursor-pointer hover:bg-sky-600" v-if="hasFilters" @click="resetFilters">Reset Filter</button>
-    <PredictionSelection :options="predictionTypes"/>
-    <div class="bg-gray-600 p-4 rounded-md">Samples count: {{cbc_counts}}</div>
+  <div class=" w-full overflow-x-scroll sm:overflow-x-hidden">
+    <div class="flex justify-center items-center gap-4 pb-4 min-w-max flex-wrap pl-4 pr-4">
+      <Home/>
+      <GenericInput/>
+      <button class="rounded-md shadow-md hover:scale-105 p-4 bg-sky-700 cursor-pointer hover:bg-sky-600" @click="uploadTest">Test</button>
+      <button class="rounded-md shadow-md hover:scale-105 p-4 bg-sky-700 cursor-pointer hover:bg-sky-600" v-if="hasFilters" @click="resetFilters">Reset Filter</button>
+      <PredictionSelection :options="predictionTypes"/>
+      <div class="bg-gray-600 p-4 rounded-md">Samples count: {{cbc_counts}}</div>
+    </div>
+
   </div>
 </template>
 

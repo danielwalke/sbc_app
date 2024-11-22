@@ -3,7 +3,7 @@
 	<tr class="grid-container">
 		<th v-for="cbcKey in editableCbcKeys" class="grid-item">
 			<div class="header-item pt-2">
-				<div class="flex gap-2 text-center hover:cursor-pointer" @click="()=> sortData(cbcKey)">{{cbcKey}}
+				<div class="flex gap-2 text-center hover:cursor-pointer" @click="()=> sortData(cbcKey)">{{getCbcLabel(cbcKey)}}
 					<ChevoronUp v-if="sortKey === cbcKey && !sortDirectionReversed"/>
 					<ChevronDown v-if="sortKey === cbcKey && sortDirectionReversed"/>
 				</div>
@@ -92,6 +92,11 @@ function getFilterClass(cbcKey){
 
 function sortData(cbcKey){
 	cbcStore.sortData(cbcKey)
+}
+
+function getCbcLabel(cbcKey){
+  if(cbcKey === "order") return "time"
+  return cbcKey
 }
 </script>
 

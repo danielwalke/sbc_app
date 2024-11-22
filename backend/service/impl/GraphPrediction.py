@@ -62,8 +62,10 @@ class GraphPrediction:
     def construct_directed_graph(self):
         data = np.zeros((len(self.graph_cbc_items), 9 + 1))
         y = np.zeros((len(self.graph_cbc_items)))
+        columns = ["id", "order","ground_truth", "age", "categorical_sex", "HGB", "WBC", "RBC", "MCV", "PLT"]
         for i, cbc_item in enumerate(self.graph_cbc_items):
             categorical_sex = 1 if cbc_item.sex == "W" else 0
+
             cbc_array = [cbc_item.id, cbc_item.order, cbc_item.ground_truth, cbc_item.age, categorical_sex,
                          cbc_item.HGB, cbc_item.WBC,
                          cbc_item.RBC, cbc_item.MCV,
@@ -76,6 +78,7 @@ class GraphPrediction:
         original_index = np.argsort(data.index)
         data = data.reset_index(drop=True)
         edge_index = get_edge_index(data)
+
         self.graph = {
             "X": data.values[:, 3:],
             "edge_index": edge_index,

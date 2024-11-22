@@ -16,7 +16,10 @@ export async function submitCbcDetail(selected_cbc, classifier = "RandomForestCl
     const associatedUuids = associatedCbcs.map(cbc => cbc.id)
     const selectedCbcIdx = associatedUuids.indexOf(selected_cbc.id)
     const data = associatedCbcs.map(cbc => getCbcInformation(cbc))
-    axios.post(endpoint, {data: data, classifier: classifier})
+    console.log({data: data, classifier: classifier})
+    axios.post(endpoint, {data: data, classifier: classifier},{
+        timeout: 10000 // Timeout set to 10 seconds
+    })
         .then(function (response) {
             store.setIsLoading(false)
             const prediction_detail = response.data.prediction_detail

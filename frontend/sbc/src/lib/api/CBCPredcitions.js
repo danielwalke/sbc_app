@@ -29,8 +29,6 @@ export async function submitCbcMeasurements(){
                 cbc.pred_proba = response.data.pred_probas[i]
                 cbc.confidence = Math.round(calculate_confidence_score(cbc.pred_proba, store.getClassifierThresholds["RandomForestClassifier"])*10000)/100
             }
-        })
-        .then(()=>{
             const cbcsWithDetails = store.getCbcMeasurements.filter(cbc => cbc.chartData)
             for(const cbc of cbcsWithDetails){
                 submitCbcDetail(cbc)
