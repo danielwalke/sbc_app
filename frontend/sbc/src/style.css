@@ -6,7 +6,6 @@
   line-height: 1.5;
   font-weight: 400;
 
-  color-scheme: light dark;
   color: rgba(255, 255, 255, 0.87);
   background-color: #242424;
 
@@ -35,14 +34,14 @@ button, label, .grid-item{
 .grid-container {
   display: grid;
   grid-template-columns: repeat(12, minmax(0, 1fr));
-  gap: 1rem;
+  @apply gap-1 md:gap-2 lg:gap-4
 }
 
 td{
-  min-width: 5rem;
   text-overflow: ".";
   overflow: hidden;
   white-space: nowrap;
+  @apply min-w-20
 }
 
 td{
@@ -56,11 +55,11 @@ td{
 }
 
 input{
-  @apply min-w-20 bg-white
+  @apply bg-white
 }
 
 button{
-  @apply rounded-md shadow-md hover:scale-105 p-4 bg-sky-700 cursor-pointer hover:bg-sky-600
+  @apply rounded-md shadow-md hover:scale-105 p-4 bg-sky-700 cursor-pointer hover:bg-sky-600 text-xs md:text-sm lg:text-base
 }
 
 .autoCompleteItem{
@@ -68,7 +67,7 @@ button{
 }
 
 .non-editable{
-  @apply p-2 bg-gray-600 rounded-md text-center select-none
+  @apply bg-gray-600 rounded-md text-center select-none p-[.25rem] lg:p-2
 }
 
 .custom-content-height{

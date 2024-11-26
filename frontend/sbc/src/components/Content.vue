@@ -85,6 +85,6 @@ async function handleDetails(cbc){
 }
 
 .custom-content-height{
-	max-height: calc(100% - 156px - 56px - 56px);
+	max-height: calc(97% - 156px - 56px - 56px);
 }
 </style>

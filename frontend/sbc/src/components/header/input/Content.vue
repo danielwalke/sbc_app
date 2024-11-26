@@ -1,13 +1,13 @@
 <template>
 	<div class="w-full overflow-x-auto " @scroll="updateViewPort" :style="`max-height: ${maxHeight}%`">
-		<table class="table-auto min-w-[1300px] h-full relative">
+		<table class="table-auto min-w-[1300px] h-full relative text-xs md:text-sm lg:text-base">
 			<TableHeader :is-detail-page="false"/>
-			<tbody class="w-full overflow-x-auto pb-2 pt-2 block" >
-			<tr class="grid leading-6 pt-2 gap-4 grid-container mb-2" :class="cbc.chartData ? ' ' : ''"
+			<tbody class="w-full overflow-x-auto p-[.25rem] lg:pb-2 lg:pt-2 block" >
+			<tr class="grid leading-6 pt-2 grid-container mb-2" :class="cbc.chartData ? ' ' : ''"
 					v-for="(cbc, idx) in filteredCbcs" :id="idx">
 				<td v-for="cbcKey in editableCbcKeys" class="flex justify-center items-center flex-col h-fit">
 					<input
-						class="p-2 rounded-md w-full text-right text-black" :value="cbc[cbcKey]"
+						class="p-[.33rem] lg:p-2 rounded-md w-full text-right text-black" :value="cbc[cbcKey]"
 						:type="type(cbcKey)"
 						:placeholder="cbcKey"
 						@input="event => valueInput(event, cbc, cbcKey)" @change="event => valueInput(event, cbc, cbcKey)"/>
