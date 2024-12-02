@@ -46,18 +46,16 @@
 <script setup>
 import {ref, onMounted, onBeforeUnmount, computed} from 'vue'
 import {useCbcStore} from "../../../lib/stores/CbcStore.js";
+import {predictionTypes} from "../../../lib/constants/PredcitionTypes.js";
 
 const props = defineProps({
-  options: {
-    type: Array,
-    required: true,
-  },
   placeholder: {
     type: String,
     default: 'Select an option'
   }
 })
 
+const options = predictionTypes
 const emit = defineEmits(['select'])
 const store = useCbcStore()
 
@@ -84,8 +82,8 @@ const handleClickOutside = (event) => {
 onMounted(() => {
   document.addEventListener('click', handleClickOutside)
   selectOption({
-    "label": "prospective",
-    "value": "prospective",
+    "label": "standard",
+    "value": "standard",
   })
 })
 

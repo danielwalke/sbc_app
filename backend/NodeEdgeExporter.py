@@ -56,7 +56,6 @@ def export_csv_data_for_neo4j():
     for set_type in ['train', 'test', 'val']:
 
         offset = export_csv_data_for_neo4j_by_set_type(set_type, offset)
-        break
 
 
 if __name__ == '__main__':

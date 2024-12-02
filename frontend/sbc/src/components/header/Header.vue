@@ -1,6 +1,5 @@
 <script setup>
 
-import {predictionTypes} from "../../lib/constants/PredcitionTypes.js";
 import Home from "./navigation/Home.vue";
 import GenericInput from "./input/GenericInput.vue";
 import PredictionSelection from "./predictionSelection/PredictionSelection.vue";
@@ -38,7 +37,7 @@ async function uploadTest() {
       <GenericInput class="w-1/8"/>
       <button class="w-1/8 rounded-md shadow-md hover:scale-105 md:p-4 bg-sky-700 cursor-pointer hover:bg-sky-600" @click="uploadTest">Test</button>
       <button class="w-1/8  rounded-md shadow-md hover:scale-105 md:p-4 bg-sky-700 cursor-pointer hover:bg-sky-600" v-if="hasFilters" @click="resetFilters">Reset Filter</button>
-      <PredictionSelection class="max-w-1/8" :options="predictionTypes"/>
+      <PredictionSelection class="max-w-1/8"/>
       <div class="max-w-1/8 bg-gray-600 p-2 md:p-4 rounded-md">Samples count: {{cbc_counts}}</div>
     </div>
 

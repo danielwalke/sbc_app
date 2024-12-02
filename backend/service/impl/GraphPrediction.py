@@ -79,11 +79,14 @@ class GraphPrediction:
         data = data.reset_index(drop=True)
         edge_index = get_edge_index(data)
 
+        ## TODO CHange
         self.graph = {
+            # "X": data.values[:, :],
             "X": data.values[:, 3:],
             "edge_index": edge_index,
             "labels": data.values[:, 2],
-            "original_index": original_index
+            "original_index": original_index,
+            # "columns": columns
         }
 
     def construct_reversed_directed_graph(self):

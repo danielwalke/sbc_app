@@ -5,8 +5,8 @@ from service.impl.Prediction import Prediction
 
 
 class PredictionDetails(Prediction):
-    def __init__(self, cbc_items, model, thresholds, shap_explainer):
-        super().__init__(cbc_items, model, thresholds)
+    def __init__(self, cbc_item, model, threshold, shap_explainer):
+        super().__init__([cbc_item], model, threshold)
         self.shap_explainer = shap_explainer
         self.model = model
 
