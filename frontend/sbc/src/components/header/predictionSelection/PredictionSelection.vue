@@ -60,7 +60,9 @@ const emit = defineEmits(['select'])
 const store = useCbcStore()
 
 const isOpen = ref(false)
-const selectedOption = computed(()=>store.getPredictionType)
+const selectedOption = computed(()=>{
+  return options.find(option => option.value === store.getPredictionType).label
+})
 
 const toggleDropdown = () => {
   isOpen.value = !isOpen.value
@@ -81,10 +83,10 @@ const handleClickOutside = (event) => {
 
 onMounted(() => {
   document.addEventListener('click', handleClickOutside)
-  selectOption({
+/*  selectOption({
     "label": "standard",
     "value": "standard",
-  })
+  })*/
 })
 
 onBeforeUnmount(() => {

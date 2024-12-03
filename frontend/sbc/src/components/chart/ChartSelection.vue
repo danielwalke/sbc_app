@@ -1,22 +1,14 @@
 <script setup>
-import {useCbcStore} from "../../lib/stores/CbcStore.js";
-
 const props = defineProps({
   cbc: Object
 })
 
-const cbcStore = useCbcStore()
-
 function hasTimeSeriesInformation(selected_cbc){
-  const cbcIds = cbcStore.getUnfilteredCbcMeasurements.map(cbc => cbc.patientId)
-  const cbcIdCounter = {}
-  for(const cbcId of cbcIds){
-    if (!(cbcId in cbcIdCounter)){
-      cbcIdCounter[cbcId] = 0
-    }
-    cbcIdCounter[cbcId] += 1
-  }
-  return cbcIdCounter[selected_cbc.patientId] > 1
+  if(selected_cbc.chartData["time"] === undefined)
+    return false
+  if(selected_cbc.chartData["original"] === undefined)
+    return false
+  return true
 }
 </script>
 

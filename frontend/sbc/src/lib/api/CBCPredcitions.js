@@ -1,10 +1,11 @@
 import {useModalStore} from "../stores/ModalStore.js";
-import {getCbcInformation} from "../cbcHelper/CBCApiFormat.js";
+import {getCbcInformation, getGraphCbcInformation} from "../cbcHelper/CBCApiFormat.js";
 import {ENDPOINT_PROSPECTIVE_PREDICTIONS, ENDPOINT_RETROSPECTIVE_PREDICTIONS} from "../constants/Server.js";
 import axios from "axios";
 import {calculate_confidence_score} from "../cbcHelper/ConfidenceCalculation.js";
 import {useCbcStore} from "../stores/CbcStore.js";
 import {submitCbcDetail} from "./CBCDetails.js";
+import {predictionTypeCBCCallback, predictionTypePredictionEndpoints} from "../constants/PredcitionTypes.js";
 
 export function removeConfidenceFilters(){
     const modalStore = useModalStore()
@@ -17,8 +18,9 @@ export async function submitCbcMeasurements(){
     store.setIsLoading(true)
     store.setHasPredictions(false)
 
-    const data = store.getCbcMeasurements.map(c=> getCbcInformation(c))
-    const endpoint = store.predictionType === "prospective" ? ENDPOINT_PROSPECTIVE_PREDICTIONS : ENDPOINT_RETROSPECTIVE_PREDICTIONS
+    const data = store.getCbcMeasurements.map(c=> predictionTypeCBCCallback[store.predictionType](c))
+    const endpoint = predictionTypePredictionEndpoints[store.predictionType]
+    console.log(endpoint)
     axios.post(endpoint, {data: data, classifier: "RandomForestClassifier"})
         .then(function (response) {
             store.setIsLoading(false)
