@@ -4,23 +4,21 @@ import torch
 import numpy as np
 
 class GraphPredictionDetails(GraphPrediction):
-    def __init__(self, cbc_items, model, thresholds, shap_explainer, standard_scaler):
-        super().__init__(cbc_items, model, thresholds, standard_scaler)
+    def __init__(self, cbc_items, model, thresholds, shap_explainer, standard_scaler, ref_node):
+        super().__init__(cbc_items, model, thresholds, standard_scaler, ref_node)
         self.shap_explainer = shap_explainer
 
     def get_shapley_values(self):
         features_origin,features_time  = self.get_features_list()
         features= torch.cat([features_origin, features_time], dim = -1).cpu().numpy()
+
         explainer = self.shap_explainer
         if self.standard_scaler is not None:
             features = self.standard_scaler.transform(features)
         shap_values = explainer.shap_values(features)
         shap_values = np.array(shap_values)
-        print(shap_values.shape)
-        shap_values = shap_values.squeeze()
-        shap_contains_probas_of_both_classes = shap_values.ndim == 1
-        shap_values = shap_values if shap_contains_probas_of_both_classes else shap_values[-1, :]
-        print(shap_values.shape)
+        shap_contains_probas_of_both_classes = shap_values.ndim == 3
+        shap_values = shap_values[-1, :] if shap_contains_probas_of_both_classes else shap_values
         time_split = shap_values.shape[-1] // 2
 
         shap_dict = dict()
@@ -30,7 +28,6 @@ class GraphPredictionDetails(GraphPrediction):
         shap_dict["combined"] = np.sum([shap_dict["original"], shap_dict["time"]], axis=0).tolist()
         shap_dict["original"] = shap_dict["original"].tolist()
         shap_dict["time"] = shap_dict["time"].tolist()
-
         return shap_dict
 
     def get_detailed_output(self):

@@ -21,5 +21,12 @@ def initialize_thresholds(app):
         "DecisionTreeClassifier": Thresholds.STANDARD_DT,
         "RandomForestClassifier": Thresholds.STANDARD_RF,
         "XGBClassifier": Thresholds.STANDARD_XGB,
-        "RUSBoostClassifier": Thresholds.STANDARD_RUS,
+        # "RUSBoostClassifier": Thresholds.STANDARD_RUS,
+    }
+
+    app.state.prospective_thresholds_ref_mean_diff = {
+        "LogisticRegression": Thresholds.PROSPECTIVE_LR,
+        "DecisionTreeClassifier": Thresholds.PROSPECTIVE_DT,
+        "RandomForestClassifier": Thresholds.PROSPECTIVE_RF,
+        "XGBClassifier": Thresholds.PROSPECTIVE_XGB,
     }
