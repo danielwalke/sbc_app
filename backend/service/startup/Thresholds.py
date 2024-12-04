@@ -25,8 +25,8 @@ def initialize_thresholds(app):
     }
 
     app.state.prospective_thresholds_ref_mean_diff = {
-        "LogisticRegression": Thresholds.PROSPECTIVE_LR,
-        "DecisionTreeClassifier": Thresholds.PROSPECTIVE_DT,
-        "RandomForestClassifier": Thresholds.PROSPECTIVE_RF,
-        "XGBClassifier": Thresholds.PROSPECTIVE_XGB,
+        "LogisticRegression": Thresholds.PROSPECTIVE_LR_MEAN_DIFF,
+        "DecisionTreeClassifier": Thresholds.PROSPECTIVE_DT_MEAN_DIFF,
+        "RandomForestClassifier": Thresholds.PROSPECTIVE_RF_MEAN_DIFF,
+        "XGBClassifier": Thresholds.PROSPECTIVE_XGB_MEAN_DIFF,
     }

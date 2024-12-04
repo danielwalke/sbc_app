@@ -47,6 +47,7 @@
 import {ref, onMounted, onBeforeUnmount, computed} from 'vue'
 import {useCbcStore} from "../../../lib/stores/CbcStore.js";
 import {predictionTypes} from "../../../lib/constants/PredcitionTypes.js";
+import Help from "../../icons/Help.vue";
 
 const props = defineProps({
   placeholder: {

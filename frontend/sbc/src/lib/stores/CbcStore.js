@@ -21,7 +21,7 @@ export const useCbcStore = defineStore('cbcStore', {
 		sortDirectionReversed: false,
 		addTimeSeriesData: false,
 		sortKey:undefined,
-		predictionType: "prospective"
+		predictionType: "prospectiveRef"
 	}),
 	getters: {
 		getCbcMeasurements: (state) => getCbcMeasurements(state),

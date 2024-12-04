@@ -9,6 +9,8 @@ import {getTestFile} from "../../lib/testCsvs/leipzig_test_100000.js";
 import {useCbcStore} from "../../lib/stores/CbcStore.js";
 import {parseFile} from "../../lib/input/FileParser.js";
 import {submitCbcMeasurements} from "../../lib/api/CBCPredcitions.js";
+import Help from "../icons/Help.vue";
+import {CBC_KEY_TO_DESCRIPTION} from "../../lib/constants/CBCDescriptions.js";
 
 const store = useCbcStore()
 const modalStore = useModalStore()
@@ -28,6 +30,17 @@ async function uploadTest() {
   await submitCbcMeasurements()
 }
 
+function helpPredictionSelection(){
+  modalStore.setIsHelpModalOpen(true)
+  modalStore.setHeaderContent("Prediction Type")
+  modalStore.setHelpMainContent(
+      "<div class='bg-white text-black'><div><b>standard:</b> Uses standard machine learning classifiers and does not incorporate time-series information</div>" +
+      "<div><b>prospective:</b>Uses machine learning classifiers that incorporate previous time-series information</div>" +
+      "<div><b>prospective (ref.):</b>Uses machine learning classifiers that incorporate previous time-series information and a healthy complete blood count as reference (recommended)</div>" +
+      "<div><b>retrospective:</b>Uses machine learning classifiers and incorporate all time-series information (only for retrospective use cases)</div></div>"
+  )
+}
+
 </script>
 
 <template>
@@ -37,7 +50,7 @@ async function uploadTest() {
       <GenericInput class="w-1/8"/>
       <button class="w-1/8 rounded-md shadow-md hover:scale-105 md:p-4 bg-sky-700 cursor-pointer hover:bg-sky-600" @click="uploadTest">Test</button>
       <button class="w-1/8  rounded-md shadow-md hover:scale-105 md:p-4 bg-sky-700 cursor-pointer hover:bg-sky-600" v-if="hasFilters" @click="resetFilters">Reset Filter</button>
-      <PredictionSelection class="max-w-1/8"/>
+      <div class="flex gap-1"> <PredictionSelection class="max-w-1/8"/><Help class="pt-1" @click="helpPredictionSelection"/></div>
       <div class="max-w-1/8 bg-gray-600 p-2 md:p-4 rounded-md">Samples count: {{cbc_counts}}</div>
     </div>
 
