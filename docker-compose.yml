@@ -1,0 +1,18 @@
+version: '3.8'
+
+services:
+  frontend:
+    image: dwalkeiti/graphsbc_frontend_local:latest
+    container_name: graphsbc_frontend
+    tty: true
+    ports:
+      - "3000:4173" 
+    restart: unless-stopped
+
+  service2:
+    image: dwalkeiti/graphsbc_backend:latest
+    container_name: graphsbc_backend  
+    tty: true
+    ports:
+      - "8000:80" 
+    restart: unless-stopped
