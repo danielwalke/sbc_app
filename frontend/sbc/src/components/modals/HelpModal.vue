@@ -15,8 +15,8 @@
 				</div>
 				<!-- Modal body -->
 				<div class="p-4 md:p-5 space-y-4">
-					<p class="text-base leading-relaxed text-gray-500 dark:text-gray-400" v-html="mainContent">
-					</p>
+					<div class="text-base leading-relaxed text-gray-500 dark:text-gray-400" v-html="mainContent">
+					</div>
 				</div>
 				<!-- Modal footer -->
 				<div class="flex items-center p-4 md:p-5 border-t border-gray-200 rounded-b dark:border-gray-600">
@@ -46,4 +46,24 @@ function close(){
 </script>
 
 <style scoped>
+body {
+  font-family: Arial, sans-serif;
+  line-height: 1.6;
+  margin: 20px;
+  color: #333;
+}
+h1, h2 {
+  color: #0056b3;
+}
+p {
+  margin-bottom: 1em;
+}
+.highlight {
+  font-weight: bold;
+  color: #d9534f;
+}
+ul {
+  margin-left: 20px;
+  list-style-type: square;
+}
 </style>
