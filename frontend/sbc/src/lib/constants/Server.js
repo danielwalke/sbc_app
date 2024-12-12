@@ -25,3 +25,5 @@ export const ENDPOINT_STANDARD_PREDICTION_DETAILS =  SERVER_URL + "get_standard_
 export const ENDPOINT_PROSPECTIVE_REF_THRESHOLDS = SERVER_URL + "classifier_thresholds_prospective_ref"
 export const ENDPOINT_PROSPECTIVE_REF_PREDICTIONS =  SERVER_URL + "get_graph_pred_prospective_ref"
 export const ENDPOINT_PROSPECTIVE_REF_PREDICTION_DETAILS =  SERVER_URL + "get_graph_pred_details_prospective_ref"
+
+export const DEFAULT_CLASSIFIER = "XGBClassifier"

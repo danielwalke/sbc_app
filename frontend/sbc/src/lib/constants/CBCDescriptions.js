@@ -52,7 +52,7 @@ export const CBC_KEY_TO_DESCRIPTION = {
         </figure>` +
 		"</div>",
 	pred: "Prediction for the instance with the given classifier",
-	classifier: "Classifier used for the classification (default is Random Forest Classifier)",
+	classifier: "Classifier used for the classification (default is XGBoost)",
 	sex: "Biological sex (character as 'M' for male or 'W' for female)",
 	details: "Click to get results from all classifiers and SHAP-values",
 

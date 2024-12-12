@@ -1,6 +1,7 @@
 import {useModalStore} from "../stores/ModalStore.js";
-import {getCbcInformation, getGraphCbcInformation} from "../cbcHelper/CBCApiFormat.js";
-import {ENDPOINT_PROSPECTIVE_PREDICTIONS, ENDPOINT_RETROSPECTIVE_PREDICTIONS} from "../constants/Server.js";
+import {
+    DEFAULT_CLASSIFIER,
+} from "../constants/Server.js";
 import axios from "axios";
 import {calculate_confidence_score} from "../cbcHelper/ConfidenceCalculation.js";
 import {useCbcStore} from "../stores/CbcStore.js";
@@ -21,7 +22,7 @@ export async function submitCbcMeasurements(){
     const data = store.getCbcMeasurements.map(c=> predictionTypeCBCCallback[store.predictionType](c))
     const endpoint = predictionTypePredictionEndpoints[store.predictionType]
     console.log(endpoint)
-    axios.post(endpoint, {data: data, classifier: "RandomForestClassifier"})
+    axios.post(endpoint, {data: data, classifier: DEFAULT_CLASSIFIER})
         .then(function (response) {
             store.setIsLoading(false)
             store.setHasPredictions(true)
@@ -29,7 +30,7 @@ export async function submitCbcMeasurements(){
                 const cbc = store.getCbcMeasurements[i]
                 cbc.pred = response.data.predictions[i] ? 'Sepsis' : 'Control'
                 cbc.pred_proba = response.data.pred_probas[i]
-                cbc.confidence = Math.round(calculate_confidence_score(cbc.pred_proba, store.getClassifierThresholds["RandomForestClassifier"])*10000)/100
+                cbc.confidence = Math.round(calculate_confidence_score(cbc.pred_proba, store.getClassifierThresholds[DEFAULT_CLASSIFIER])*10000)/100
             }
             const cbcsWithDetails = store.getCbcMeasurements.filter(cbc => cbc.chartData)
             for(const cbc of cbcsWithDetails){

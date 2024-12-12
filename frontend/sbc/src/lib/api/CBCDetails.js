@@ -3,6 +3,7 @@ import {useCbcStore} from "../stores/CbcStore.js";
 import {calculate_confidence_score} from "../cbcHelper/ConfidenceCalculation.js";
 import {getShapFormat} from "../shap/ChartFormat.js";
 import {predictionTypeCBCCallback, predictionTypePredictionDetailsEndpoints} from "../constants/PredcitionTypes.js";
+import {DEFAULT_CLASSIFIER} from "../constants/Server.js";
 
 async function standardDetailSubmission(store, selected_cbc, classifier, endpoint){
     const data = predictionTypeCBCCallback[store.predictionType](selected_cbc)
@@ -54,7 +55,7 @@ async function graphDetailSubmission(store, selected_cbc, classifier, endpoint){
         })
 }
 
-export async function submitCbcDetail(selected_cbc, classifier = "RandomForestClassifier"){
+export async function submitCbcDetail(selected_cbc, classifier = DEFAULT_CLASSIFIER){
     const store = useCbcStore()
     store.setIsLoading(true)
     const endpoint = predictionTypePredictionDetailsEndpoints[store.predictionType]
