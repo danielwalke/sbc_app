@@ -73,7 +73,7 @@ function isSorted(attributeName){
 }
 
 function isAscending(attributeName){
-  return sortKeys.value.find(sortKey => sortKey.attributeName === attributeName)?.ascending
+  return !sortKeys.value.find(sortKey => sortKey.attributeName === attributeName)?.ascending
 }
 
 function unit(cbcKey){
