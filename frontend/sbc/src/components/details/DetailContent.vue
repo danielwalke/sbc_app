@@ -1,25 +1,25 @@
 <template>
-	<div class="w-full custom-height select-none">
+	<div class="w-full custom-height select-none flex flex-col">
 		<Back/>
-		<div class="w-full overflow-x-auto max-h-[80%]">
+		<div class="w-full overflow-x-auto h-full overflow-y-hidden">
 			<table class="table-auto min-w-[1300px] h-full relative">
 				<TableHeader :is-detail-page="true" class="pt-4"/>
-				<tbody>
-				<tr class="w-full grid leading-6 pt-2 gap-4 grid-container pl-4 pr-4" :class="''"
-						v-for="(cbc, idx) in cbcOverClassifiers" :id="idx">
-					<td v-for="cbcKey in editableCbcKeys" class="flex justify-center items-center flex-col h-fit">
-						<input
-							class="p-2 rounded-md w-full w-32 text-right text-black" :value="cbc[cbcKey]"
-							:type="type(cbcKey)"
-							:placeholder="cbcKey"
-							@input="event => valueInput(event, cbc, cbcKey)" @change="event => valueInput(event, cbc, cbcKey)"/>
-					</td>
-					<td class="non-editable">{{cbc.groundTruth === undefined ? 'Unknown' : cbc.groundTruth}}</td>
-					<td class="non-editable">{{cbc.confidence === undefined ? 'Unclassified' : getConfidenceString(cbc.confidence)}}</td>
-					<td class="non-editable">{{cbc.classifier}}</td>
-          <ChartSelection :cbc="cbc"/>
-          <Chart  :cbc="cbc" :shap-type="cbc.shapType"/>
-				</tr>
+				<tbody class="overflow-y-auto block" :style="`height: ${maxHeight}%`">
+          <tr class="w-full grid leading-6 pt-2 gap-4 grid-container pl-4 pr-4" :class="''"
+              v-for="(cbc, idx) in cbcOverClassifiers" :id="idx">
+            <td v-for="cbcKey in editableCbcKeys" class="flex justify-center items-center flex-col h-fit">
+              <input
+                class="p-2 rounded-md w-full w-32 text-right text-black" :value="cbc[cbcKey]"
+                :type="type(cbcKey)"
+                :placeholder="cbcKey"
+                @input="event => valueInput(event, cbc, cbcKey)" @change="event => valueInput(event, cbc, cbcKey)"/>
+            </td>
+            <td class="non-editable">{{cbc.groundTruth === undefined ? 'Unknown' : cbc.groundTruth}}</td>
+            <td class="non-editable">{{cbc.confidence === undefined ? 'Unclassified' : getConfidenceString(cbc.confidence)}}</td>
+            <td class="non-editable">{{cbc.classifier}}</td>
+            <ChartSelection :cbc="cbc"/>
+            <Chart  :cbc="cbc" :shap-type="cbc.shapType"/>
+          </tr>
 				</tbody>
 			</table>
 		</div>
@@ -30,7 +30,7 @@
 <script setup lang="js">
 import {editableCbcKeys} from "../../lib/TableGrid.js"
 import {useCbcStore} from "../../lib/stores/CbcStore.js";
-import {computed, onMounted, watch} from "vue";
+import {computed, onBeforeMount, onMounted, onUnmounted, ref, watch} from "vue";
 import TableHeader from "../header/input/TableHeader.vue";
 import SubmitButton from "../submit/SubmitButton.vue";
 import Chart from "../chart/Chart.vue";
@@ -38,10 +38,30 @@ import Back from "../header/navigation/Back.vue";
 import ChartSelection from "../chart/ChartSelection.vue";
 import {submitCbcClassifierDetails} from "../../lib/api/CBCClassifierDetails.js";
 import {initializeClassifiersCbcs} from "../../lib/classifierDetails/InitializeClassifierObjects.js";
+import {updateScreenHeight} from "../../lib/responsive/HeightRegularization.js";
 
 const cbcStore = useCbcStore()
 initializeClassifiersCbcs()
 cbcStore.setHasPredictionDetails(false)
+
+const screenHeight = ref(window.innerHeight)
+const screenWidth = ref(window.innerWidth)
+const maxHeight = ref(85)
+
+updateScreenHeight(screenHeight, maxHeight)
+
+function screenSizeHandler(){
+  screenHeight.value = window.innerHeight
+  screenWidth.value = window.innerWidth
+  updateScreenHeight(screenHeight, maxHeight)
+}
+
+onBeforeMount(()=>{
+  window.addEventListener("resize", screenSizeHandler)
+})
+onUnmounted(()=>{
+  window.removeEventListener("resize", screenSizeHandler);
+})
 
 function type(cbcKey){return cbcKey === "sex" ? "text" : "number"}
 

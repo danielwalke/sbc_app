@@ -1,28 +1,28 @@
 <template>
-	<div class="w-full overflow-x-auto" @scroll="updateViewPort" :style="`max-height: ${maxHeight}%`">
-		<div class="table-auto min-w-[1300px] h-full relative text-xs md:text-sm lg:text-base">
-			<TableHeader :is-detail-page="false"/>
-			<div class="w-full overflow-x-auto p-[.25rem] lg:pb-2 lg:pt-2 block h-full" >
-			<div class="table-data grid leading-6 pt-2 grid-container mb-2" :class="cbc.chartData ? ' ' : ''"
-					v-for="(cbc, idx) in filteredCbcs" :id="idx">
-				<div v-for="cbcKey in editableCbcKeys" class="table-data flex justify-center items-center flex-col h-fit">
-					<input
-						class="p-[.33rem] lg:p-2 rounded-md w-full text-right text-black" :value="cbc[cbcKey]"
-						:type="type(cbcKey)"
-						:placeholder="cbcKey"
-						@input="event => valueInput(event, cbc, cbcKey)" @change="event => valueInput(event, cbc, cbcKey)"/>
-				</div>
-				<div class="table-data non-editable w-full">{{cbc.groundTruth === undefined ? 'Unknown' : cbc.groundTruth}}</div>
-				<div class="table-data non-editable w-full">{{cbc.confidence === undefined ? 'Unclassified' : getConfidenceString(cbc.confidence)}}</div>
-				<div class="table-data"><Details :fun="()=>handleDetails(cbc)"/></div>
-				<div class="table-data grid-container " style="grid-column: span 12" v-if="cbc.chartData">
-					<ChartSelection :cbc="cbc"/>
-					<Chart  :cbc="cbc" :shap-type="cbc.shapType"/>
-					<div class="col-span-2"></div>
-					<div><List :fun="()=>handleShowClassifiers(cbc)"/></div>
-				</div>
-				<hr style="grid-column: span 12" v-if="newPatient(idx)"/>
-			</div>
+	<div class="w-full overflow-x-auto overflow-y-hidden" :style="`height: ${maxHeight}%`">
+		<div class="min-w-[1300px] w-full h-full text-xs md:text-sm lg:text-base">
+      <TableHeader :is-detail-page="false"/>
+			<div class="w-full overflow-x-auto p-[.25rem] lg:pb-2 lg:pt-2 block overflow-y-auto h-full" @scroll="updateViewPort">
+        <div class="table-data grid leading-6 pt-2 grid-container mb-2" :class="cbc.chartData ? ' ' : ''"
+            v-for="(cbc, idx) in filteredCbcs" :id="idx">
+          <div v-for="cbcKey in editableCbcKeys" class="table-data flex justify-center items-center flex-col h-fit">
+            <input
+              class="p-[.33rem] lg:p-2 rounded-md w-full text-right text-black" :value="cbc[cbcKey]"
+              :type="type(cbcKey)"
+              :placeholder="cbcKey"
+              @input="event => valueInput(event, cbc, cbcKey)" @change="event => valueInput(event, cbc, cbcKey)"/>
+          </div>
+          <div class="table-data non-editable w-full">{{cbc.groundTruth === undefined ? 'Unknown' : cbc.groundTruth}}</div>
+          <div class="table-data non-editable w-full">{{cbc.confidence === undefined ? 'Unclassified' : getConfidenceString(cbc.confidence)}}</div>
+          <div class="table-data"><Details :fun="()=>handleDetails(cbc)"/></div>
+          <div class="table-data grid-container " style="grid-column: span 12" v-if="cbc.chartData">
+            <ChartSelection :cbc="cbc"/>
+            <Chart  :cbc="cbc" :shap-type="cbc.shapType"/>
+            <div class="col-span-2"></div>
+            <div><List :fun="()=>handleShowClassifiers(cbc)"/></div>
+          </div>
+          <hr style="grid-column: span 12" v-if="newPatient(idx)"/>
+        </div>
 			</div>
 		</div>
 	</div>

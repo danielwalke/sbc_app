@@ -1,5 +1,5 @@
 <template>
-	<div class="w-full 2xl:max-h-[114px] block top-0 sticky text-xs md:text-sm lg:text-base" style="background-color: #242424">
+	<div class="w-full text-xs md:text-sm lg:text-base" style="background-color: #242424">
 	<div class="grid-container">
 		<div v-for="cbcKey in editableCbcKeys" class="grid-item">
 			<div class="header-item pt-2">
