@@ -1,8 +1,8 @@
 <template>
 	<div class="w-full overflow-x-auto overflow-y-hidden" :style="`height: ${maxHeight}%`">
-		<div class="min-w-[1300px] w-full h-full text-xs md:text-sm lg:text-base">
+		<div class="min-w-[1300px] w-full h-full text-xs md:text-sm lg:text-base mb-4">
       <TableHeader :is-detail-page="false"/>
-			<div class="w-full overflow-x-auto p-[.25rem] lg:pb-2 lg:pt-2 block overflow-y-auto h-full" @scroll="updateViewPort">
+			<div class="w-full overflow-x-auto p-[.25rem] lg:pt-2 block overflow-y-auto h-full pb-24" @scroll="updateViewPort">
         <div class="table-data grid leading-6 pt-2 grid-container mb-2" :class="cbc.chartData ? ' ' : ''"
             v-for="(cbc, idx) in filteredCbcs" :id="idx">
           <div v-for="cbcKey in editableCbcKeys" class="table-data flex justify-center items-center flex-col h-fit">
