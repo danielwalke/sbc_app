@@ -8,7 +8,7 @@
 				<table class="table-auto min-w-[1300px] h-full relative w-full">
 					<TableHeader :is-detail-page="false"/>
 					<tbody class="w-full grid leading-6 pt-2 gap-4 grid-container"
-								 v-for="_ in 18" >
+								 v-for="_ in 25" >
 					<td v-for="_ in editableCbcKeys" class="flex justify-center items-center flex-col h-fit">
 						<div
 							class="p-2 rounded-md w-full w-32 h-12 text-right text-black skeleton-bright"></div>
