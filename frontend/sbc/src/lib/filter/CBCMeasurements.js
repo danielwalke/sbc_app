@@ -16,7 +16,7 @@ export function getCbcMeasurements(state) {
                 return filter["filterItems"].includes(cbc[filter["filterKey"]])
             })
         }
-        filteredCbcMeasurements = addTimeSeriesData(state, filteredCbcMeasurements)
+        // filteredCbcMeasurements = addTimeSeriesData(state, filteredCbcMeasurements)
     }
     for (const filter of rangeFilters) {
         filteredCbcMeasurements = filteredCbcMeasurements.filter(cbc => {

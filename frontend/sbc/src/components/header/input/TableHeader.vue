@@ -4,8 +4,8 @@
 		<div v-for="cbcKey in editableCbcKeys" class="grid-item">
 			<div class="header-item pt-2">
 				<div class="flex gap-2 text-center hover:cursor-pointer" @click="()=> sortData(cbcKey)">{{getCbcLabel(cbcKey)}}
-					<ChevoronUp v-if="sortKey === cbcKey && !sortDirectionReversed"/>
-					<ChevronDown v-if="sortKey === cbcKey && sortDirectionReversed"/>
+					<ChevoronUp v-if="isSorted(cbcKey) && isAscending(cbcKey)"/>
+					<ChevronDown v-if="isSorted(cbcKey) && !isAscending(cbcKey)"/>
 				</div>
 				<Filter v-if="!isDetailPage" :fun="()=> filterCbcKeyFunction(cbcKey)" :classes="getFilterClass(cbcKey)"/>
 				<Help :fun="() => helpCbcKeyFunction(cbcKey)"/>
@@ -15,8 +15,8 @@
 		<div class="grid-item" >
 			<div class="header-item">
 				<div class="flex gap-2 text-center hover:cursor-pointer" @click="()=> sortData('groundTruth')">Ground-truth
-					<ChevoronUp v-if="sortKey === 'groundTruth' && !sortDirectionReversed"/>
-					<ChevronDown v-if="sortKey === 'groundTruth' && sortDirectionReversed"/>
+					<ChevoronUp v-if="isSorted('groundTruth') && isAscending('groundTruth')"/>
+					<ChevronDown v-if="isSorted('groundTruth') && !isAscending('groundTruth')"/>
 				</div>
 				<Filter v-if="!isDetailPage" :fun="()=> filterCbcKeyFunction('groundTruth')" :classes="getFilterClass('groundTruth')"/>
 				<Help :fun="() => helpCbcKeyFunction('groundTruth')"/>
@@ -25,8 +25,8 @@
 		<div class="grid-item" >
 			<div class="header-item">
 				<div class="flex gap-2 text-center hover:cursor-pointer" @click="()=> sortData('confidence')">Sepsis risk
-					<ChevoronUp v-if="sortKey === 'confidence' && !sortDirectionReversed"/>
-					<ChevronDown v-if="sortKey === 'confidence' && sortDirectionReversed"/>
+					<ChevoronUp v-if="isSorted('confidence') && isAscending('confidence')"/>
+					<ChevronDown v-if="isSorted('confidence') && !isAscending('confidence')"/>
 				</div>
 				<Filter v-if="!isDetailPage" :fun="()=> filterCbcKeyFunction('confidence')" :classes="getFilterClass('confidence')"/>
 				<Help :fun="() => helpCbcKeyFunction('confidence')"/>
@@ -65,8 +65,16 @@ const props = defineProps({
 	isDetailPage: Boolean
 })
 
-const sortKey = computed(()=> cbcStore.getLastSortKey)
-const sortDirectionReversed = computed(()=> cbcStore.getSortDirectionReversed)
+
+const sortKeys = computed(()=> cbcStore.getSortKeys)
+
+function isSorted(attributeName){
+  return sortKeys.value.map(sortKey => sortKey.attributeName).includes(attributeName)
+}
+
+function isAscending(attributeName){
+  return sortKeys.value.find(sortKey => sortKey.attributeName === attributeName)?.ascending
+}
 
 function unit(cbcKey){
 	return UNITS_DICT[cbcKey]
@@ -96,6 +104,7 @@ function sortData(cbcKey){
 
 function getCbcLabel(cbcKey){
   if(cbcKey === "order") return "time"
+  if(cbcKey === "patientId") return "Id"
   return cbcKey
 }
 </script>

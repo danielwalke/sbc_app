@@ -16,12 +16,10 @@ export const useCbcStore = defineStore('cbcStore', {
 		classifierThresholds: undefined,
 		hasPredictionDetails: false,
 		isSorted: undefined,
-		uuidToIdxMapper:undefined,
-		lastSortKey: undefined,
 		sortDirectionReversed: false,
 		addTimeSeriesData: false,
-		sortKey:undefined,
-		predictionType: "prospectiveRef"
+		predictionType: "prospectiveRef",
+		sortKeys: []
 	}),
 	getters: {
 		getCbcMeasurements: (state) => getCbcMeasurements(state),
@@ -32,11 +30,10 @@ export const useCbcStore = defineStore('cbcStore', {
 		getClassifierThresholds: (state) => state.classifierThresholds,
 		getHasPredictionDetails: (state) => state.hasPredictionDetails,
 		getIsSorted: (state) => state.isSorted,
-		getUuidToIdxMapper: (state) => state.uuidToIdxMapper,
-		getLastSortKey: (state) => state.lastSortKey,
 		getSortDirectionReversed: (state) => state.sortDirectionReversed,
 		getAddTimeSeriesData: (state) => state.addTimeSeriesData,
-		getPredictionType: (state) => state.predictionType
+		getPredictionType: (state) => state.predictionType,
+		getSortKeys:(state) => state.sortKeys,
 	},
 	actions: {
 		addCbcMeasurements(value ){
@@ -68,32 +65,36 @@ export const useCbcStore = defineStore('cbcStore', {
 		setCbcOverClassifiers(newCbcOverClassifiers){
 			this.cbcOverClassifiers =newCbcOverClassifiers
 		},
-		setIsSorted(value){
-			this.isSorted = value
-		},
-		setUuidToIdxMapper(value){
-			this.uuidToIdxMapper = value
-		},
-		setLastSortKey(value){
-			this.lastSortKey = value
-		},
-		setSortDirectionReversed(value){
-			this.sortDirectionReversed = value
-		},
-		setSortKey(val){
-			this.sortKey = val
- 		},
 		sortData(sortKey){
 			sortData(sortKey)
 		},
 		setAddTimeSeriesData(val){
 			this.addTimeSeriesData = val
-			this.sortKey = "patientId"
+			this.addSortKey("patientId")
 		},
 		async setPredictionType(val){
 			this.predictionType = val
 			await fetchClassifierNamesAndThresholds()
 			await submitCbcMeasurements()
+		},
+		addSortKey(attributeName){
+			const attributeNames = this.sortKeys.map(sortKey => sortKey.attributeName)
+			if(attributeNames.includes(attributeName)){
+				for(const sortKeyObject of this.sortKeys){
+					if(sortKeyObject.attributeName === attributeName){
+						sortKeyObject.ascending = !sortKeyObject.ascending
+					}
+				}
+			}
+			if(!attributeNames.includes(attributeName)){
+				this.sortKeys.push({
+					attributeName: attributeName,
+					ascending: true
+				})
+			}
+		},
+		resetSorting(){
+			this.sortKeys = []
 		}
 	},
 })

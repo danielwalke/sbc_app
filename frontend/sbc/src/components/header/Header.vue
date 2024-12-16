@@ -41,6 +41,12 @@ function helpPredictionSelection(){
   )
 }
 
+function resetSort(){
+  store.resetSorting()
+}
+
+const hasSorting = computed(()=> store.getSortKeys.length > 0)
+
 </script>
 
 <template>
@@ -50,6 +56,7 @@ function helpPredictionSelection(){
       <GenericInput class="w-1/8"/>
       <button class="w-1/8 rounded-md shadow-md hover:scale-105 md:p-4 bg-sky-700 cursor-pointer hover:bg-sky-600" @click="uploadTest">Test</button>
       <button class="w-1/8  rounded-md shadow-md hover:scale-105 md:p-4 bg-sky-700 cursor-pointer hover:bg-sky-600" v-if="hasFilters" @click="resetFilters">Reset Filter</button>
+      <button class="w-1/8  rounded-md shadow-md hover:scale-105 md:p-4 bg-sky-700 cursor-pointer hover:bg-sky-600" v-if="hasSorting" @click="resetSort">Reset Sort</button>
       <div class="flex gap-1"> <PredictionSelection class="max-w-1/8"/><Help class="pt-1" @click="helpPredictionSelection"/></div>
       <div class="max-w-1/8 bg-gray-600 p-2 md:p-4 rounded-md">Samples count: {{cbc_counts}}</div>
     </div>
