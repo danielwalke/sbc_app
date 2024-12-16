@@ -1,30 +1,30 @@
 <template>
-	<div class="w-full overflow-x-auto " @scroll="updateViewPort" :style="`max-height: ${maxHeight}%`">
-		<table class="table-auto min-w-[1300px] h-full relative text-xs md:text-sm lg:text-base">
+	<div class="w-full overflow-x-auto" @scroll="updateViewPort" :style="`max-height: ${maxHeight}%`">
+		<div class="table-auto min-w-[1300px] h-full relative text-xs md:text-sm lg:text-base">
 			<TableHeader :is-detail-page="false"/>
-			<tbody class="w-full overflow-x-auto p-[.25rem] lg:pb-2 lg:pt-2 block" >
-			<tr class="grid leading-6 pt-2 grid-container mb-2" :class="cbc.chartData ? ' ' : ''"
+			<div class="w-full overflow-x-auto p-[.25rem] lg:pb-2 lg:pt-2 block h-full" >
+			<div class="table-data grid leading-6 pt-2 grid-container mb-2" :class="cbc.chartData ? ' ' : ''"
 					v-for="(cbc, idx) in filteredCbcs" :id="idx">
-				<td v-for="cbcKey in editableCbcKeys" class="flex justify-center items-center flex-col h-fit">
+				<div v-for="cbcKey in editableCbcKeys" class="table-data flex justify-center items-center flex-col h-fit">
 					<input
 						class="p-[.33rem] lg:p-2 rounded-md w-full text-right text-black" :value="cbc[cbcKey]"
 						:type="type(cbcKey)"
 						:placeholder="cbcKey"
 						@input="event => valueInput(event, cbc, cbcKey)" @change="event => valueInput(event, cbc, cbcKey)"/>
-				</td>
-				<td class="non-editable w-full">{{cbc.groundTruth === undefined ? 'Unknown' : cbc.groundTruth}}</td>
-				<td class="non-editable w-full">{{cbc.confidence === undefined ? 'Unclassified' : getConfidenceString(cbc.confidence)}}</td>
-				<td><Details :fun="()=>handleDetails(cbc)"/></td>
-				<td class="grid-container " style="grid-column: span 12" v-if="cbc.chartData">
+				</div>
+				<div class="table-data non-editable w-full">{{cbc.groundTruth === undefined ? 'Unknown' : cbc.groundTruth}}</div>
+				<div class="table-data non-editable w-full">{{cbc.confidence === undefined ? 'Unclassified' : getConfidenceString(cbc.confidence)}}</div>
+				<div class="table-data"><Details :fun="()=>handleDetails(cbc)"/></div>
+				<div class="table-data grid-container " style="grid-column: span 12" v-if="cbc.chartData">
 					<ChartSelection :cbc="cbc"/>
 					<Chart  :cbc="cbc" :shap-type="cbc.shapType"/>
 					<div class="col-span-2"></div>
 					<div><List :fun="()=>handleShowClassifiers(cbc)"/></div>
-				</td>
+				</div>
 				<hr style="grid-column: span 12" v-if="newPatient(idx)"/>
-			</tr>
-			</tbody>
-		</table>
+			</div>
+			</div>
+		</div>
 	</div>
 
 </template>
@@ -79,17 +79,21 @@ const filteredCbcs = computed(() =>{
 
 
 function isInViewport(element) {
-	const rect = element.getBoundingClientRect();
-	return (
-		rect.top >= 0 &&
-		rect.left >= 0 &&
-		rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
-		rect.right <= (window.innerWidth || document.documentElement.clientWidth)
-	);
+  const rect = element.getBoundingClientRect();
+  const viewportHeight = window.innerHeight || document.documentElement.clientHeight;
+  const viewportWidth = window.innerWidth || document.documentElement.clientWidth;
+
+  return (
+      rect.top < viewportHeight &&
+      rect.left < viewportWidth &&
+      rect.bottom > 0 &&
+      rect.right > 0
+  );
 }
 
 function updateViewPort(){
-	const lowerIdx = upperLimit.value-2
+	// const lowerIdx = upperLimit.value- 2
+  const lowerIdx = upperLimit.value- 20
 	const lowerElement = document.getElementById(lowerIdx)
 	if(lowerElement && isInViewport(lowerElement)){
 		upperLimit.value +=50
