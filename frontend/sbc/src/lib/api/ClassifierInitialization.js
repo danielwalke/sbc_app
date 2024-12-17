@@ -8,7 +8,7 @@ export async function fetchClassifierNamesAndThresholds(){
     store.setIsLoading(true)
     const classifier_endpoint = predictionTypeThresholdEndpoints[store.predictionType]
     try{
-        const response = await axios.get(classifier_endpoint)
+        const response = await axios.post(classifier_endpoint, {min_sensitivity: store.getMinSensitivity / 100})
         console.log(response.data)
         store.setClassifierNames(Object.keys(response.data))
         store.setClassifierThresholds(response.data)

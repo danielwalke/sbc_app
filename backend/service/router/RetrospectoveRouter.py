@@ -1,16 +1,22 @@
 from fastapi import APIRouter, Request
+import pandas as pd
 from service.meta.GraphCBC import GraphCBC
 from service.constants.Server import ADD_PATH
 from service.meta.InGraphPrediction import InGraphPrediction
+from service.meta.InThreshold import InThreshold
+from service.impl.ThresholdCalculation import ThresholdCalculation
 from service.impl.GraphPrediction import GraphPrediction
 from service.impl.DetailsPredictionGraph import DetailsPredictionGraph
 
 router = APIRouter(redirect_slashes=False)
 
 
-@router.get(ADD_PATH + "/classifier_thresholds_retrospective")
-async def get_classifier_thresholds_retrospective(request: Request, ):
-    return request.app.state.retrospective_thresholds
+@router.post(ADD_PATH + "/classifier_thresholds_retrospective")
+async def get_classifier_thresholds_retrospective(request: Request, body:InThreshold):
+    threshold_calculation = ThresholdCalculation(request.app.state.retrospective_df,
+                                                 request.app.state.retrospective_thresholds,
+                                                 body.min_sensitivity)
+    return threshold_calculation.get_thresholds()
 
 
 @router.post(ADD_PATH + "/get_graph_pred_retrospective")

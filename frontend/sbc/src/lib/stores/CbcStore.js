@@ -19,7 +19,8 @@ export const useCbcStore = defineStore('cbcStore', {
 		sortDirectionReversed: false,
 		addTimeSeriesData: false,
 		predictionType: "prospectiveRef",
-		sortKeys: []
+		sortKeys: [],
+		minSensitivity: undefined
 	}),
 	getters: {
 		getCbcMeasurements: (state) => getCbcMeasurements(state),
@@ -34,6 +35,7 @@ export const useCbcStore = defineStore('cbcStore', {
 		getAddTimeSeriesData: (state) => state.addTimeSeriesData,
 		getPredictionType: (state) => state.predictionType,
 		getSortKeys:(state) => state.sortKeys,
+		getMinSensitivity: (state) => state.minSensitivity,
 	},
 	actions: {
 		addCbcMeasurements(value ){
@@ -95,6 +97,10 @@ export const useCbcStore = defineStore('cbcStore', {
 		},
 		resetSorting(){
 			this.sortKeys = []
+		},
+		async setMinSensitivity(minSensitivity){
+			this.minSensitivity = minSensitivity
+			await fetchClassifierNamesAndThresholds()
 		}
 	},
 })

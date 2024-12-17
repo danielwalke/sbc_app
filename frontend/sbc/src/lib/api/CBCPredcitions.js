@@ -22,7 +22,7 @@ export async function submitCbcMeasurements(){
     const data = store.getCbcMeasurements.map(c=> predictionTypeCBCCallback[store.predictionType](c))
     const endpoint = predictionTypePredictionEndpoints[store.predictionType]
     console.log(endpoint)
-    axios.post(endpoint, {data: data, classifier: DEFAULT_CLASSIFIER})
+    axios.post(endpoint, {data: data, classifier: DEFAULT_CLASSIFIER, threshold: store.getClassifierThresholds[DEFAULT_CLASSIFIER]})
         .then(function (response) {
             store.setIsLoading(false)
             store.setHasPredictions(true)
@@ -30,7 +30,10 @@ export async function submitCbcMeasurements(){
                 const cbc = store.getCbcMeasurements[i]
                 cbc.pred = response.data.predictions[i] ? 'Sepsis' : 'Control'
                 cbc.pred_proba = response.data.pred_probas[i]
+
                 cbc.confidence = Math.round(calculate_confidence_score(cbc.pred_proba, store.getClassifierThresholds[DEFAULT_CLASSIFIER])*10000)/100
+                if(store.getMinSensitivity === 100) cbc.confidence = 100
+                if(store.getMinSensitivity === 0) cbc.confidence = 0
             }
             const cbcsWithDetails = store.getCbcMeasurements.filter(cbc => cbc.chartData)
             for(const cbc of cbcsWithDetails){

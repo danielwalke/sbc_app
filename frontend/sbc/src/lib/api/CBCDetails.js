@@ -7,7 +7,7 @@ import {DEFAULT_CLASSIFIER} from "../constants/Server.js";
 
 async function standardDetailSubmission(store, selected_cbc, classifier, endpoint){
     const data = predictionTypeCBCCallback[store.predictionType](selected_cbc)
-    axios.post(endpoint, {data: data, classifier: classifier},{
+    axios.post(endpoint, {data: data, classifier: classifier, threshold: store.getClassifierThresholds[classifier]},{
         timeout: 10000 // Timeout set to 10 seconds
     })
         .then(function (response) {
@@ -31,7 +31,7 @@ async function graphDetailSubmission(store, selected_cbc, classifier, endpoint){
     const selectedCbcIdx = associatedUuids.indexOf(selected_cbc.id)
     const data = associatedCbcs.map(cbc => predictionTypeCBCCallback[store.predictionType](cbc))
 
-    axios.post(endpoint, {data: data, classifier: classifier},{
+    axios.post(endpoint, {data: data, classifier: classifier, threshold: store.getClassifierThresholds[classifier]},{
         timeout: 10000 // Timeout set to 10 seconds
     })
         .then(function (response) {

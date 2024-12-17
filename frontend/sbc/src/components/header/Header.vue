@@ -11,6 +11,7 @@ import {parseFile} from "../../lib/input/FileParser.js";
 import {submitCbcMeasurements} from "../../lib/api/CBCPredcitions.js";
 import Help from "../icons/Help.vue";
 import {CBC_KEY_TO_DESCRIPTION} from "../../lib/constants/CBCDescriptions.js";
+import ThresholdSelection from "./thresholdSelection/ThresholdSelection.vue";
 
 const store = useCbcStore()
 const modalStore = useModalStore()
@@ -53,6 +54,7 @@ const hasSorting = computed(()=> store.getSortKeys.length > 0)
   <div class="w-full text-xs md:text-sm lg:text-base">
     <div class="flex lg:justify-center items-center gap-2 md:gap-4 md:pb-4 flex-wrap md:pl-4 md:pr-4">
       <Home class="w-1/8"/>
+      <ThresholdSelection/>
       <GenericInput class="w-1/8"/>
       <button class="w-1/8 rounded-md shadow-md hover:scale-105 md:p-4 bg-sky-700 cursor-pointer hover:bg-sky-600" @click="uploadTest">Test</button>
       <button class="w-1/8  rounded-md shadow-md hover:scale-105 md:p-4 bg-sky-700 cursor-pointer hover:bg-sky-600" v-if="hasFilters" @click="resetFilters">Reset Filter</button>

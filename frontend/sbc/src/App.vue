@@ -6,6 +6,7 @@ import {useCbcStore} from "./lib/stores/CbcStore.js";
 import Footer from "./components/footer/Footer.vue";
 import InputModal from "./components/modals/InputModal.vue";
 import {fetchClassifierNamesAndThresholds} from "./lib/api/ClassifierInitialization.js";
+import SensitivityModal from "./components/modals/SensitivityModal.vue";
 
 
 const cbcStore = useCbcStore()
@@ -18,6 +19,7 @@ fetchClassifierNamesAndThresholds()
 		<HelpModal/>
 		<FilterModal/>
 		<LoadingSkeleton/>
+    <SensitivityModal/>
 		<InputModal/>
 		<Footer/>
   </div>

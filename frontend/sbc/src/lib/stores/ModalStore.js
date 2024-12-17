@@ -9,7 +9,9 @@ export const useModalStore = defineStore('modal', {
 		isFilterModalOpen: false,
 		filterKey: undefined,
 		filters: [],
-		isInputModelOpen: false}),
+		isInputModelOpen: false,
+		isSensitivityModelOpen: false,
+	}),
 	getters: {
 		getHeaderContent: (state) => state.headerContent,
 		getHelpMainContent: (state) => state.helpMainContent,
@@ -43,6 +45,7 @@ export const useModalStore = defineStore('modal', {
 			return filter["filterItems"]
 		},
 		getIsInputModelOpen: (state) => state.isInputModelOpen,
+		getIsSensitivityModelOpen: (state) => state.isSensitivityModelOpen,
 	},
 	actions: {
 		setIsHelpModalOpen(value){
@@ -89,6 +92,9 @@ export const useModalStore = defineStore('modal', {
 			if(filter["filterItems"].length === 0){
 				this.filters = this.filters.filter(f => f["filterKey"] !== filter["filterKey"])
 			}
+		},
+		setIsSensitivityModelOpen(isOpen){
+			this.isSensitivityModelOpen = isOpen
 		}
 	},
 })

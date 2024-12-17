@@ -7,6 +7,7 @@ from service.startup.Thresholds import initialize_thresholds
 from service.startup.Models import initialize_models
 from service.startup.Explainers import initialize_explainers
 from service.startup.RefNodes import initialize_ref_nodes
+from service.startup.PredProba import initialize_pred_proba_dfs
 from service.router import HealthRouter, BaselineModelsRouter, ProspectiveRouter, RetrospectoveRouter, ProspectiveRefRouter
 from fastapi import APIRouter
 
@@ -31,6 +32,7 @@ app.include_router(ProspectiveRefRouter.router)
 
 @app.on_event("startup")
 async def startup_event():
+    initialize_pred_proba_dfs(app)
     initialize_ref_nodes(app)
     initialize_standard_scaler(app)
     initialize_thresholds(app)

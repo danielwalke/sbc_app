@@ -1,5 +1,8 @@
 from fastapi import APIRouter, Request
+import pandas as pd
 from service.meta.GraphCBC import GraphCBC
+from service.meta.InThreshold import InThreshold
+from service.impl.ThresholdCalculation import ThresholdCalculation
 from service.constants.Server import ADD_PATH
 from service.meta.InGraphPrediction import InGraphPrediction
 from service.impl.GraphPrediction import GraphPrediction
@@ -8,9 +11,12 @@ from service.impl.DetailsPredictionGraph import DetailsPredictionGraph
 router = APIRouter(redirect_slashes=False)
 
 
-@router.get(ADD_PATH + "/classifier_thresholds_prospective")
-async def get_classifier_thresholds_prospective(request: Request):
-    return request.app.state.prospective_thresholds
+@router.post(ADD_PATH + "/classifier_thresholds_prospective")
+async def get_classifier_thresholds_prospective(request: Request, body:InThreshold):
+    threshold_calculation = ThresholdCalculation(request.app.state.prospective_df,
+                                                 request.app.state.prospective_thresholds,
+                                                 body.min_sensitivity)
+    return threshold_calculation.get_thresholds()
 
 
 @router.post(ADD_PATH + "/get_graph_pred_prospective")

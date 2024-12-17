@@ -46,8 +46,8 @@ export const CBC_KEY_TO_DESCRIPTION = {
 		<figure class="mt-4">
           <img src="${RiskOverview}" alt="Overview Figure" class="mt-4 rounded-lg shadow-lg p-2">
           <figcaption class="mt-2 text-sm text-gray-500">
-            <bold class='font-semibold'>Figure 1: Overview of the sepsis prediction.</bold> 
-            First, we calculate an optimal threshold using the Receiver Operating Crev (A). Then, this threshold is used combined with prediction probabilities from machine elarning classifiers to calculate sepsis risks (B).  
+            <bold class='font-semibold'>Figure 1: Overview of calculating the sepsis risk.</bold> 
+            First, we calculate an optimal threshold using the Receiver Operating Curve (A). Then, this threshold is used combined with prediction probabilities from machine learning classifiers to calculate sepsis risks (B).  
           </figcaption>
         </figure>` +
 		"</div>",
