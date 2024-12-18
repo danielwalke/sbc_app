@@ -22,8 +22,8 @@ export function getCbcMeasurements(state) {
         filteredCbcMeasurements = filteredCbcMeasurements.filter(cbc => {
                 const filterKey = filter["filterKey"]
                 const selectedValue = filter["selectedValue"]
-                const minValue = Math.round(filter["minValue"]) //round here because slider library visualizes ints but stores floats
-                const maxValue = Math.round(filter["maxValue"]) //round here because slider library visualizes ints but stores floats
+                const minValue = Math.floor(filter["minValue"]) //round here because slider library visualizes ints but stores floats
+                const maxValue = Math.ceil(filter["maxValue"]) //round here because slider library visualizes ints but stores floats
                 if (selectedValue === undefined && maxValue === undefined && minValue === undefined) return true
                 if (selectedValue !== undefined) return cbc[filterKey] === selectedValue
                 // if(minValue === undefined && maxValue === undefined) return filter["filterItems"].includes(cbc[filterKey])

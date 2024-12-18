@@ -105,7 +105,7 @@ const defaultRangeValues = computed(()=>{
 	const numericFilterOptions = allFilterOptions.value.map(o => +o.value)
 	if(numericFilterOptions.some(isNaN)) return [0, 0]
 	if(numericFilterOptions.length === 0)	return [0, 0]
-	return [Math.min(...numericFilterOptions), Math.max(...numericFilterOptions)]
+	return [Math.floor(Math.min(...numericFilterOptions)), Math.ceil(Math.max(...numericFilterOptions))]
 })
 
 const rangeValues = computed({
