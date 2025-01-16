@@ -107,7 +107,7 @@ async function handleDetails(cbc){
 
 
 async function handleShowClassifiers(cbc){
-	await router.push(`/sbc_frontend/details/${cbc.id}`)
+	await router.push(`/sbc/details/${cbc.id}`)
 }
 
 function newPatient(idx){
