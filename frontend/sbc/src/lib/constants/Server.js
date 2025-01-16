@@ -1,9 +1,9 @@
-// export const SERVER_URL = "http://localhost:8000/sbc-shap/"
+// export const SERVER_URL = "http://localhost:8000/sbc_backend/"
 // export const SERVER_URL = "http://141.44.141.132/sbc/"
 // export const SERVER_URL = "https://prophane.de/sbc/"
 // export const SERVER_URL = "https://prophane.de/sbc/"
-// export const SERVER_URL = "https://mdoa-tools.bi.denbi.de/sbc-shap/"
-export const SERVER_URL = "https://daniel-walke.com/sbc-shap/"
+// export const SERVER_URL = "https://mdoa-tools.bi.denbi.de/sbc_backend/"
+export const SERVER_URL = "https://daniel-walke.com/sbc_backend/"
 
 
 export const PORT = 8000

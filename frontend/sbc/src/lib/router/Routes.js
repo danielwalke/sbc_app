@@ -4,8 +4,8 @@ import About from "../../components/footer/about/About.vue";
 import Disclaimer from "../../components/footer/disclaimer/Disclaimer.vue";
 
 export const routes = [
-	{ path: '/sbc', component: MainComponent },
-	{ path: '/sbc/about', component: About },
-	{ path: '/sbc/disclaimer', component: Disclaimer },
-	{ path: '/sbc/details/:id', component: DetailContent}
+	{ path: '/sbc-shap', component: MainComponent },
+	{ path: '/sbc-shap/about', component: About },
+	{ path: '/sbc-shap/disclaimer', component: Disclaimer },
+	{ path: '/sbc-shap/details/:id', component: DetailContent}
 ]

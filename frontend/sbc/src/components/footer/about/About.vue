@@ -39,6 +39,9 @@
 					<li>
 						Thorsten Kaiser
 					</li>
+          <li>
+            Alexander Schönhuth
+          </li>
 					<li>
 						David Broneske
 					</li>
