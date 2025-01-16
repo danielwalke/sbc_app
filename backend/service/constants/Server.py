@@ -1,1 +1,1 @@
-ADD_PATH = "/sbc-shap"
+ADD_PATH = "/sbc_backend"
