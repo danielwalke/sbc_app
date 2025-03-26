@@ -36,7 +36,7 @@ onMounted(() => {
 });
 
 function scrollToSection(){
-  const targetElement = document.getElementById("start");
+  const targetElement = document.getElementById("startTutorial");
   if(targetElement === null) return
   targetElement.scrollIntoView(
       {
