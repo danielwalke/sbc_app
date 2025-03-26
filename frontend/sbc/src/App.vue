@@ -14,7 +14,7 @@ fetchClassifierNamesAndThresholds()
 </script>
 
 <template>
-  <div class="h-screen w-screen min-h-[640px] overflow-y-auto">
+  <div class="h-dvh w-screen min-h-[640px]">
 		<router-view></router-view>
 		<HelpModal/>
 		<FilterModal/>
