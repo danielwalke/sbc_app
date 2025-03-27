@@ -1,5 +1,45 @@
 # SBC-SHAP
-Web application for predicting sepsis and visualizing SHAP values for increased interpretability.
+# SBC-SHAP: Sepsis Risk Prediction System
+
+## Project Overview
+SBC-SHAP is an advanced machine learning solution designed to predict interpretable sepsis risk using minimal patient information (sex, age, complete blood count information).
+
+## Key Features
+
+### 1. Real-time Prediction of Sepsis
+- Provides immediate risk assessment for sepsis
+- Enables early intervention and critical medical decision-making
+- Designed to support healthcare professionals in time-sensitive scenarios
+
+### 2. Minimal Input Requirements
+- Only requires three key patient data points:
+  - Age
+  - Sex
+  - Complete Blood Count (CBC) information
+- Reduces complexity of data collection
+- Makes the prediction model accessible and easy to implement
+
+### 3. Advanced Interpretability with SHAP Values
+- Utilizes SHAP (SHapley Additive exPlanations) methodology
+- Provides transparent insight into how predictions are made
+- Allows medical professionals to understand the reasoning behind each risk assessment
+- Breaks down the contribution of individual features to the final prediction
+
+### 4. Multiple Machine Learning Models
+- Incorporates diverse machine learning algorithms:
+  - Logistic Regression
+  - Decision Tree
+  - Random Forest
+  - XGBoost
+- Enables comprehensive and robust risk prediction
+- Allows comparison and validation across different modeling approaches
+
+## Getting Started
+For easy access just visit http://daniel-walke.com/sbc-shap.  However, you can also setup everything locally using [Link to my_file.txt](https://github.com/danielwalke/sbc_app/blob/main/docker-compose.yml)](docker-compose) or by cloning this repository and executing the following steps:
+
+```bash
+https://github.com/danielwalke/sbc_app.git
+```
 
 Requirements:
 python>=3.X
