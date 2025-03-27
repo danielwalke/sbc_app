@@ -30,6 +30,24 @@ Run backend:
 cd backend/
 uvicorn main:app --reload
 ```
+
+# YouTube Tutorials
+## Video Guides
+1. [Introduction](https://www.youtube.com/embed/mFxcSfSPRqE?si=bEX_jaI35hjWxA4I)
+2. [Input new Data](https://www.youtube.com/embed/MAZnUR2NAtE?si=ta7Z6hLE-vMXifmm)
+3. [Input data as CSV](https://www.youtube.com/embed/ltawHl3CHTs?si=1waaawz9zkJ8Cwz5)
+4. [Structure of the CSV file](https://www.youtube.com/embed/luiYG8DT59I?si=wyh2IOf08B6IWOOY)
+5. [Test data as demonstration](https://www.youtube.com/embed/25aA9UL8NgA?si=m0kEYFKZqvdR_XVs)
+6. [Prediction goal](https://www.youtube.com/embed/rxclOvnYKnM?si=z7bM1crXtRq_Pc0T)
+7. [Sorting data](https://www.youtube.com/embed/WYnEV6rXWLY?si=v0iIogOf4QaucyNQ)
+8. [Filter data](https://www.youtube.com/embed/Ou6TyFyCBac?si=zDlXK1wTmIxI1KrT)
+9. [Filter data II (Time-series filtering)](https://www.youtube.com/embed/7An7GzHydnE?si=EqCTF1eOxr2y0xIs)
+10. [Customize sensitivity](https://www.youtube.com/embed/xALGYqCN2I8?si=7V9YQWZGagMI3jmy)
+11. [Investigate details (SHAP values)](https://www.youtube.com/embed/ymOUin-xRJE?si=mpt-Qbl36c9n5HIe)
+12. [Prediction of other classifiers](https://www.youtube.com/embed/WF_Z7rHrdJY?si=qUJjhnLCKyrvkMnj)
+13. [Local setup](https://www.youtube.com/embed/qcQakg9_8qQ?si=_EzJU9dMlknlO3uy)
+
+
 # Data Import
 ## How to Import Data
 1. Click on the blue "Input"-button
