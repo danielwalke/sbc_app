@@ -4,6 +4,41 @@
 ## Project Overview
 SBC-SHAP is an advanced machine learning solution designed to predict interpretable sepsis risk using minimal patient information (sex, age, complete blood count information).
 
+# Table of Contents
+
+## Key Features
+1. [Real-time Prediction of Sepsis](#1-real-time-prediction-of-sepsis)
+2. [Minimal Input Requirements](#2-minimal-input-requirements)
+3. [Advanced Interpretability with SHAP Values](#3-advanced-interpretability-with-shap-values)
+4. [Multiple Machine Learning Models](#4-multiple-machine-learning-models)
+
+## Getting Started
+- [Installation and Setup](#getting-started)
+  - [Requirements](#requirements)
+  - [Frontend Installation](#install-frontend)
+  - [Backend Installation](#install-backend)
+  - [Running the Application](#run-frontend)
+
+## Video Tutorials
+- [YouTube Tutorial Links](#youtube-tutorials)
+
+## User Guide
+1. [Data Import](#data-import)
+2. [Single Input](#single-input)
+3. [Sorting and Filtering](#sorting)
+4. [Submit and Analyze Data](#submit-data)
+5. [Adjusting Sensitivity](#sensitivity)
+6. [SHAP Time Series](#shap-time-series)
+7. [Understanding SHAP Values](#shap-values)
+8. [Filtering Data](#filter)
+9. [Sorting Time Series](#filter-time-series)
+10. [Investigating Other Models](#other-models)
+11. [Returning to Home](#home)
+
+## Additional Information
+- [Project Repository](https://github.com/danielwalke/sbc_app)
+- [Live Application](https://daniel-walke.com/sbc-shap)
+- 
 ## Key Features
 
 ### 1. Real-time Prediction of Sepsis
