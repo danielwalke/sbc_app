@@ -12,16 +12,15 @@ SBC-SHAP is an advanced machine learning solution designed to predict interpreta
 - Designed to support healthcare professionals in time-sensitive scenarios
 
 ### 2. Minimal Input Requirements
-- Only requires three key patient data points:
+- Only requires three key patient information:
   - Age
   - Sex
-  - Complete Blood Count (CBC) information
-- Reduces complexity of data collection
-- Makes the prediction model accessible and easy to implement
+  - Complete Blood Count (CBC) information (hemoglobin, white blood cells, red blood cells, platelets and mean corpuscular volume)
+- Makes the prediction model easily accessible under https://daniel-walke.com/sbc-shap
 
 ### 3. Advanced Interpretability with SHAP Values
-- Utilizes SHAP (SHapley Additive exPlanations) methodology
-- Provides transparent insight into how predictions are made
+- Utilizes SHAP (SHapley Additive exPlanations) methodology to increase interpretability
+- Provides transparent insight into how predictions are made (i.e., how specific feature values change the sepsis risk)
 - Allows medical professionals to understand the reasoning behind each risk assessment
 - Breaks down the contribution of individual features to the final prediction
 
@@ -31,11 +30,11 @@ SBC-SHAP is an advanced machine learning solution designed to predict interpreta
   - Decision Tree
   - Random Forest
   - XGBoost
-- Enables comprehensive and robust risk prediction
+- Enables comprehensive risk prediction
 - Allows comparison and validation across different modeling approaches
 
 ## Getting Started
-For easy access just visit http://daniel-walke.com/sbc-shap.  However, you can also setup everything locally using [Link to my_file.txt](https://github.com/danielwalke/sbc_app/blob/main/docker-compose.yml)](docker-compose) or by cloning this repository and executing the following steps:
+For easy access visit http://daniel-walke.com/sbc-shap. However, you can also set up everything locally using [Link to my_file.txt](https://github.com/danielwalke/sbc_app/blob/main/docker-compose.yml)](docker-compose) or by cloning this repository and executing the following steps:
 
 ```bash
 https://github.com/danielwalke/sbc_app.git
