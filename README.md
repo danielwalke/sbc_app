@@ -1,4 +1,3 @@
-# SBC-SHAP
 # SBC-SHAP: Sepsis Risk Prediction System
 
 ## Project Overview
