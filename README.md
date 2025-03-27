@@ -37,7 +37,8 @@ SBC-SHAP is an advanced machine learning solution designed to predict interpreta
 ## Additional Information
 - [Project Repository](https://github.com/danielwalke/sbc_app)
 - [Live Application](https://daniel-walke.com/sbc-shap)
-- 
+
+
 ## Key Features
 
 ### 1. Real-time Prediction of Sepsis
