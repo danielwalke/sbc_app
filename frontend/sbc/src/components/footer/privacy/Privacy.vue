@@ -5,7 +5,7 @@
 <template>
   <div class="w-full custom-height overflow-y-auto">
     <div class="flex justify-center items-center">
-      <div class="p-4 lg:p-8 text-justify leading-6 container-xxxl mt-2 flex-grow-1 py-2 d-flex flex-column w-4/5">
+      <div class="p-4 lg:p-8 text-justify leading-6 container-xxxl mt-2 flex-grow-1 py-2 d-flex flex-column w-full lg:w-4/5">
         <!---->
         <div data-v-a07f78b4="">
           <h2 data-v-a07f78b4="">Privacy Notice</h2>

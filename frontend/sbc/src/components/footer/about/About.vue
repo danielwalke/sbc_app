@@ -1,6 +1,6 @@
 <template>
 	<div class="custom-height w-full flex justify-center p-4 overflow-y-auto">
-		<div class=" w-4/5">
+		<div class="w-full lg:w-4/5">
 			<div class="impressum">
 				<h2>Impressum (Legal Disclosure)</h2>
 				<p>
@@ -62,7 +62,7 @@
 			</div>
 
 			<div class="disclaimer">
-				Current version: v:2.2.0
+				Current version: v:2.2.1
 			</div>
 		</div>
 	</div>

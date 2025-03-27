@@ -31,7 +31,7 @@ onMounted(() => {
       }
     } else {
       clearInterval(interval);
-      if(isScrolled) return
+      if(isScrolled.value) return
       setTimeout(()=>{
         scrollToSection()
       }, 500)
