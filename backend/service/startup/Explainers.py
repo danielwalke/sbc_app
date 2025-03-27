@@ -8,7 +8,8 @@ from service.meta.CBC import CBC
 import torch
 from typing import List
 from service.startup import RefNodes
-
+import os
+import zipfile
 
 class BackgroundData:
 	def __init__(self):
@@ -16,6 +17,9 @@ class BackgroundData:
 
 	def get_background_data(self):
 		if self.background_data is not None: return self.background_data
+		if not os.path.isfile(r"./extdata/sbcdata.csv"):
+			with zipfile.ZipFile(r"./extdata/sbcdata.zip", 'r') as zip_ref:
+				zip_ref.extractall(r"./extdata/")
 		data = pd.read_csv(r"./extdata/sbcdata.csv", header=0)
 		data_analysis = DataAnalysis(data)
 		training_data = data_analysis.get_training_data()

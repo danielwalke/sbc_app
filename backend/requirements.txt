@@ -3,7 +3,6 @@ fastapi[standard]==0.112.0
 fastjsonschema==2.16.3
 joblib==1.2.0
 json5==0.9.14
-numpy==1.23.0
 pandas==1.5.0
 pydantic==1.10.12
 scikit-learn==1.2.2
@@ -13,3 +12,4 @@ uvicorn==0.23.1
 xgboost==2.0.3
 matplotlib==3.9.2
 imblearn>=0.0
+numpy==1.26.4
