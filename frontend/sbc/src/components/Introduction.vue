@@ -1,5 +1,6 @@
 <script setup>
-import { ref, onMounted, onUnmounted } from 'vue';
+import {ref, onMounted, computed} from 'vue';
+import {useModalStore} from "../lib/stores/ModalStore.js";
 
 // const fullText = "The goal of this app is to predict a potential sepsis event based on a patient's age, sex and " +
 //     "complete blood count data (hemoglobin, mean corpuscular volume, white blood cells, red blood cells and platelets)." +
@@ -13,6 +14,8 @@ const fullTexts = [
     "Multiple machine learning models"
 ]
 const displayedTexts = ref(fullTexts.map(() => ""));
+const modalStore = useModalStore()
+const isScrolled = computed(()=> modalStore.getIsScrolled)
 
 onMounted(() => {
   let listIndex = 0;
@@ -28,12 +31,15 @@ onMounted(() => {
       }
     } else {
       clearInterval(interval);
+      if(isScrolled) return
       setTimeout(()=>{
         scrollToSection()
       }, 500)
     }
   }, 50);
 });
+
+
 
 function scrollToSection(){
   const targetElement = document.getElementById("startTutorial");
@@ -44,7 +50,7 @@ function scrollToSection(){
         block: 'start'
       }
   )
-};
+}
 
 
 

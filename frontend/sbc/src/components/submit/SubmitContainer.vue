@@ -9,7 +9,7 @@ function submit(){
 </script>
 
 <template>
-  <div class="p-2">
+  <div class="">
     <div class="flex justify-center items-center gap-4 p-4">
       <SubmitButton :fun="submit"/>
     </div>

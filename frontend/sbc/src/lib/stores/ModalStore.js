@@ -11,6 +11,7 @@ export const useModalStore = defineStore('modal', {
 		filters: [],
 		isInputModelOpen: false,
 		isSensitivityModelOpen: false,
+		isScrolled: false
 	}),
 	getters: {
 		getHeaderContent: (state) => state.headerContent,
@@ -46,6 +47,7 @@ export const useModalStore = defineStore('modal', {
 		},
 		getIsInputModelOpen: (state) => state.isInputModelOpen,
 		getIsSensitivityModelOpen: (state) => state.isSensitivityModelOpen,
+		getIsScrolled: (state)=> state.isScrolled
 	},
 	actions: {
 		setIsHelpModalOpen(value){
@@ -95,6 +97,9 @@ export const useModalStore = defineStore('modal', {
 		},
 		setIsSensitivityModelOpen(isOpen){
 			this.isSensitivityModelOpen = isOpen
+		},
+		setIsScrolled(isScrolled){
+			this.isScrolled = isScrolled
 		}
 	},
 })

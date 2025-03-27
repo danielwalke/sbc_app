@@ -32,12 +32,20 @@ app.include_router(ProspectiveRefRouter.router)
 
 @app.on_event("startup")
 async def startup_event():
+    print("Startup")
     initialize_pred_proba_dfs(app)
+    print("Loaded prediction probabilities to estimate thresholds")
     initialize_ref_nodes(app)
+    print("Loaded reference nodes")
     initialize_standard_scaler(app)
+    print("Loaded standard scaler")
     initialize_thresholds(app)
+    print("Loaded thresholds")
     initialize_models(app)
+    print("Loaded models")
     initialize_explainers(app)
+    print("Loaded explainers")
+    print("Finished")
 
 
 
