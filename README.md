@@ -72,7 +72,7 @@ SBC-SHAP is an advanced machine learning solution designed to predict interpreta
 For easy access visit http://daniel-walke.com/sbc-shap. However, you can also set up everything locally using [Link to my_file.txt](https://github.com/danielwalke/sbc_app/blob/main/docker-compose.yml)](docker-compose) or by cloning this repository and executing the following steps:
 
 ```bash
-https://github.com/danielwalke/sbc_app.git
+git clone https://github.com/danielwalke/sbc_app.git
 ```
 
 Requirements:
