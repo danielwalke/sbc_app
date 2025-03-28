@@ -12,8 +12,13 @@
           <h3 data-v-a07f78b4="">1. General information on data processing and data protection</h3>
           <p data-v-a07f78b4=""> The operators of this website take the protection of your personal data very seriously. This privacy policy informs you as a visitor to our website about the processing of personal data. We collect and use personal data of our users only insofar as this is necessary to provide a functional website and our content and services and a legal basis allows us to do so or you have consented to the collection and always treat it confidentially. With this privacy policy, we comply with the information obligation pursuant to Article 13 of the EU General Data Protection Regulation (EU GDPR). </p>
           <h3 data-v-a07f78b4="">2. Contact details of the responsible body</h3>
-          <p data-v-a07f78b4=""> The technical provision (hosting) of the website is carried out in cooperation with the Otto-von-Guericke University at Magdeburg, and can be contacted as follows: </p>
-          <p data-v-a07f78b4=""> Universität Magdeburg<br data-v-a07f78b4=""> Universitätsplatz 2<br data-v-a07f78b4=""> D-39106 Magdeburg<br data-v-a07f78b4=""> Tel.: <a href="tel:+49 391 6752845" data-v-a07f78b4="">+49 391 6752845</a><br data-v-a07f78b4=""><a href="mailto:daniel.walke@ovgu.de" data-v-a07f78b4="">daniel.walke@ovgu.de</a></p>
+          <p data-v-a07f78b4=""> The technical provision (hosting) of the website is carried out in cooperation with the German Network for Bioinformatics Infrastructure (de.NBI), and can be contacted as follows: </p>
+          <p data-v-a07f78b4=""> Bielefeld-Gießen Resource Center for Microbial Bioinformatics (BiGi)<br data-v-a07f78b4=""> Technische Fakultät
+            <br data-v-a07f78b4=""> Universität Bielefeld
+            <br data-v-a07f78b4=""> Universitätsstraße 25
+            <br data-v-a07f78b4=""> 33615 Bielefeld
+            <br>Represented by: Robert Heyer, and Daniel Walke
+          </p>
           <h3 data-v-a07f78b4="">3. Data protection officer</h3>
           <p data-v-a07f78b4=""> You can contact the data protection officer at the address of the controller given above or as follows: </p>
           <p data-v-a07f78b4=""> E-Mail: <a href="mailto:daniel.walke@ovgu.de" data-v-a07f78b4="">daniel.walke@ovgu.de</a><br data-v-a07f78b4=""> Tel.: <a href="tel:+49 391 6752845" data-v-a07f78b4="">+49 391 67528455</a></p>
@@ -63,7 +68,7 @@
           <h5 data-v-a07f78b4="">5.3.5 Matomo Cookies</h5>
           <p data-v-a07f78b4=""> Cookies are used to enable anonymous recognition of a user by the web analysis software Matomo. The "_pk_id" cookie contains an anonymous unique user ID with a validity of 13 months, the "_pk_ref" cookie contains the referrer originally used to visit the website with a lifespan of 6 months and the "_pk_ses" cookie, which is a short-lived cookie with a lifespan of 30 minutes that temporarily stores the data of the website visit. Expiring cookies are then deleted by your browser. The validity is renewed when you visit the website again. Cross-site or cross-domain tracking does not take place; the cookies are used exclusively in the context of this website and to fulfill the above-mentioned purposes. </p>
           <h5 data-v-a07f78b4="">5.3.6 Your rights and option to object</h5>
-          <p data-v-a07f78b4=""> As we do not collect any personal data using Matomo, you cannot assert any rights against us with regard to information, correction, blocking or deletion of this data. However, you have the option of objecting to the collection by Matomo at any time. To do this, you can set an opt-out cookie that prevents the future collection of your data on this website. Please note that the opt-out cookie will be deleted if you delete all cookies in your browser. In this case, you must set the opt-out cookie again. Furthermore, data will not be collected by Matomo if you use the browser in so-called anonymous mode. </p>
+          <p data-v-a07f78b4=""> As we do not collect any personal data using Matomo, you cannot assert any rights against us with regard to information, correction, blocking or deletion of this data. However, you have the option of objecting to the collection by Matomo at any time by blocking the cockies. Furthermore, you can anonymize your data by using your browser in anonymous/private mode. </p>
           <div id="matomo-opt-out" class="mb-2" data-v-a07f78b4="" style="">
             <p>Sie haben die Möglichkeit zu verhindern, dass von Ihnen hier getätigte Aktionen analysiert und verknüpft werden. Dies wird Ihre Privatsphäre schützen, aber wird auch den Besitzer daran hindern, aus Ihren Aktionen zu lernen und die Bedienbarkeit für Sie und andere Benutzer zu verbessern.</p>
             <input onclick="_paq.push(['optUserOut']);showContent(false, null, true);" id="trackVisits" type="checkbox" checked="checked"><label for="trackVisits"><strong><span>Ihr Besuch dieser Webseite wird aktuell von der Matomo Webanalyse erfasst. Diese Checkbox abwählen für Opt-Out.</span></strong></label>
@@ -88,7 +93,7 @@
             </ul>
           </div>
           <h3 data-v-a07f78b4="">8. Validity of this privacy policy</h3>
-          <p data-v-a07f78b4="">This privacy policy is currently valid and is dated 27.03.2024.</p>
+          <p data-v-a07f78b4="">This privacy policy is currently valid and is dated 27.03.2025.</p>
           <p data-v-a07f78b4=""> Unless specified in more detail or formulated differently in this privacy policy, the provisions of Otto-von-Guericke University's <a target="_blank" href="https://www.ovgu.de/datenschutzerklaerung.html" data-v-a07f78b4="">privacy policy</a> apply. </p>
           <p data-v-a07f78b4=""> Due to the further development of our website or due to changed legal or official requirements, we reserve the right or it may become necessary to change this privacy policy. </p>
         </div>

@@ -62,7 +62,7 @@
 			</div>
 
 			<div class="disclaimer">
-				Current version: v:2.2.1
+				Current version: v:2.2.2
 			</div>
 		</div>
 	</div>
