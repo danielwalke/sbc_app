@@ -29,4 +29,4 @@ RUN npm install
 
 # Command to run the application
 #CMD ["serve", "-s", "dist"]
-CMD ["npm", "run", "preview"]
+CMD ["npm", "run", "preview", "--", "--host", "--port", "4173"]
