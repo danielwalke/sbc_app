@@ -7,9 +7,9 @@ export default defineConfig({
   base: "/sbc-shap",
   server: {
     host: true,
-    port: 8080,
+    port: 4173,
     preview: {
-      allowedHosts: ["daniel-walke.com", "https://mdoa-tools.bi.denbi.de/"] // Ersetze "domain.com" mit deiner tatsächlichen Domain
+      allowedHosts: true
     }
   }
 })
