@@ -21,7 +21,7 @@
           </p>
           <h3 data-v-a07f78b4="">3. Data protection officer</h3>
           <p data-v-a07f78b4=""> You can contact the data protection officer at the address of the controller given above or as follows: </p>
-          <p data-v-a07f78b4=""> E-Mail: <a href="mailto:daniel.walke@ovgu.de" data-v-a07f78b4="">daniel.walke@ovgu.de</a><br data-v-a07f78b4=""> Tel.: <a href="tel:+49 391 6752845" data-v-a07f78b4="">+49 391 67528455</a></p>
+          <p data-v-a07f78b4=""> E-Mail: <a href="mailto:support@mdoa-tools.bi.denbi.de" data-v-a07f78b4="">support@mdoa-tools.bi.denbi.de</a><br data-v-a07f78b4=""> Tel.: <a href="tel:+49 521 106-3507" data-v-a07f78b4=""> +49 521 106-3507</a></p>
           <h3 data-v-a07f78b4="">4. Purpose</h3>
           <p data-v-a07f78b4=""> The primary purpose of SBC-SHAP is to offer indications for potential sepsis risks. If personal data is collected, this only includes the data required for technical operation and log files to ensure the technical security of the systems in accordance with Art. 6 para. 1 lit. f GDPR. The temporary storage of the IP address by the system is necessary to enable the website to be delivered to the user's computer. The data is stored in log files to ensure the functionality of the website. In addition, we use the data to optimize the website and to ensure the security of our information technology systems. The data is not analyzed for marketing purposes in this context. </p>
           <h3 data-v-a07f78b4="">5. Scope of data processing</h3>

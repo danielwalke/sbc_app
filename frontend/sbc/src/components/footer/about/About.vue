@@ -4,14 +4,14 @@
 			<div class="impressum">
 				<h2>Impressum (Legal Disclosure)</h2>
 				<p>
-					<strong>Daniel Walke / Otto-von-Guericke University</strong><br>
-					Universitätspl. 2<br/>
-					39106 Magdeburg<br/>
+					<strong>Prof. Dr. Robert Heyer / Bielefeld University</strong><br>
+          Universitätsstraße 25<br/>
+          33594 Bielefeld<br/>
 					Germany<br/>
 				</p>
 				<p>
 					<strong>Kontakt</strong><br>
-					E-Mail: <a href="mailto:[your email address]">daniel.walke@ovgu.de</a><br>
+					E-Mail: <a href="mailto:support@mdoa-tools.bi.denbi.de">support@mdoa-tools.bi.denbi.de</a><br>
 				</p>
 			</div>
 
@@ -62,7 +62,7 @@
 			</div>
 
 			<div class="disclaimer">
-				Current version: v:2.2.2
+				Current version: v:2.2.3
 			</div>
 		</div>
 	</div>
