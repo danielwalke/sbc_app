@@ -16,6 +16,7 @@ app.use(VueMatomo, {
     host: 'https://piwik.cebitec.uni-bielefeld.de/',
     siteId: 29,
 })
+window._paq.push(['trackPageView']);
 app.use(VueVideoPlayer)
 app.use(pinia)
 app.use(router)
