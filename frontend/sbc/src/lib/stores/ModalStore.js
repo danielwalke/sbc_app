@@ -11,7 +11,10 @@ export const useModalStore = defineStore('modal', {
 		filters: [],
 		isInputModelOpen: false,
 		isSensitivityModelOpen: false,
-		isScrolled: false
+		isScrolled: false,
+		isLlmExplanationModalOpen: false,
+		llmResponse: "",
+		llmResponseLoading: false
 	}),
 	getters: {
 		getHeaderContent: (state) => state.headerContent,
@@ -47,7 +50,11 @@ export const useModalStore = defineStore('modal', {
 		},
 		getIsInputModelOpen: (state) => state.isInputModelOpen,
 		getIsSensitivityModelOpen: (state) => state.isSensitivityModelOpen,
-		getIsScrolled: (state)=> state.isScrolled
+		getIsScrolled: (state)=> state.isScrolled,
+		getIsExplanationModalOpen: (state) => state.isLlmExplanationModalOpen,
+		getLLMResponse: (state) => state.llmResponse,
+		getLLMResponseLoading: (state) => state.llmResponseLoading,
+
 	},
 	actions: {
 		setIsHelpModalOpen(value){
@@ -100,6 +107,15 @@ export const useModalStore = defineStore('modal', {
 		},
 		setIsScrolled(isScrolled){
 			this.isScrolled = isScrolled
+		},
+		setIsExplanationModalOpen(isExplanationModalOpen){
+			this.isLlmExplanationModalOpen = isExplanationModalOpen
+		},
+		setLLMResponse(llmResponse){
+			this.llmResponse = llmResponse
+		},
+		setLLMResponseLoading(llmResponseLoading){
+			this.llmResponseLoading = llmResponseLoading
 		}
 	},
 })

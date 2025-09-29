@@ -8,7 +8,9 @@ from service.startup.Models import initialize_models
 from service.startup.Explainers import initialize_explainers
 from service.startup.RefNodes import initialize_ref_nodes
 from service.startup.PredProba import initialize_pred_proba_dfs
-from service.router import HealthRouter, BaselineModelsRouter, ProspectiveRouter, RetrospectoveRouter, ProspectiveRefRouter
+from service.startup.LLM import initialize_llm
+from service.router import (HealthRouter, BaselineModelsRouter, ProspectiveRouter, RetrospectoveRouter, ProspectiveRefRouter, LlmRouter
+)
 from fastapi import APIRouter
 
 os.environ["OPENBLAS_NUM_THREADS"] = '8'
@@ -29,6 +31,7 @@ app.include_router(BaselineModelsRouter.router)
 app.include_router(ProspectiveRouter.router)
 app.include_router(RetrospectoveRouter.router)
 app.include_router(ProspectiveRefRouter.router)
+app.include_router(LlmRouter.router)
 
 @app.on_event("startup")
 async def startup_event():
@@ -45,6 +48,8 @@ async def startup_event():
     print("Loaded models")
     initialize_explainers(app)
     print("Loaded explainers")
+    initialize_llm(app)
+    print("Loaded LLM")
     print("Finished")
 
 

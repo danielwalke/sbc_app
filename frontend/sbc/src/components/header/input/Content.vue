@@ -18,7 +18,9 @@
           <div class="table-data grid-container " style="grid-column: span 12" v-if="cbc.chartData">
             <ChartSelection :cbc="cbc"/>
             <Chart  :cbc="cbc" :shap-type="cbc.shapType"/>
-            <div class="col-span-2"></div>
+            <div class="col-span-2">
+              <button @click="()=> openLlmExplanationModal(cbc)">LLM</button>
+            </div>
             <div><List :fun="()=>handleShowClassifiers(cbc)"/></div>
           </div>
           <hr style="grid-column: span 12" v-if="newPatient(idx)"/>
@@ -41,6 +43,8 @@ import List from "../../icons/List.vue";
 import ChartSelection from "../../chart/ChartSelection.vue";
 import {updateScreenHeight} from "../../../lib/responsive/HeightRegularization.js";
 import {submitCbcDetail} from "../../../lib/api/CBCDetails.js";
+import {useModalStore} from "../../../lib/stores/ModalStore.js";
+import {receiveLlmExplanation} from "../../../lib/api/LlmExplanation.js";
 
 function type(cbcKey){return cbcKey === "sex" ? "text" : "number"}
 
@@ -63,6 +67,7 @@ onUnmounted(()=>{
 	window.removeEventListener("resize", screenSizeHandler);
 })
 const store = useCbcStore()
+const modalStore = useModalStore()
 const upperLimit = ref(50)
 const lowerLimit = ref(0)
 
@@ -117,6 +122,13 @@ function newPatient(idx){
 function getConfidenceString(percent){
 	const percentRounded = Math.round(percent*10)/10
 	return `${percentRounded} %`
+}
+
+function openLlmExplanationModal(cbc){
+  console.log(cbc)
+  receiveLlmExplanation(cbc)
+  modalStore.setIsExplanationModalOpen(true)
+
 }
 </script>
 

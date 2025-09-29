@@ -165,3 +165,24 @@ class GraphPrediction:
     def get_retrospective_output(self):
         self.construct_reversed_directed_graph()
         return self.get_output()
+
+if __name__ == "__main__":
+    from joblib import load
+    graph_cbc_instance = GraphCBC(
+        id=101,
+        order=1.0,
+        age=58.0,
+        sex='F',
+        HGB=13.5,
+        WBC=6.7,
+        RBC=4.5,
+        MCV=92.0,
+        PLT=210.0,
+        ground_truth=0
+    )
+    graph_cbc_items = [graph_cbc_instance]
+    model = load('../../models/prospective/prospective_xgb.joblib')
+    threshold = 0.5
+    standard_scaler = None
+    graph_pred = GraphPrediction(graph_cbc_items, model, threshold, standard_scaler, ref_node=None,
+                 user_function=diff_user_function)

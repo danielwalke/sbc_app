@@ -7,6 +7,7 @@ import Footer from "./components/footer/Footer.vue";
 import InputModal from "./components/modals/InputModal.vue";
 import {fetchClassifierNamesAndThresholds} from "./lib/api/ClassifierInitialization.js";
 import SensitivityModal from "./components/modals/SensitivityModal.vue";
+import LLMExplanationModal from "./components/modals/LLMExplanationModal.vue";
 
 
 const cbcStore = useCbcStore()
@@ -21,6 +22,7 @@ fetchClassifierNamesAndThresholds()
 		<LoadingSkeleton/>
     <SensitivityModal/>
 		<InputModal/>
+    <LLMExplanationModal/>
 		<Footer/>
   </div>
 </template>

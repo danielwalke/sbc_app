@@ -1,9 +1,9 @@
-// export const SERVER_URL = "http://localhost:8000/sbc_backend/"
+export const SERVER_URL = "http://localhost:8000/sbc_backend/"
 // export const SERVER_URL = "http://141.44.141.132/sbc/"
 // export const SERVER_URL = "https://prophane.de/sbc/"
 // export const SERVER_URL = "https://prophane.de/sbc/"
 // export const SERVER_URL = "https://mdoa-tools.bi.denbi.de/sbc_backend/"
-export const SERVER_URL = "https://daniel-walke.com/sbc_backend/"
+// export const SERVER_URL = "https://daniel-walke.com/sbc_backend/"
 
 
 export const PORT = 8000
@@ -25,5 +25,7 @@ export const ENDPOINT_STANDARD_PREDICTION_DETAILS =  SERVER_URL + "get_standard_
 export const ENDPOINT_PROSPECTIVE_REF_THRESHOLDS = SERVER_URL + "classifier_thresholds_prospective_ref"
 export const ENDPOINT_PROSPECTIVE_REF_PREDICTIONS =  SERVER_URL + "get_graph_pred_prospective_ref"
 export const ENDPOINT_PROSPECTIVE_REF_PREDICTION_DETAILS =  SERVER_URL + "get_graph_pred_details_prospective_ref"
+
+export const ENDPOINT_LLM_EXPLANATION =  SERVER_URL + "llm_resp"
 
 export const DEFAULT_CLASSIFIER = "XGBClassifier"

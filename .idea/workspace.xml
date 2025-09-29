@@ -5,7 +5,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="875a38dc-bf1f-4839-9933-7efb22d78c92" name="Changes" comment="workspace fix">
+      <change afterPath="$PROJECT_DIR$/backend/main2.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/service/meta/LLMInput.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/service/router/LlmRouter.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/service/startup/LLM.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sbc_app.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sbc_app.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/backend/requirements.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/service/impl/GraphPrediction.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/service/impl/GraphPrediction.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -15,9 +24,9 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Python Script" />
         <option value="JavaScript File" />
         <option value="Vue Single File Component" />
+        <option value="Python Script" />
       </list>
     </option>
   </component>
@@ -44,15 +53,17 @@
   &quot;associatedIndex&quot;: 4
 }</component>
   <component name="ProjectId" id="2HDnglcop5GQDayUKRfOVhFEVLs" />
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">{
   &quot;keyToString&quot;: {
+    &quot;Python.GraphPrediction.executor&quot;: &quot;Run&quot;,
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
     &quot;git-widget-placeholder&quot;: &quot;main&quot;,
     &quot;last_opened_file_path&quot;: &quot;C:/Users/danie/git/sbc_app/backend&quot;,
@@ -68,9 +79,11 @@
 }</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\danie\git\sbc_app\backend" />
+      <recent name="C:\Users\danie\git\sbc_app\backend\service\startup" />
+      <recent name="C:\Users\danie\git\sbc_app\backend\service\meta" />
+      <recent name="C:\Users\danie\git\sbc_app\backend\service\router" />
       <recent name="C:\Users\danie\git\sbc_app\frontend\sbc\testCsvs" />
-      <recent name="C:\Users\danie\git\sbc_app\frontend" />
-      <recent name="C:\Users\danie\PycharmProjects\sbc\extdata" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\danie\git\sbc_app\frontend\sbc\testCsvs" />
@@ -80,7 +93,7 @@
       <recent name="C:\Users\danie\PycharmProjects\sbc\dataAnalysis" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.main">
+  <component name="RunManager" selected="Python.GraphPrediction">
     <configuration name="DataAnalysis" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="sbcAnalysis" />
       <option name="ENV_FILES" value="" />
@@ -98,6 +111,26 @@
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/dataAnalysis/DataAnalysis.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="GraphPrediction" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="sbc_app" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/backend/service/impl" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/backend/service/impl/GraphPrediction.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="true" />
       <option name="EMULATE_TERMINAL" value="false" />
       <option name="MODULE_MODE" value="false" />
       <option name="REDIRECT_INPUT" value="false" />
@@ -196,12 +229,17 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Python.GraphPrediction" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-js-predefined-1d06a55b98c1-0b3e54e931b4-JavaScript-PY-241.19072.16" />
-        <option value="bundled-python-sdk-8336bb23522e-2767605e8bc2-com.jetbrains.pycharm.pro.sharedIndexes.bundled-PY-241.19072.16" />
+        <option value="bundled-js-predefined-d6986cc7102b-e03c56caf84a-JavaScript-PY-252.23892.515" />
+        <option value="bundled-python-sdk-7e47963ff851-f0eec537fc84-com.jetbrains.pycharm.pro.sharedIndexes.bundled-PY-252.23892.515" />
       </set>
     </attachedChunks>
   </component>
@@ -278,6 +316,10 @@
       <workItem from="1721366350595" duration="20000" />
       <workItem from="1743079788233" duration="95000" />
       <workItem from="1743396332668" duration="650000" />
+      <workItem from="1759042300216" duration="2121000" />
+      <workItem from="1759044494302" duration="814000" />
+      <workItem from="1759125175206" duration="1766000" />
+      <workItem from="1759127157557" duration="87000" />
     </task>
     <task id="LOCAL-00001" summary="changes in data processing">
       <created>1667911144366</created>

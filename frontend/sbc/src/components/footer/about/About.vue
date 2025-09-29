@@ -39,30 +39,13 @@
 
 			<div class="disclaimer">
 				<h2>Contributors</h2>
-				<ul class="list-disc pl-5">
-					<li>
-						Daniel Walke
-					</li>
-					<li>
-						Daniel Steinbach
-					</li>
-					<li>
-						Thorsten Kaiser
-					</li>
-          <li>
-            Alexander Schönhuth
-          </li>
-					<li>
-						David Broneske
-					</li>
-					<li>
-						Robert Heyer
-					</li>
-				</ul>
+				<div v-for="contributor in contributors">
+          <Contributor :name="contributor.name" :affiliation="contributor.affiliation" :mail="contributor.mail"/>
+        </div>
 			</div>
 
 			<div class="disclaimer">
-				Current version: v:2.2.4
+				Current version: v:2.2.5
 			</div>
 		</div>
 	</div>
@@ -70,6 +53,45 @@
 </template>
 
 <script setup lang="js">
+import Contributor from "./Contributor.vue";
+
+const contributors = [
+  {
+    name: "Daniel Walke",
+    mail: "daniel.walke@ovgu.de",
+    affiliation: "Otto von Guericke University, Magdeburg"
+  },
+  {
+    name: "Daniel Steinbach",
+    mail: "daniel.steinbach@medizin.uni-leipzig.de",
+    affiliation: "Leipzig University Hospital; Medical Informatics Center Department for Clinical AI and Translational Medicine"
+  },
+  {
+    name: "Thorsten Kaiser",
+    mail: "thorsten.kaiser@uni-bielefeld.de",
+    affiliation: "OWL University Hospital of Bielefeld University, Detmold"
+  },
+  {
+    name: "Alexander Schönhuth",
+    mail: "aschoen@cebitec.uni-bielefeld.de",
+    affiliation: "Faculty of Technology, Bielefeld University"
+  },
+  {
+    name: "Gunter Saake",
+    mail: "saake@iti.cs.uni-magdeburg.de",
+    affiliation: "Otto von Guericke University, Magdeburg"
+  },
+  {
+    name: "David Broneske",
+    mail: "broneske@dzhw.eu",
+    affiliation: "German Center for Higher Education Research and Science Studies (DZHW), Hannover"
+  },
+  {
+    name: "Robert Heyer",
+    mail: "robert.heyer@isas.de",
+    affiliation: "Leibniz-Institut für Analytische Wissenschaften-ISAS-e.V., Dortmund; Faculty of Technology, Bielefeld University"
+  }
+]
 </script>
 
 <style scoped>
