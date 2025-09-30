@@ -4,11 +4,22 @@
 			<div class="impressum">
 				<h2>Impressum (Legal Disclosure)</h2>
 				<p>
-					<strong>Prof. Dr. Robert Heyer / Bielefeld University</strong><br>
+					<strong>Prof. Dr. Robert Heyer</strong><br>
+          Bielefeld University<br>
+          Technical Faculty<br>
           Universitätsstraße 25<br/>
           33594 Bielefeld<br/>
 					Germany<br/>
 				</p>
+        <p>
+          <strong>Prof. Dr. Robert Heyer</strong><br>
+          Leibniz-Institut für Analytische Wissenschaften - ISAS<br>
+          Bioanalytics<br>
+          Multidimensional Omics Data Analysis<br>
+          ISAS City<br>
+          44139 Dortmund<br>
+          Germany<br/>
+        </p>
 				<p>
 					<strong>Kontakt</strong><br>
 					E-Mail: <a href="mailto:support@mdoa-tools.bi.denbi.de">support@mdoa-tools.bi.denbi.de</a><br>
@@ -45,7 +56,7 @@
 			</div>
 
 			<div class="disclaimer">
-				Current version: v:2.3.0
+				Current version: v:2.3.1
 			</div>
 		</div>
 	</div>
