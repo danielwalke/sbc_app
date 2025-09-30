@@ -8,6 +8,7 @@ import InputModal from "./components/modals/InputModal.vue";
 import {fetchClassifierNamesAndThresholds} from "./lib/api/ClassifierInitialization.js";
 import SensitivityModal from "./components/modals/SensitivityModal.vue";
 import LLMExplanationModal from "./components/modals/LLMExplanationModal.vue";
+import Spinner from "./components/modals/Spinner.vue";
 
 
 const cbcStore = useCbcStore()
@@ -23,6 +24,7 @@ fetchClassifierNamesAndThresholds()
     <SensitivityModal/>
 		<InputModal/>
     <LLMExplanationModal/>
+    <Spinner/>
 		<Footer/>
   </div>
 </template>

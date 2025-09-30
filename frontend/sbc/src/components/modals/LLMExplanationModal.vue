@@ -1,7 +1,7 @@
 <template>
   <div :class="isOpen ? 'block' : 'hidden' " id="default-modal" tabindex="-1" aria-hidden="true" class="overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50
 	 flex justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full text-black text-justify">
-    <div class="relative p-4 w-full max-w-2xl h-full lg:h-4/5">
+    <div class="relative p-4 w-full max-w-2xl max-h-4/5">
       <!-- Modal content -->
       <div class="relative bg-white rounded-lg shadow dark:bg-gray-700 h-full">
         <!-- Modal header -->
@@ -17,11 +17,6 @@
         <!-- Modal body -->
         <div class="p-4 md:p-5 space-y-4 h-4/5 overflow-y-scroll" v-if="!isLLMResponseLoading" >
           <div class="markdown-content" v-html="renderedHtml"></div>
-        </div>
-        <div v-if="isLLMResponseLoading">
-          <div class="spinner-overlay w-full h-full">
-            <div class="spinner"></div>
-          </div>
         </div>
         <!-- Modal footer -->
         <div class="flex items-center p-4 md:p-5 border-t border-gray-200 rounded-b dark:border-gray-600">

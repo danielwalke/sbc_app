@@ -19,7 +19,7 @@
             <ChartSelection :cbc="cbc"/>
             <Chart  :cbc="cbc" :shap-type="cbc.shapType"/>
             <div class="col-span-2">
-              <button @click="()=> openLlmExplanationModal(cbc)">LLM</button>
+              <button class="w-full" @click="()=> openLlmExplanationModal(cbc)">Ask Google Gemini</button>
             </div>
             <div><List :fun="()=>handleShowClassifiers(cbc)"/></div>
           </div>
@@ -127,7 +127,6 @@ function getConfidenceString(percent){
 function openLlmExplanationModal(cbc){
   console.log(cbc)
   receiveLlmExplanation(cbc)
-  modalStore.setIsExplanationModalOpen(true)
 
 }
 </script>

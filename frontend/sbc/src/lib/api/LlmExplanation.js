@@ -29,11 +29,12 @@ export async function receiveLlmExplanation(cbc){
     console.warn(data)
     try{
         const resp = await axios.post(ENDPOINT_LLM_EXPLANATION, data,{
-            timeout: 50000 // Timeout set to 10 seconds
+            timeout: 120000 // Timeout set to 10 seconds
         })
         console.log(resp.data)
         modalStore.setLLMResponse(resp.data)
         modalStore.setLLMResponseLoading(false)
+        modalStore.setIsExplanationModalOpen(true)
     }catch(e){
         console.error(e);
     }
